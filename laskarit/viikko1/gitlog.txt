@@ -1,9 +1,59 @@
-commit 03f1ff44fc8b13a52424825a2d95e6e8e10913b5
+commit 5546d229203a250760db61050d88858c9f15e2c1
 Author: Vili Lipo <vili.lipo@helsinki.fi>
-Date:   Tue Mar 13 11:33:12 2018 +0200
+Date:   Tue Mar 13 11:32:00 2018 +0200
 
-    initial commit
-    
-     readme.md | 0
-      1 file changed, 0 insertions(+), 0 deletions(-)
-      
+    practice
+
+commit b25ebe07d4a953ce563867da0c592787de75be70
+Author: Vili Lipo <vili.lipo@helsinki.fi>
+Date:   Tue Mar 13 11:26:45 2018 +0200
+
+    tiedostoja
+
+commit faf4c18e44d3de842f4a7d2179e4bbd868f24e86
+Author: Vili Lipo <vili.lipo@helsinki.fi>
+Date:   Tue Mar 13 11:23:50 2018 +0200
+
+    patchi
+
+commit 9c0574d75b3ddfb7b412923b6127f32db40aecfe
+Author: Lipo Vili S <vililipo@lx7-fuxi147.ad.helsinki.fi>
+Date:   Tue Mar 13 11:19:36 2018 +0200
+
+    rename tiedosto -> eka
+
+commit 146651173d19bdc71ed9b59192c05495db8cedcf
+Author: Lipo Vili S <vililipo@lx7-fuxi147.ad.helsinki.fi>
+Date:   Tue Mar 13 11:16:48 2018 +0200
+
+    removed second
+
+commit 697d00e266517ec0e689a3ece5264cdc09b69bd1
+Author: Lipo Vili S <vililipo@lx7-fuxi147.ad.helsinki.fi>
+Date:   Tue Mar 13 11:15:08 2018 +0200
+
+    changes..                                                                                                                        
+                                                                                                                                     
+commit 64960fa2fbdd1e9e038b913f43c6824d518cf69a                                                                                      
+Author: Lipo Vili S <vililipo@lx7-fuxi147.ad.helsinki.fi>                                                                            
+Date:   Tue Mar 13 11:14:15 2018 +0200                                                                                               
+                                                                                                                                     
+    whole lot of text                                                                                                                
+                                                                                                                                     
+commit c694db0178e0622d661969648f1d99c0127a21c4                                                                                      
+Author: Lipo Vili S <vililipo@lx7-fuxi147.ad.helsinki.fi>                                                                            
+Date:   Tue Mar 13 11:11:15 2018 +0200                                                                                               
+                                                                                                                                     
+    second and third                                                                                                                 
+                                                                                                                                     
+commit 09c2f147bbaf052529647572eaff57d5fd3f2ef8                                                                                      
+Author: Lipo Vili S <vililipo@lx7-fuxi147.ad.helsinki.fi>                                                                            
+Date:   Tue Mar 13 11:09:37 2018 +0200                                                                                               
+                                                                                                                                     
+    This is a second commit                                                                                                          
+                                                                                                                                     
+commit 070cfff352ce4d6a341797b1610e721df62cee7c                                                                                      
+Author: Lipo Vili S <vililipo@lx7-fuxi147.ad.helsinki.fi>                                                                            
+Date:   Tue Mar 13 11:07:11 2018 +0200                                                                                               
+                                                                                                                                     
+    Tiedosto luotu                  
