@@ -56,4 +56,5 @@ commit 070cfff352ce4d6a341797b1610e721df62cee7c
 Author: Lipo Vili S <vililipo@lx7-fuxi147.ad.helsinki.fi>                                                                            
 Date:   Tue Mar 13 11:07:11 2018 +0200                                                                                               
                                                                                                                                      
-    Tiedosto luotu                  
+    Tiedosto luotu         
+   this is a git log
