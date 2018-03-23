@@ -6,3 +6,4 @@
 - [komentorivi.txt](https://github.com/ViliLipo/otm-harjoitustyo/blob/master/laskarit/viikko1/komentorivi.txt)
 ## Viikko2
 - [Vaatimusmäärittely](https://github.com/ViliLipo/otm-harjoitustyo/blob/master/requirements.md)
+- [Työaikakirjanpito](https://github.com/ViliLipo/otm-harjoitustyo/blob/master/tyoaikakirjanpito.md)
