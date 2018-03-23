@@ -10,7 +10,11 @@
     - Voi lisätä itselleen ruokailutapahtuman
     - Ruokailutapahtumaan voi lisätä ruoka-aineita
     - Voi lisätä ohjelmaan ruoka-aineita
-  - Ohjelma
-      - Laskee päivittäisen kalorien sisään oton ja muut ravinto arvot
+  - Suunnitellut toiminnallisuudet
+      - Laskee päivittäisen kalorien sisään oton ja muut ravintoarvot
         ja vertaa niitä viittellisiin arvoihin ja näyttää statistiikkaa.
       - Piirtää pylväsdiagrammin viikon tavoitteiden toteutumisesta
+      - Lataa ruoka-aineiden tiedot finellin avoimesta datasta.
+  - Rajoitteet
+    - Ohjelmisto toimii Linux-ympäristössä ja OSX-käyttöjärjestelmillä.
+    - Käyttäjien tiedot tallennetaan paikalliseen SQLITE tietokantaan(toistaiseksi)
