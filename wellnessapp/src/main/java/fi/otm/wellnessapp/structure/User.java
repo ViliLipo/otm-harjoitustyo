@@ -7,6 +7,7 @@ package fi.otm.wellnessapp.structure;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -20,6 +21,7 @@ public class User {
     private int userId;
     
     private int dailyCalorieGoal;
+    private double dailyProteinGoal;
     
     private ArrayList<Meal> mealList;
     
@@ -27,6 +29,7 @@ public class User {
         this.userName = userName;
         this.passwordHash = passwordHash;
         this.mealList = new ArrayList<>();
+        this.dailyCalorieGoal = 2000;
     }
     public void setUserID(int id) {
         this.userId = id;
@@ -58,6 +61,14 @@ public class User {
         return (double) this.dailyCalorieGoal * 4.1868;
     }
     
+    public double getDailyProteinGoal() {
+        return this.dailyProteinGoal;
+    }
+    
+    public void setDailyProteinGoal(double value) {
+        this.dailyProteinGoal = value;
+    }
+    
     public void setMealList(ArrayList<Meal> list) {
         this.mealList = list;
     }
@@ -68,6 +79,24 @@ public class User {
     
     public void addMeal(Meal meal) {
         this.mealList.add(meal);
+    }
+    
+    public ArrayList<HashMap<NutritionalComponent, Double>> weekBeforeDate(Date time) {
+        ArrayList<HashMap<NutritionalComponent, Double>> listForWeek =
+                new ArrayList<>();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(time);
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.roll(Calendar.MINUTE, 60);
+        cal.roll(Calendar.MILLISECOND, 60000);
+        int startDay = cal.get(Calendar.DAY_OF_YEAR);
+        int startYear = cal.get(Calendar.YEAR);
+        for (int i = 0;  i < 8; i++) {
+            int day = startDay -i;
+            cal.set(Calendar.DAY_OF_YEAR, day);
+            listForWeek.add(this.dailyScore(new Date(cal.getTimeInMillis())));
+        }
+        return listForWeek;
     }
     
     public HashMap<NutritionalComponent, Double> dailyScore(Date time) {

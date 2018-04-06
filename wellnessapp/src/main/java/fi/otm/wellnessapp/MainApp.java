@@ -21,38 +21,14 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Scene.fxml"));
-        
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"));
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/styles/Styles.css");
-        
-        stage.setTitle("JavaFX and Maven");
+        UiStructure us = UiStructure.getInstance();
+        us.setDataBaseName("jdbc:sqlite:src/main/resources/sqlite/appDb.sqlite3");
+        stage.setTitle("WellnessApp");
         stage.setScene(scene);
         stage.show();
-        // test runs
-        String schemaFile = "src/main/resources/sqlite/dataBaseSchema.sqlite3";
-        String dbName = "jdbc:sqlite:src/main/resources/sqlite/testDb.sqlite3";
-        Sqlite3Utils.setupSchema(schemaFile, dbName);
-        String csvName = "src/main/resources/csv/component.csv";
-        CsvParser.convertComponentCSVtoSQLITE(csvName, dbName);
-        String componentValueCsv = "src/main/resources/csv/component_value.csv";
-        String foodNameFICsv = "src/main/resources/csv/foodname_FI.csv";
-        CsvParser.convertFoodItems(componentValueCsv, foodNameFICsv, dbName);
-        User u = new User("Matti", "Passoword252356");
-        UserDao userDao = new UserDaoSqlite3(dbName);
-        userDao.addUser(u);
-        
-        Meal meal = new Meal(new Date(), u.getUserId());
-        u.addMeal(meal);
-        FoodItemStructure fis = FoodItemStructure.getFoodItemStructure(dbName);
-        NutritionalComponentStructure nc = NutritionalComponentStructure
-                .getNutrititonalComponentStructure(dbName);
-        meal.addFoodItem(fis.getFoodItemById(5), 200.d);
-        
-        System.out.println(meal.getTotalNutritionalValues().get(
-        nc.getNutCompByName("ENERC")
-        ));
-        
     }
 
     /**

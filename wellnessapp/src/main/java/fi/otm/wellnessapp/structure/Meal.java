@@ -6,6 +6,7 @@
 package fi.otm.wellnessapp.structure;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Set;
@@ -89,9 +90,9 @@ public class Meal implements Comparable {
 
     @Override
     public int compareTo(Object o) {
-        Meal m = (Meal)o;
+        Meal m = (Meal) o;
         return this.time.compareTo(m.getTime());
     }
-    
+
     
 }

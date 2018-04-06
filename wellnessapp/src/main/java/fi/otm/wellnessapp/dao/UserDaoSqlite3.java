@@ -31,6 +31,7 @@ public class UserDaoSqlite3 implements UserDao{
     @Override
     public User getUser(String username, String passwordHash) {
          User user = null;
+         System.out.println("Getting user");
          String sqlQuery = "SELECT * FROM User "
                  + "WHERE UserName = (?) "
                  + "AND PasswordHash = (?)";
@@ -45,11 +46,14 @@ public class UserDaoSqlite3 implements UserDao{
                 user.setDailyKiloJouleGoal(rs.getDouble("DailyKiloJouleGoal"));
                 user.setUserID(rs.getInt("UserID"));
             } else {
+                System.out.println("no user");
                 return user;
             }
             ArrayList<Meal> mealList;
+            System.out.println("getting meals");
             MealDaoSqlite3 mealDao = new MealDaoSqlite3(dbname);
             mealList = mealDao.getByUserId(user.getUserId());
+            System.out.println("got meals");
             return user;
         } catch (SQLException ex) {
             Logger.getLogger(UserDaoSqlite3.class.getName()).log(Level.SEVERE, null, ex);
@@ -72,6 +76,9 @@ public class UserDaoSqlite3 implements UserDao{
             Statement stmnt = scm.connect().createStatement();
             ResultSet rs = stmnt.executeQuery(query);
             user.setUserID(rs.getInt(1));
+            System.out.println("Userid = " + user.getUserId());
+            scm.connect().commit();
+            scm.connect().close();
         } catch (SQLException ex) {
             Logger.getLogger(UserDaoSqlite3.class.getName()).log(Level.SEVERE, null, ex);
         }
