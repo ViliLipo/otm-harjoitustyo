@@ -106,8 +106,8 @@ public class NutritionalComponentDaoSqlite3 implements NutritionalComponentDao{
     @Override
     public void remove(String eufdName) {
         try {
-            String sqlDelete = "DELETE FROM COMPONENT"
-                               + "WHERE EUFDNAME = (?);";
+            String sqlDelete = "DELETE FROM COMPONENT "
+                               + " WHERE EUFDNAME = (?);";
             PreparedStatement prep = scm.connect().prepareStatement(sqlDelete);
             prep.setString(1, eufdName);
             prep.executeUpdate();
