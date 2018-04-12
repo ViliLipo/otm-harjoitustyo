@@ -8,6 +8,7 @@ package fi.otm.wellnessapp;
 import fi.otm.wellnessapp.dao.UserDao;
 import fi.otm.wellnessapp.dao.UserDaoSqlite3;
 import fi.otm.wellnessapp.structure.User;
+import fi.otm.wellnessapp.tools.Sqlite3Utils;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -107,6 +108,9 @@ public class LoginController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         this.us = UiStructure.getInstance();
         this.us.setLoginController(this);
+        Sqlite3Utils.initDb("src/main/resources/sqlite/dataBaseSchema.sqlite3",
+                "jdbc:sqlite:src/main/resources/sqlite/appDb.sqlite3", "src/main/resources/csv/component.csv",
+                "src/main/resources/csv/foodname_FI.csv", "src/main/resources/csv/component_value.csv");
     }
 
 }

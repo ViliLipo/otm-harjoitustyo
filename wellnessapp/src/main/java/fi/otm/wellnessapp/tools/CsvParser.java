@@ -24,8 +24,8 @@ import java.util.logging.Logger;
  * @author vili
  */
 public class CsvParser {
-    
-    public static ArrayList<String> lines(String filename) throws FileNotFoundException {
+
+    private static ArrayList<String> lines(String filename) throws FileNotFoundException {
         FileReader fr = new FileReader(filename);
         BufferedReader br = new BufferedReader(fr);
         ArrayList<String> lines = new ArrayList<>();
@@ -34,20 +34,20 @@ public class CsvParser {
         });
         return lines;
     }
-    
-    public static ArrayList<NutritionalComponent> parseComponents(String filename) {
+
+    private static ArrayList<NutritionalComponent> parseComponents(String filename) {
         try {
             ArrayList<String> lines = lines(filename);
             Iterator<String> iterator = lines.iterator();
             iterator.next(); // firstLine is a header we dont need
             String line;
             ArrayList<NutritionalComponent> ncList = new ArrayList<>();
-            while(iterator.hasNext()) {
+            while (iterator.hasNext()) {
                 line = iterator.next();
-                String[] pieces = line.split(";") ;
+                String[] pieces = line.split(";");
                 ncList.add(new NutritionalComponent(
-                pieces[0],pieces[1], pieces[2], pieces[3]));
-                
+                        pieces[0], pieces[1], pieces[2], pieces[3]));
+
             }
             return ncList;
         } catch (FileNotFoundException ex) {
@@ -55,15 +55,16 @@ public class CsvParser {
         }
         return null;
     }
+
     public static void convertComponentCSVtoSQLITE(String filename, String dbname) {
         ArrayList<NutritionalComponent> ncList = parseComponents(filename);
         NutritionalComponentDaoSqlite3 ncDao = new NutritionalComponentDaoSqlite3(dbname);
-        for(NutritionalComponent nc : ncList) {
+        for (NutritionalComponent nc : ncList) {
             ncDao.add(nc);
         }
     }
-    
-    public static ArrayList<FoodItem> parseItems(String filename) {
+
+    private static ArrayList<FoodItem> parseItems(String filename) {
         ArrayList<FoodItem> fiList = new ArrayList<>();
         try {
             ArrayList<String> lines = lines(filename);
@@ -79,51 +80,56 @@ public class CsvParser {
         }
         return fiList;
     }
-    public static void resolveNutritionFoodRelations(String componentValueFile, String dataBaseName, ArrayList<FoodItem> fiList) {
+
+    private static void resolveNutritionFoodRelations(String componentValueFile, String dataBaseName, ArrayList<FoodItem> fiList) {
         HashMap<Integer, FoodItem> fiMap = new HashMap<>();
         fiList.stream().forEach(foodItem -> {
             fiMap.put(foodItem.getId(), foodItem);
         });
         try {
             ArrayList<String> lines = lines(componentValueFile);
-            NutritionalComponentStructure ncs =
-                    NutritionalComponentStructure
+            NutritionalComponentStructure ncs
+                    = NutritionalComponentStructure
                             .getNutrititonalComponentStructure(dataBaseName);
             lines.remove(0); // This is the header, we wont need it
             lines.stream().forEach(line -> {
-                if(!line.contentEquals("")) {
-                    String[] pieces = line.split(";");
-                    int id = Integer.parseInt(pieces[0]);
-                    //System.out.println("id :" + id);
-                    String eufdname = pieces[1];
-                    //System.out.println(eufdname);
-                    pieces[2] = pieces[2].replace(",", ".");
-                    //System.out.println(pieces[2]);
-                    Double amount;
-                    try {
-                        amount = Double.parseDouble(pieces[2]);
-                    } catch (Exception ex) {
-                        amount = 0.d;
-                    }
-                    FoodItem fi = fiMap.get(id);
-                    fi.addContents(amount, ncs.getNutCompByName(eufdname));
-                }
-
+                handleOneRelationLine(line, fiMap, ncs);
             });
             System.out.println("DONE");
         } catch (FileNotFoundException ex) {
             Logger.getLogger(CsvParser.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    private static void handleOneRelationLine(String line,
+            HashMap<Integer, FoodItem> fiMap,
+            NutritionalComponentStructure ncs) {
+        if (!line.contentEquals("")) {
+            String[] pieces = line.split(";");
+            int id = Integer.parseInt(pieces[0]);
+            String eufdname = pieces[1];
+            pieces[2] = pieces[2].replace(",", ".");
+            Double amount;
+            try {
+                amount = Double.parseDouble(pieces[2]);
+            } catch (Exception ex) {
+                amount = 0.d;
+            }
+            FoodItem fi = fiMap.get(id);
+            fi.addContents(amount, ncs.getNutCompByName(eufdname));
+        }
+
+    }
+
     /*
     * In order for this to work components must be
     * written to the db first
-    */
+     */
     public static void convertFoodItems(String componentValueFile, String foodItemFile, String dbName) {
-        ArrayList<FoodItem>  fiList = parseItems(foodItemFile);
+        ArrayList<FoodItem> fiList = parseItems(foodItemFile);
         resolveNutritionFoodRelations(componentValueFile, dbName, fiList);
         FoodItemDaoSqlite3 fid = new FoodItemDaoSqlite3(dbName);
         fid.addAll(fiList);
-        
+
     }
 }

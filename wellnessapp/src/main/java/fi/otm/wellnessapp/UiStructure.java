@@ -13,7 +13,7 @@ import fi.otm.wellnessapp.structure.User;
  */
 public class UiStructure {
     
-    private static UiStructure SINGLETON;
+    private static UiStructure singleton;
     private User user;
     private String dataBaseName;
     
@@ -24,10 +24,10 @@ public class UiStructure {
     }
     
     public static UiStructure getInstance() {
-        if(SINGLETON == null) {
-            SINGLETON = new UiStructure();
+        if (singleton == null) {
+            singleton = new UiStructure();
         }
-        return SINGLETON;
+        return singleton;
     }
     
     public void setUser(User user) {

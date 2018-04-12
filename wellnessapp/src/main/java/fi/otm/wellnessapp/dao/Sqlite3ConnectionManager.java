@@ -15,7 +15,7 @@ import java.sql.SQLException;
  */
 public class Sqlite3ConnectionManager {
     
-    private static Sqlite3ConnectionManager SINGLETON = null;
+    private static Sqlite3ConnectionManager singleton = null;
     
     private Connection conn = null;
     private String dbName;
@@ -23,16 +23,20 @@ public class Sqlite3ConnectionManager {
         this.dbName = dbName;
     }
     public static Sqlite3ConnectionManager getConnectionManager(String dbName) {
-        if(SINGLETON == null) {
-            SINGLETON = new Sqlite3ConnectionManager(dbName);
+        if (singleton == null) {
+            singleton = new Sqlite3ConnectionManager(dbName);
         }
-        return SINGLETON;
+        return singleton;
     }
     public static Sqlite3ConnectionManager getConnectionManager() {
-        if(SINGLETON == null) {
+        if (singleton == null) {
             System.out.println("CALL WITH FILENAME FIRST");
         }
-        return SINGLETON;
+        return singleton;
+    }
+    
+    public static void reset() {
+        singleton = null;
     }
     
     public void setDbName(String filename) {

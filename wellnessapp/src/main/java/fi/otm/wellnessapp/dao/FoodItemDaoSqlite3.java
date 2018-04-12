@@ -31,42 +31,38 @@ public class FoodItemDaoSqlite3 implements FoodItemDao {
         this.scm = Sqlite3ConnectionManager.getConnectionManager(filename);
     }
 
+    private void resolveComponents(FoodItem fi) {
+        try {
+            NutritionalComponentStructure ncs = NutritionalComponentStructure
+                    .getNutrititonalComponentStructure(this.filename);
+            String sqlQuery = "SELECT EUFDNAME, BESTLOC FROM ComponentValue  WHERE FoodID = (?);";
+            PreparedStatement prep = scm.connect().prepareStatement(sqlQuery);
+            prep.setInt(1, fi.getId());
+            ResultSet rsInner = prep.executeQuery();
+            while (rsInner.next()) {
+                String amountString = rsInner.getString("BESTLOC");
+                String name = rsInner.getString("EUFDNAME");
+                Double amount = Double.parseDouble(amountString);
+                fi.addContents(amount, ncs.getNutCompByName(name));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FoodItemDaoSqlite3.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     @Override
     public ArrayList<FoodItem> getAll() {
-        //first get all NutritionalComponents
-        NutritionalComponentStructure ncs
-                = NutritionalComponentStructure
-                        .getNutrititonalComponentStructure(this.filename);
         ArrayList<FoodItem> fiList = new ArrayList<>();
-        String sqlQuery = "SELECT FoodID, FoodName, Lang"
-                + " FROM "
-                + " FoodNameFi; ";
-        String sqlQuery2 = "SELECT EUFDNAME, BESTLOC FROM ComponentValue "
-                + " WHERE FoodID = (?);";
+        String sqlQuery = "SELECT FoodID, FoodName, Lang  FROM FoodNameFi; ";
         try {
-            Statement stmnt = scm.connect().createStatement();
-            ResultSet rs = stmnt.executeQuery(sqlQuery);
+            ResultSet rs = scm.connect().createStatement().executeQuery(sqlQuery);
             while (rs.next()) {
                 fiList.add(new FoodItem(
                         rs.getInt("FoodID"), rs.getString("FoodName"),
                         rs.getString("Lang")
                 ));
             }
-            for (FoodItem fi : fiList) {
-                /*
-                    for each food item this will resolve all of the 
-                    nutrients in it
-                 */
-                PreparedStatement prep = scm.connect().prepareStatement(sqlQuery2);
-                prep.setInt(1, fi.getId());
-                ResultSet rsInner = prep.executeQuery();
-                while (rsInner.next()) {
-                    String amountString = rsInner.getString("BESTLOC");
-                    String name = rsInner.getString("EUFDNAME");
-                    Double amount = Double.parseDouble(amountString);
-                    fi.addContents(amount, ncs.getNutCompByName(name));
-                }
-            }
+            fiList.stream().forEach((FoodItem fi) -> this.resolveComponents(fi));
             scm.connect().close();
             return fiList;
         } catch (SQLException ex) {
@@ -77,59 +73,27 @@ public class FoodItemDaoSqlite3 implements FoodItemDao {
 
     @Override
     public FoodItem getOne(int foodItemID) {
-        NutritionalComponentStructure ncs
-                = NutritionalComponentStructure
-                        .getNutrititonalComponentStructure(this.filename);
-        String sqlQuery = "SELECT FoodID, FoodName, Lang FROM FoodNameFi"
-                + "WHERE FoodID = (?); ";
-        String sqlQuery2 = "SELECT EUFDNAME, BESTLOC, FROM ComponentValue"
-                + "WHERE FoodID = (?); ";
-        FoodItem value = null;
+        String sqlQuery = "SELECT FoodID, FoodName, Lang FROM FoodNameFi WHERE FoodID = (?); ";
         try {
             PreparedStatement prep = scm.connect().prepareStatement(sqlQuery);
             prep.setInt(1, foodItemID);
-            ResultSet rs = prep.executeQuery(sqlQuery);
-            while (rs.next()) {
-                value = new FoodItem(
-                        rs.getInt("FoodID"),
-                        rs.getString("FoodName"),
-                        rs.getString("Lang")
-                );
-            }
-            if (value == null) {
-                return null;
-            }
-            prep = scm.connect().prepareStatement(sqlQuery2);
-            prep.setInt(1, foodItemID);
-            rs = prep.executeQuery();
-            while (rs.next()) {
-                String amountString = rs.getString("BESTLOC");
-                Double amount = Double.parseDouble(amountString);
-                String name = rs.getString("EUFDNAME");
-                value.addContents(amount, ncs.getNutCompByName(name));
+            ResultSet rs = prep.executeQuery();
+            FoodItem value = null;
+            if (rs.next()) {
+                value = new FoodItem(rs.getInt("FoodID"), rs.getString("FoodName"), rs.getString("Lang"));
+                this.resolveComponents(value);
             }
             scm.connect().close();
             return value;
-
         } catch (SQLException ex) {
             Logger.getLogger(FoodItemDaoSqlite3.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return value;
+        return null;
     }
 
-    private void addCore(FoodItem fi) throws SQLException {
-        /*
-        * SQL inserts will fail silently
-         */
-        String sqlInsert = "INSERT OR IGNORE INTO FoodNameFi (FoodID, FoodName, Lang)"
-                + "VALUES(?,?,?)";
+    private void addComponentRelations(FoodItem fi) {
         String sqlInsert2 = "INSERT OR IGNORE INTO ComponentValue (FoodId, EUFDNAME, BESTLOC)"
                 + "VALUES(?,?,?);";
-        PreparedStatement prep = scm.connect().prepareStatement(sqlInsert);
-        prep.setInt(1, fi.getId());
-        prep.setString(2, fi.getName());
-        prep.setString(3, fi.getLanguage());
-        prep.executeUpdate();
         HashMap<NutritionalComponent, Double> contents = fi.getContents();
         contents.keySet().parallelStream().forEach(k -> {
             try {
@@ -144,6 +108,17 @@ public class FoodItemDaoSqlite3 implements FoodItemDao {
                 Logger.getLogger(FoodItemDaoSqlite3.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
+    }
+
+    private void addCore(FoodItem fi) throws SQLException {
+        String sqlInsert = "INSERT OR IGNORE INTO FoodNameFi (FoodID, FoodName, Lang)"
+                + "VALUES(?,?,?)";
+        PreparedStatement prep = scm.connect().prepareStatement(sqlInsert);
+        prep.setInt(1, fi.getId());
+        prep.setString(2, fi.getName());
+        prep.setString(3, fi.getLanguage());
+        prep.executeUpdate();
+        addComponentRelations(fi);
     }
 
     @Override

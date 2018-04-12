@@ -28,7 +28,7 @@ import static org.junit.Assert.*;
  */
 public class NutritionalComponentDaoSqlite3Test {
 
-    private final String testDbName = "src/main/resources/sqlite/appDb.sqlite3";
+    private final String testDbName = "src/main/resources/sqlite/testDb.sqlite3";
 
     public NutritionalComponentDaoSqlite3Test() {
 
@@ -38,6 +38,7 @@ public class NutritionalComponentDaoSqlite3Test {
     public void setUp() {
         File file = new File(testDbName);
         file.delete();
+        Sqlite3ConnectionManager.reset();
         Sqlite3Utils.setupSchema("src/main/resources/sqlite/dataBaseSchema.sqlite3", ("jdbc:sqlite:" + testDbName));
         String insert = "INSERT INTO Component "
                 + "VALUES(?,?,?,?)";
@@ -73,6 +74,7 @@ public class NutritionalComponentDaoSqlite3Test {
         System.out.println("getAll");
         NutritionalComponentDaoSqlite3 instance = new NutritionalComponentDaoSqlite3("jdbc:sqlite:" + testDbName);
         ArrayList<NutritionalComponent> result = instance.getAll();
+        //System.out.println(result);
         assertEquals("TEST", result.get(0).getName());
         assertEquals("TEST2", result.get(1).getName());
         // TODO review the generated test code and remove the default call to fail.
@@ -84,7 +86,6 @@ public class NutritionalComponentDaoSqlite3Test {
     @Test
     public void testGetOne() {
         System.out.println("getOne");
-        String eufdName = "";
         NutritionalComponentDaoSqlite3 instance = new NutritionalComponentDaoSqlite3("jdbc:sqlite:" + testDbName);;
         NutritionalComponent result = instance.getOne("TEST2");
         assertEquals("TEST2", result.getName());

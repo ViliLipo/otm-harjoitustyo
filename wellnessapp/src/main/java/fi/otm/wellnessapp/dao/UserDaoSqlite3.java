@@ -19,10 +19,11 @@ import java.util.logging.Logger;
  *
  * @author vili
  */
-public class UserDaoSqlite3 implements UserDao{
-    
+public class UserDaoSqlite3 implements UserDao {
+
     private String dbname;
     private Sqlite3ConnectionManager scm;
+
     public UserDaoSqlite3(String dbname) {
         this.dbname = dbname;
         this.scm = Sqlite3ConnectionManager.getConnectionManager(dbname);
@@ -30,42 +31,29 @@ public class UserDaoSqlite3 implements UserDao{
 
     @Override
     public User getUser(String username, String passwordHash) {
-         User user = null;
-         System.out.println("Getting user");
-         String sqlQuery = "SELECT * FROM User "
-                 + "WHERE UserName = (?) "
-                 + "AND PasswordHash = (?)";
+        String sqlQuery = "SELECT * FROM User WHERE UserName = (?) AND PasswordHash = (?)";
         try {
             PreparedStatement prep = scm.connect().prepareStatement(sqlQuery);
             prep.setString(1, username);
             prep.setString(2, passwordHash);
             ResultSet rs = prep.executeQuery();
-            if(rs.next()) {
-                user = new User(rs.getString("UserName"),
-                        rs.getString("PasswordHash"));
+            if (rs.next()) {
+                User user = new User(rs.getString("UserName"), rs.getString("PasswordHash"));
                 user.setDailyKiloJouleGoal(rs.getDouble("DailyKiloJouleGoal"));
                 user.setUserID(rs.getInt("UserID"));
-            } else {
-                System.out.println("no user");
+                ArrayList<Meal> mealList = new MealDaoSqlite3(dbname).getByUserId(user.getUserId());
                 return user;
             }
-            ArrayList<Meal> mealList;
-            System.out.println("getting meals");
-            MealDaoSqlite3 mealDao = new MealDaoSqlite3(dbname);
-            mealList = mealDao.getByUserId(user.getUserId());
-            System.out.println("got meals");
-            return user;
         } catch (SQLException ex) {
             Logger.getLogger(UserDaoSqlite3.class.getName()).log(Level.SEVERE, null, ex);
         }
-         return user;
+        return null;
     }
 
     @Override
     public void addUser(User user) {
         String sqlInsert = "INSERT INTO User (UserName, PasswordHash,"
-                + " DailyKilojouleGoal) "
-                + "VALUES(?,?,?);";
+                + " DailyKilojouleGoal) VALUES(?,?,?);";
         try {
             PreparedStatement prep = scm.connect().prepareStatement(sqlInsert);
             prep.setString(1, user.getUserName());
@@ -82,8 +70,7 @@ public class UserDaoSqlite3 implements UserDao{
         } catch (SQLException ex) {
             Logger.getLogger(UserDaoSqlite3.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+
     }
 
     @Override
@@ -95,7 +82,5 @@ public class UserDaoSqlite3 implements UserDao{
     public void updateUser(User user) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
-    
+
 }

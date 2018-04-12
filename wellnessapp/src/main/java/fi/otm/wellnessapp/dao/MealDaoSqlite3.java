@@ -100,17 +100,14 @@ public class MealDaoSqlite3 implements MealDao {
     @Override
     public Meal getOne(int mealId) {
         Meal meal = null;
-        String sqlQuery = "SELECT * FROM MEAL "
-                + "WHERE MealID = (?);";
+        String sqlQuery = "SELECT * FROM MEAL WHERE MealID = (?);";
         try {
             PreparedStatement prep = scm.connect().prepareStatement(sqlQuery);
             prep.setInt(1, mealId);
             ResultSet rs = prep.executeQuery();
             rs.next();
             if (rs.isAfterLast()) {
-                //database did not contain mealID
-                //meal is null
-                return meal;
+                return null; // database did not contain id
             }
             meal = new Meal(new Date(rs.getTimestamp("Time").getTime()),
                     rs.getInt("UserID"));

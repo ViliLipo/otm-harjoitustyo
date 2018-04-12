@@ -46,7 +46,7 @@ public class Meal implements Comparable {
         this.foodItems.put(fi, a);
     }
     
-    public HashMap<NutritionalComponent, Double> getTotalNutritionalValues () {
+    public HashMap<NutritionalComponent, Double> getTotalNutritionalValues() {
         if (this.totalNutritionalValues == null) {
             this.buildTotalNutritionalValues();
         }
@@ -61,28 +61,18 @@ public class Meal implements Comparable {
     private void buildTotalNutritionalValues() {
         this.totalNutritionalValues = new HashMap<>();
         this.foodItems.keySet().stream().forEach(k -> {
-            /*
-                for each item nutritional values are added to
-                the hashmap
-            */
             Double amountOfFood = this.foodItems.get(k);
             HashMap nutritionalValue = k.getContents();
             nutritionalValue.keySet().stream().forEach(r -> {
-                /*
-                    for each nutritional value in food item
-                    the nutritional values are
-                    calculated to the total hashmap
-                */
                 Double amountOfNutrient = amountOfFood *
-                        ((Double)nutritionalValue.get(r))/100;
-                Double old = this.totalNutritionalValues.put((NutritionalComponent)r, amountOfNutrient);
-                if(old != null) {
+                        ((Double) nutritionalValue.get(r)) / 100;
+                Double old = this.totalNutritionalValues.put((NutritionalComponent) r, amountOfNutrient);
+                if (old != null) {
                     Double val = old + amountOfNutrient;
                     this.totalNutritionalValues.replace((NutritionalComponent) r , val);
                 }          
             });
         });
-        
     }
     public Date getTime() {
         return this.time;

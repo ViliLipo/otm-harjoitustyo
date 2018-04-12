@@ -6,8 +6,6 @@
 package fi.otm.wellnessapp.dao;
 
 import fi.otm.wellnessapp.structure.NutritionalComponent;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,14 +18,15 @@ import java.util.logging.Logger;
  *
  * @author vili
  */
-public class NutritionalComponentDaoSqlite3 implements NutritionalComponentDao{
-    
+public class NutritionalComponentDaoSqlite3 implements NutritionalComponentDao {
+
     private final String filename;
-    
+
     private Sqlite3ConnectionManager scm;
-    
+
     public NutritionalComponentDaoSqlite3(String filename) {
         this.filename = filename;
+        Sqlite3ConnectionManager.reset();
         this.scm = Sqlite3ConnectionManager.getConnectionManager(filename);
     }
 
@@ -35,13 +34,11 @@ public class NutritionalComponentDaoSqlite3 implements NutritionalComponentDao{
     public ArrayList<NutritionalComponent> getAll() {
         try {
             ArrayList<NutritionalComponent> componentList = new ArrayList<>();
-            ResultSet rs = null;
             String query = "SELECT * FROM COMPONENT";
-            Statement stmnt = scm.connect().createStatement();
-            rs = stmnt.executeQuery(query);
-            while(rs.next()) {
+            ResultSet rs = scm.connect().createStatement().executeQuery(query);
+            while (rs.next()) {
                 componentList.add(new NutritionalComponent(
-                        rs.getString("EUFDNAME"),//NAME
+                        rs.getString("EUFDNAME"), //NAME
                         rs.getString("COMPUNIT"), //UNIT
                         rs.getString("CMPCLASS"),
                         rs.getString("CMPCLASSP")
@@ -58,26 +55,19 @@ public class NutritionalComponentDaoSqlite3 implements NutritionalComponentDao{
     @Override
     public NutritionalComponent getOne(String eufdName) {
         try {
-            NutritionalComponent nc = null;
-            ResultSet rs = null;
-            String query = "SELECT * FROM Component "
-                           + "WHERE EUFDNAME = ?;";
+            String query = "SELECT * FROM Component WHERE EUFDNAME = ?;";
             PreparedStatement prep = scm.connect().prepareStatement(query);
             prep.setString(1, eufdName);
-            rs = prep.executeQuery();
-            if(rs.next()) {
-                nc = new NutritionalComponent(
-                        rs.getString("EUFDNAME"),//NAME
-                        rs.getString("COMPUNIT"), //UNIT
-                        rs.getString("CMPCLASS"),
+            ResultSet rs = prep.executeQuery();
+            if (rs.next()) {
+                NutritionalComponent nc = new NutritionalComponent(rs.getString("EUFDNAME"),
+                        rs.getString("COMPUNIT"), rs.getString("CMPCLASS"),
                         rs.getString("CMPCLASSP")
                 );
-                
-            }else {
+                return nc;
+            } else {
                 return null;
             }
-            scm.connect().close();
-            return nc;
         } catch (SQLException ex) {
             ex.printStackTrace();
             return null;
@@ -88,8 +78,8 @@ public class NutritionalComponentDaoSqlite3 implements NutritionalComponentDao{
     public void add(NutritionalComponent nc) {
         try {
             String sqlInsert = "INSERT OR IGNORE INTO COMPONENT"
-                               +"(EUFDNAME, COMPUNIT, CMPCLASS, CMPCLASSP)"
-                               + "VALUES (?,?,?,?)" ;
+                    + "(EUFDNAME, COMPUNIT, CMPCLASS, CMPCLASSP)"
+                    + "VALUES (?,?,?,?)";
             PreparedStatement prep = scm.connect().prepareStatement(sqlInsert);
             prep.setString(1, nc.getName());
             prep.setString(2, nc.getUnit());
@@ -98,7 +88,7 @@ public class NutritionalComponentDaoSqlite3 implements NutritionalComponentDao{
             prep.executeUpdate();
             scm.connect().commit();
             scm.connect().close();
-        } catch ( SQLException ex) {
+        } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }
@@ -107,7 +97,7 @@ public class NutritionalComponentDaoSqlite3 implements NutritionalComponentDao{
     public void remove(String eufdName) {
         try {
             String sqlDelete = "DELETE FROM COMPONENT "
-                               + " WHERE EUFDNAME = (?);";
+                    + " WHERE EUFDNAME = (?);";
             PreparedStatement prep = scm.connect().prepareStatement(sqlDelete);
             prep.setString(1, eufdName);
             prep.executeUpdate();
@@ -117,5 +107,5 @@ public class NutritionalComponentDaoSqlite3 implements NutritionalComponentDao{
             Logger.getLogger(NutritionalComponentDaoSqlite3.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
 }

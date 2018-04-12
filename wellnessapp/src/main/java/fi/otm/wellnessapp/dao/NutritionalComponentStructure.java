@@ -11,20 +11,17 @@ import java.util.HashMap;
 
 /**
  *
- * @author vili
- * This is a singleton class for globally accessing 
- * data structure for resolving NutritionalComponents
- * based on their name.
- * It saves space.
+ * @author vili This is a singleton class for globally accessing data structure
+ * for resolving NutritionalComponents based on their name. It saves space.
  */
 public class NutritionalComponentStructure {
-    
+
     private final HashMap<String, NutritionalComponent> structure;
     private final ArrayList<String> nameList;
     private final String filename;
-    private static NutritionalComponentStructure SINGLETON = null;
-    
-    private NutritionalComponentStructure (String filename) {
+    private static NutritionalComponentStructure singleton = null;
+
+    private NutritionalComponentStructure(String filename) {
         this.filename = filename;
         NutritionalComponentDaoSqlite3 ncDao = new NutritionalComponentDaoSqlite3(this.filename);
         ArrayList<NutritionalComponent> nclist = ncDao.getAll();
@@ -35,16 +32,16 @@ public class NutritionalComponentStructure {
             this.nameList.add(nc.getName());
         }
     }
+
     public static NutritionalComponentStructure getNutrititonalComponentStructure(String filename) {
-        if(SINGLETON == null) {
-            SINGLETON = new NutritionalComponentStructure(filename);
+        if (singleton == null) {
+            singleton = new NutritionalComponentStructure(filename);
         }
-        return SINGLETON;
+        return singleton;
     }
-    
+
     public NutritionalComponent getNutCompByName(String name) {
         return this.structure.get(name);
     }
-    
-    
+
 }
