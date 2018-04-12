@@ -10,10 +10,10 @@ package fi.otm.wellnessapp.structure;
  * @author vili
  */
 public class NutritionalComponent {
-    private String name;
-    private String unit;
-    private String cmpClass;
-    private String cmpClassp;
+    private final String name;
+    private final String unit;
+    private final String cmpClass;
+    private final String cmpClassp;
     
     public NutritionalComponent(String name, String unit, String cmpClass,
             String cmpClassp) {
@@ -23,17 +23,10 @@ public class NutritionalComponent {
         this.cmpClassp = cmpClassp;
     }
     
-    public void setName(String name) {
-        this.name = name;
-    }
-    
     public String getName() {
         return this.name;
     }
     
-    public void setUnit(String unit) {
-        this.unit = unit;
-    }
     public String getUnit() {
         return this.unit;
     }
@@ -53,7 +46,7 @@ public class NutritionalComponent {
     public boolean equals(Object o){
         if(o.getClass().equals(this.getClass())) {
             NutritionalComponent nc = (NutritionalComponent)o;
-            return this.name.contentEquals(name);
+            return this.name.contentEquals(nc.getName());
         }
         return false;
     }

@@ -1,4 +1,4 @@
- # The Welness Mate
+ # The WellnessApp
  # Vaatimusmäärittely
 
  ## Featurelist
