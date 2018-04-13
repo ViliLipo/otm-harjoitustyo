@@ -64,12 +64,12 @@ public class NutritionalComponentDaoSqlite3 implements NutritionalComponentDao {
                         rs.getString("COMPUNIT"), rs.getString("CMPCLASS"),
                         rs.getString("CMPCLASSP")
                 );
+                scm.connect().close();
                 return nc;
             } else {
                 return null;
             }
         } catch (SQLException ex) {
-            ex.printStackTrace();
             return null;
         }
     }

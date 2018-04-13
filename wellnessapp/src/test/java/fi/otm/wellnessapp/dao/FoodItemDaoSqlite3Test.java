@@ -12,8 +12,11 @@ import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,16 +30,15 @@ import org.junit.Ignore;
  *
  * @author vili
  */
-
 public class FoodItemDaoSqlite3Test {
-    
+
     private final String testDbName = "src/main/resources/sqlite/testDb.sqlite3";
-    
+
     private NutritionalComponent energy;
-    
+
     public FoodItemDaoSqlite3Test() {
     }
-    
+
     @Before
     public void setUp() {
         File file = new File(testDbName);
@@ -47,7 +49,7 @@ public class FoodItemDaoSqlite3Test {
                 + "VALUES(?,?,?,?)";
         String insert2 = "INSERT INTO ComponentValue VALUES(?,?,?)";
         String insert3 = "INSERT INTO FoodNameFi VALUES(?,?,?)";
-        
+
         try {
             Connection conn = DriverManager.getConnection("jdbc:sqlite:" + testDbName);
             PreparedStatement prep = conn.prepareStatement(insert);
@@ -57,12 +59,12 @@ public class FoodItemDaoSqlite3Test {
             prep.setString(4, "ENER");
             prep.executeUpdate();
             prep = conn.prepareStatement(insert2);
-            prep.setInt(1, 1 );
+            prep.setInt(1, 1);
             prep.setString(2, "ENERC");
             prep.setString(3, "400.00");
             prep.executeUpdate();
             prep = conn.prepareStatement(insert2);
-            prep.setInt(1, 2 );
+            prep.setInt(1, 2);
             prep.setString(2, "ENERC");
             prep.setString(3, "600.00");
             prep.executeUpdate();
@@ -76,22 +78,20 @@ public class FoodItemDaoSqlite3Test {
             prep.setString(2, "pulla");
             prep.setString(3, "fi");
             prep.executeUpdate();
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(FoodItemDaoSqlite3Test.class.getName()).log(Level.SEVERE, null, ex);
         }
         energy = new NutritionalComponent("ENERC", "kj", "ENER", "ENER");
     }
-    
+
     @After
     public void tearDown() {
     }
 
-
     /**
      * Test of getAll method, of class FoodItemDaoSqlite3.
      */
-     
     @Test
     public void testGetAll() {
         System.out.println("getAll");
@@ -123,42 +123,92 @@ public class FoodItemDaoSqlite3Test {
     /**
      * Test of addOne method, of class FoodItemDaoSqlite3.
      */
-    @Ignore @Test
+    @Test
     public void testAddOne() {
         System.out.println("addOne");
         FoodItem fi = new FoodItem(3, "Rinkeli", "fi");
         fi.addContents(300.0d, energy);
-        FoodItemDaoSqlite3 instance = new FoodItemDaoSqlite3(testDbName);
+        FoodItemDaoSqlite3 instance = new FoodItemDaoSqlite3("jdbc:sqlite:"+testDbName);
         instance.addOne(fi);
-        String query = "SELECT * FROM FOOD ITEM WHERE FoodID = (?)";
+        String query = "SELECT * FROM FoodNameFi WHERE FoodID = (?)";
         String query2 = "SELECT * FROM ComponentValue WHERE FoodID = (?)";
-        
+        try {
+            Connection conn = DriverManager.getConnection("jdbc:sqlite:" + testDbName);
+            PreparedStatement prep = conn.prepareStatement(query);
+            prep.setInt(1, 3);
+            ResultSet rs = prep.executeQuery();
+            rs.next();
+            assertTrue(rs.getString("FoodName").contentEquals("Rinkeli"));
+            prep = conn.prepareStatement(query2);
+            prep.setInt(1, 3);
+            rs = prep.executeQuery();
+            rs.next();
+            assertEquals("300.0", rs.getString("BESTLOC"));
+            conn.close();
+
+        } catch (SQLException ex) {
+            fail("exception");
+            Logger.getLogger(FoodItemDaoSqlite3Test.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
      * Test of addAll method, of class FoodItemDaoSqlite3.
      */
-    @Ignore @Test
+    @Test
     public void testAddAll() {
         System.out.println("addAll");
-        List<FoodItem> fiList = null;
-        FoodItemDaoSqlite3 instance = null;
+        FoodItem fi = new FoodItem(3, "Rinkeli", "fi");
+        fi.addContents(300.0d, energy);
+        FoodItemDaoSqlite3 instance = new FoodItemDaoSqlite3("jdbc:sqlite:" + testDbName);
+        FoodItem fi2 = new FoodItem(4, "muna", "fi");
+        String query = "SELECT * FROM FoodNameFi";
+        List<FoodItem> fiList = new ArrayList<>();
+        fiList.add(fi);
+        fiList.add(fi2);
         instance.addAll(fiList);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        try {
+            Connection conn = DriverManager.getConnection("jdbc:sqlite:" + testDbName);
+            Statement stmnt = conn.createStatement();
+            ResultSet rs = stmnt.executeQuery(query);
+            HashSet<String> stringSet = new HashSet<>();
+            while (rs.next()) {
+                stringSet.add(rs.getString("FoodName"));
+            }
+            assertTrue(stringSet.contains("Rinkeli"));
+            assertTrue(stringSet.contains("muna"));
+            conn.close();
+        } catch (SQLException ex) {
+            fail("Exception");
+            Logger.getLogger(FoodItemDaoSqlite3Test.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
      * Test of remove method, of class FoodItemDaoSqlite3.
      */
-    @Ignore @Test
+    @Test
     public void testRemove() {
         System.out.println("remove");
-        FoodItem fi = null;
-        FoodItemDaoSqlite3 instance = null;
-        instance.remove(fi);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        FoodItem meatBall = new FoodItem(1, "lihapulla", "fi");
+        FoodItemDaoSqlite3 instance = new FoodItemDaoSqlite3("jdbc:sqlite:" + testDbName);
+        instance.remove(meatBall);
+        String query = "SELECT * FROM FoodNameFi";
+        try {
+            Connection conn = DriverManager.getConnection("jdbc:sqlite:" + testDbName);
+            Statement stmnt = conn.createStatement();
+            ResultSet rs = stmnt.executeQuery(query);
+            HashSet<String> stringSet = new HashSet<>();
+            while (rs.next()) {
+                stringSet.add(rs.getString("FoodName"));
+            }
+            assertFalse(stringSet.contains("lihapulla"));
+            conn.close();
+        } catch (SQLException ex) {
+            fail("exception");
+            Logger.getLogger(FoodItemDaoSqlite3Test.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
-    
+
 }

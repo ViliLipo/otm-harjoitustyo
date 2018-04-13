@@ -5,11 +5,17 @@
  */
 package fi.otm.wellnessapp.structure;
 
+import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -44,9 +50,13 @@ public class User {
     public String getUserName() {
         return this.userName;
     }
+    
 
     public String getPasswordHash() {
         return this.passwordHash;
+    }
+    public String getUserNameHash() {
+        return this.md5Hash(userName);
     }
 
     public void setCalorieGoal(int goal) {
@@ -130,6 +140,25 @@ public class User {
                 && cl1.get(Calendar.DAY_OF_YEAR)
                 == cl2.get(Calendar.DAY_OF_YEAR));
 
+    }
+    public static String md5Hash(String string) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            try {
+                md.update(string.getBytes("UTF-8"));
+                byte[] digest = md.digest();
+                BigInteger bigInt = new BigInteger(1, digest);
+                //TODO implement salt
+                String hashText = bigInt.toString(16);
+                return hashText;
+            } catch (UnsupportedEncodingException ex) {
+                Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
 }

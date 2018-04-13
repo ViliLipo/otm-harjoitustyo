@@ -52,10 +52,9 @@ public class LoginController implements Initializable {
                 || this.passwordField.getText().contentEquals("")) {
             this.userNameField.setPromptText("Give username and password");
         } else {
-            // TODO IMPLEMENT HASH
             String name = this.userNameField.getText();
             String password = this.passwordField.getText();
-            User user = new User(name, password);
+            User user = new User(name, User.md5Hash(password));
             UserDao userDao = new UserDaoSqlite3(us.getDataBaseName());
             userDao.addUser(user);
             us.setUser(user);
@@ -70,10 +69,10 @@ public class LoginController implements Initializable {
                 && !this.passwordField.getText().contentEquals("")) {
             String userName = this.userNameField.getText();
             String password = this.passwordField.getText();
-            //TODO IMPLEMENT HASH
             UserDao userDao = new UserDaoSqlite3(us.getDataBaseName());
-            User user = userDao.getUser(userName, password);
+            User user = userDao.getUser(userName, User.md5Hash(password));
             if (user == null) {
+                userNameField.clear();
                 userNameField.setPromptText("Invalid credentials");
             } else {
                 us.setUser(user);

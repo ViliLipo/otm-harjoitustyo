@@ -113,6 +113,7 @@ public class NutritionalComponentDaoSqlite3Test {
             ResultSet rs = prep.executeQuery();
             assertEquals("ADD", rs.getString("EUFDNAME") );
             assertEquals("kg", rs.getString("COMPUNIT"));
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(NutritionalComponentDaoSqlite3Test.class.getName()).log(Level.SEVERE, null, ex);
             fail(ex.getMessage());
@@ -138,6 +139,7 @@ public class NutritionalComponentDaoSqlite3Test {
             rs.next();
             rs.next();
             assertEquals(true, rs.isAfterLast());
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(NutritionalComponentDaoSqlite3Test.class.getName()).log(Level.SEVERE, null, ex);
             fail("Sqlite exception");

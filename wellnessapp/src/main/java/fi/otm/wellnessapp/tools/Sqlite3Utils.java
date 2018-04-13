@@ -33,6 +33,7 @@ public class Sqlite3Utils {
                 Connection conn = DriverManager.getConnection(dbname);
                 Statement stmnt = conn.createStatement();
                 stmnt.executeUpdate(schema);
+                conn.close();
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(Sqlite3Utils.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -57,6 +58,7 @@ public class Sqlite3Utils {
                 CsvParser.convertComponentCSVtoSQLITE(compCsv, dbname);
                 CsvParser.convertFoodItems(compValCsv, foodCsv, dbname);
             }
+            conn.close();
         } catch (SQLException ex) { // no schema at all
             setupSchema(schemafile, dbname);
             CsvParser.convertComponentCSVtoSQLITE(compCsv, dbname);

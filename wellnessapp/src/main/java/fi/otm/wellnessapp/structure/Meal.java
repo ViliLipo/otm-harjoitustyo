@@ -5,11 +5,11 @@
  */
 package fi.otm.wellnessapp.structure;
 
-import java.util.ArrayList;
-import java.util.Comparator;
+import fi.otm.wellnessapp.dao.NutritionalComponentStructure;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Set;
 
 /**
  *
@@ -82,6 +82,17 @@ public class Meal implements Comparable {
     public int compareTo(Object o) {
         Meal m = (Meal) o;
         return this.time.compareTo(m.getTime());
+    }
+    @Override
+    public String toString() {
+        DateFormat df = new SimpleDateFormat("HH:mm dd/MM/yyyy");
+        String dateString = df.format(this.time);
+        NutritionalComponentStructure ncs = NutritionalComponentStructure.getNutrititonalComponentStructure();
+        Double energy = this.getTotalNutritionalValues().get(ncs.getNutCompByName("ENERC"));
+        energy = energy / 4.1868;
+        String s = dateString + energy.toString() + " kcal";
+        return s;
+        
     }
 
     

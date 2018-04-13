@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fi.otm.wellnessapp.newMealMenu">
+    <stylesheets>
+        <URL value="@/styles/newmealmenu.css" />
+    </stylesheets>
+   <children>
+      <AnchorPane fx:id="timePane" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label layoutX="29.0" layoutY="24.0" prefHeight="44.0" prefWidth="146.0" text="Uusi Ateria" AnchorPane.leftAnchor="29.0" AnchorPane.rightAnchor="425.0" AnchorPane.topAnchor="24.0">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="40.0" layoutY="68.0" prefHeight="44.0" prefWidth="146.0" text="Aseta aika" AnchorPane.bottomAnchor="288.0" AnchorPane.leftAnchor="29.0" AnchorPane.rightAnchor="425.0" AnchorPane.topAnchor="68.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="hourField" layoutX="45.0" layoutY="119.0" prefHeight="26.0" prefWidth="66.0" promptText="HH" AnchorPane.bottomAnchor="255.0" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="489.0" AnchorPane.topAnchor="119.0" />
+            <TextField fx:id="minuteField" layoutX="116.0" layoutY="119.0" prefHeight="26.0" prefWidth="66.0" promptText="mm" AnchorPane.bottomAnchor="255.0" AnchorPane.leftAnchor="116.0" AnchorPane.rightAnchor="418.0" AnchorPane.topAnchor="119.0" />
+            <Label layoutX="111.0" layoutY="124.0" text=":" AnchorPane.bottomAnchor="260.0" AnchorPane.leftAnchor="111.0" AnchorPane.rightAnchor="484.0" AnchorPane.topAnchor="124.0" />
+            <DatePicker fx:id="datePicker" layoutX="186.0" layoutY="119.0" onAction="#selectDate" promptText="valitse päivä" AnchorPane.bottomAnchor="255.0" AnchorPane.leftAnchor="186.0" AnchorPane.rightAnchor="216.0" AnchorPane.topAnchor="119.0" />
+            <Button fx:id="bigOKbutton" layoutX="48.0" layoutY="216.0" mnemonicParsing="false" onAction="#swapPanes" prefHeight="44.0" prefWidth="175.0" text="OK" AnchorPane.bottomAnchor="140.0" AnchorPane.leftAnchor="48.0" AnchorPane.rightAnchor="377.0" AnchorPane.topAnchor="216.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="foodPane" layoutY="7.0" prefHeight="400.0" prefWidth="600.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ListView fx:id="foodView" layoutX="109.0" layoutY="171.0" prefHeight="185.0" prefWidth="334.0" AnchorPane.bottomAnchor="44.0" AnchorPane.leftAnchor="109.0" AnchorPane.rightAnchor="157.0" AnchorPane.topAnchor="171.0" />
+            <ComboBox fx:id="foodComBox" layoutX="300.0" layoutY="73.0" onAction="#foodSelected" prefWidth="150.0" AnchorPane.bottomAnchor="301.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="73.0" />
+            <TextField fx:id="filterField" layoutX="109.0" layoutY="73.0" onAction="#filterFood" AnchorPane.bottomAnchor="301.0" AnchorPane.leftAnchor="109.0" AnchorPane.rightAnchor="320.0" AnchorPane.topAnchor="73.0" />
+            <Button fx:id="addFoodButton" layoutX="300.0" layoutY="135.0" mnemonicParsing="false" onAction="#addFood" text="Lisää" AnchorPane.bottomAnchor="239.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="248.0" AnchorPane.topAnchor="135.0" />
+            <TextField fx:id="amountField" layoutX="185.0" layoutY="135.0" prefHeight="26.0" prefWidth="80.0" AnchorPane.bottomAnchor="239.0" AnchorPane.leftAnchor="185.0" AnchorPane.rightAnchor="335.0" AnchorPane.topAnchor="135.0" />
+            <Label layoutX="110.0" layoutY="140.0" text="Määrä" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="449.0" AnchorPane.topAnchor="140.0" />
+            <Label layoutX="110.0" layoutY="47.0" text="Suodatin" AnchorPane.bottomAnchor="337.0" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="432.0" AnchorPane.topAnchor="47.0" />
+            <Label layoutX="297.0" layoutY="47.0" text="Ruoka" AnchorPane.bottomAnchor="337.0" AnchorPane.leftAnchor="297.0" AnchorPane.rightAnchor="245.0" AnchorPane.topAnchor="47.0" />
+            <Button fx:id="continueButton" layoutX="497.0" layoutY="331.0" mnemonicParsing="false" onAction="#closeNewFoodWindow" text="Jatka" AnchorPane.bottomAnchor="43.0" AnchorPane.leftAnchor="497.0" AnchorPane.rightAnchor="52.0" AnchorPane.topAnchor="331.0" />
+            <Button fx:id="removeFoodButton" layoutX="375.0" layoutY="135.0" mnemonicParsing="false" onAction="#removeFood" prefHeight="26.0" prefWidth="66.0" text="Poista" AnchorPane.bottomAnchor="239.0" AnchorPane.leftAnchor="375.0" AnchorPane.rightAnchor="159.0" AnchorPane.topAnchor="135.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

@@ -41,7 +41,8 @@ public class UserDaoSqlite3 implements UserDao {
                 User user = new User(rs.getString("UserName"), rs.getString("PasswordHash"));
                 user.setDailyKiloJouleGoal(rs.getDouble("DailyKiloJouleGoal"));
                 user.setUserID(rs.getInt("UserID"));
-                ArrayList<Meal> mealList = new MealDaoSqlite3(dbname).getByUserId(user.getUserId());
+                user.setMealList(new MealDaoSqlite3(dbname).getByUserId(user.getUserId()));
+                scm.connect().close();
                 return user;
             }
         } catch (SQLException ex) {

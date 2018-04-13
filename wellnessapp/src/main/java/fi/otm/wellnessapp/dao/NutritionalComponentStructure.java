@@ -39,7 +39,12 @@ public class NutritionalComponentStructure {
         }
         return singleton;
     }
-
+    public static NutritionalComponentStructure getNutrititonalComponentStructure() {
+        if (singleton == null) {
+            return null;
+        }
+        return singleton;
+    }
     public NutritionalComponent getNutCompByName(String name) {
         return this.structure.get(name);
     }
