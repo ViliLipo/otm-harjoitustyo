@@ -17,11 +17,13 @@ public class FoodItem implements Comparable {
     private final String name;
     private final String language;
     private HashMap<NutritionalComponent, Double> contents;
+    private HashMap<String, NutritionalComponent> contentName;
 
     public FoodItem(int id, String name, String language) {
         this.id = id;
         this.name = name;
         contents = new HashMap<>();
+        contentName = new HashMap<>();
         this.language = language;
     }
 
@@ -40,10 +42,25 @@ public class FoodItem implements Comparable {
     public void addContents(double amount, NutritionalComponent nc) {
         Double a = amount;
         this.contents.put(nc, a);
+        this.contentName.put(nc.getName(), nc);
     }
 
     public HashMap<NutritionalComponent, Double> getContents() {
         return this.contents;
+    }
+    
+    public String info() {
+        String info = this.name +"\n";
+        Double enerVal = this.getContents().get(this.contentName.get("ENERC")) / 4.1868;
+        String energy = "Energiaa : " + String.format("%.2f", enerVal) +"kcal/100g \n";
+        Double fatVal = this.getContents().get(this.contentName.get("FAT"));
+        String fat = "Rasvaa : " + String.format("%.2f", fatVal) + "g/100g\n";
+        Double protVal = this.getContents().get(this.contentName.get("PROT"));
+        String prot = "Proteiinia : " + String.format("%.2f", protVal) + "g/100g\n";
+        Double sugarVal = this.getContents().get(this.contentName.get("SUGAR"));
+        String sugar = "Sokeria : " + String.format("%.2f", sugarVal) + "g/100g\n";
+        info = info + energy + fat + prot + sugar;
+        return info;
     }
 
     @Override

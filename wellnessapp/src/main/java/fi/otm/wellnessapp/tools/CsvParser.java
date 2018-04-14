@@ -11,8 +11,14 @@ import fi.otm.wellnessapp.dao.NutritionalComponentStructure;
 import fi.otm.wellnessapp.structure.FoodItem;
 import fi.otm.wellnessapp.structure.NutritionalComponent;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -26,13 +32,22 @@ import java.util.logging.Logger;
 public class CsvParser {
 
     private static ArrayList<String> lines(String filename) throws FileNotFoundException {
-        FileReader fr = new FileReader(filename);
-        BufferedReader br = new BufferedReader(fr);
-        ArrayList<String> lines = new ArrayList<>();
-        br.lines().forEach(line -> {
-            lines.add(line);
-        });
-        return lines;
+        try {
+            URL url = Paths.get(filename).toUri().toURL();
+            InputStreamReader fr = new InputStreamReader(url.openStream(), "windows-1252");
+            BufferedReader br = new BufferedReader(fr);
+            ArrayList<String> lines = new ArrayList<>();
+            br.lines().forEach(line -> {
+                lines.add(line);
+            });
+            return lines;
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(CsvParser.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(CsvParser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
     }
 
     private static ArrayList<NutritionalComponent> parseComponents(String filename) {

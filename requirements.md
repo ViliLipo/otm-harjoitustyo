@@ -9,7 +9,7 @@
     - Voi lisätä itselleen päivittäisen kaloritavoitteen
     - Voi lisätä itselleen ruokailutapahtuman
     - Ruokailutapahtumaan voi lisätä ruoka-aineita
-    - Voi lisätä ohjelmaan ruoka-aineita
+    - Ruoka-aineiden tietoja voi tarkastella
   - Suunnitellut toiminnallisuudet
       - Laskee päivittäisen kalorien sisään oton ja muut ravintoarvot
         ja vertaa niitä viittellisiin arvoihin ja näyttää statistiikkaa.

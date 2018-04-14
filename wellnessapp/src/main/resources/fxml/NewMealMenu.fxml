@@ -39,8 +39,8 @@
       <AnchorPane fx:id="foodPane" layoutX="64.0" layoutY="21.0" prefHeight="554.0" prefWidth="891.0" visible="false" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="64.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="21.0">
          <children>
             <ListView fx:id="foodView" layoutX="109.0" layoutY="171.0" prefHeight="185.0" prefWidth="334.0" AnchorPane.bottomAnchor="244.0" AnchorPane.leftAnchor="109.0" AnchorPane.rightAnchor="557.0" AnchorPane.topAnchor="171.0" />
-            <ComboBox fx:id="foodComBox" layoutX="300.0" layoutY="73.0" onAction="#foodSelected" prefWidth="150.0" />
-            <TextField fx:id="filterField" layoutX="109.0" layoutY="73.0" onAction="#filterFood" />
+            <ComboBox fx:id="foodComBox" layoutX="300.0" layoutY="73.0" onAction="#foodSelected" prefHeight="26.0" prefWidth="485.0" />
+            <TextField fx:id="filterField" layoutX="109.0" layoutY="73.0" onKeyTyped="#filterFood" />
             <Button fx:id="addFoodButton" layoutX="300.0" layoutY="135.0" mnemonicParsing="false" onAction="#addFood" text="Lisää" />
             <TextField fx:id="amountField" layoutX="185.0" layoutY="135.0" prefHeight="26.0" prefWidth="80.0" />
             <Label layoutX="110.0" layoutY="140.0" text="Määrä" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="449.0" AnchorPane.topAnchor="140.0" />
@@ -48,7 +48,7 @@
             <Label layoutX="297.0" layoutY="47.0" text="Ruoka" />
             <Button fx:id="continueButton" layoutX="787.0" layoutY="408.0" mnemonicParsing="false" onAction="#closeNewFoodWindow" text="Jatka" />
             <Button fx:id="removeFoodButton" layoutX="375.0" layoutY="135.0" mnemonicParsing="false" onAction="#removeFood" prefHeight="26.0" prefWidth="66.0" text="Poista" />
-            <TextArea fx:id="foodInfoField" layoutX="489.0" layoutY="86.0" prefHeight="273.0" prefWidth="290.0" />
+            <TextArea fx:id="foodInfoField" editable="false" layoutX="486.0" layoutY="111.0" prefHeight="273.0" prefWidth="290.0" />
          </children>
       </AnchorPane>
    </children>

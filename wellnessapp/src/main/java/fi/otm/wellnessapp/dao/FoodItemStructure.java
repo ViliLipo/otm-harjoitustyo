@@ -7,7 +7,9 @@ package fi.otm.wellnessapp.dao;
 
 import fi.otm.wellnessapp.structure.FoodItem;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -54,7 +56,15 @@ public class FoodItemStructure {
     }
 
     public ArrayList<String> getNameList() {
+        Collections.sort(this.nameList, String.CASE_INSENSITIVE_ORDER);
         return this.nameList;
+    }
+
+    public ArrayList<String> filteredNameList(String filter) {
+        ArrayList<String> fNameList = new ArrayList<>();
+        this.getNameList().stream().filter(name -> name.toLowerCase().contains(filter.toLowerCase()))
+                .forEach(name -> fNameList.add(name));
+        return fNameList;
     }
 
 }
