@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fi.otm.wellnessapp;
+package fi.otm.wellnessapp.ui;
 
 import fi.otm.wellnessapp.structure.User;
 

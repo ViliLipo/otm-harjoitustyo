@@ -1,4 +1,4 @@
-package fi.otm.wellnessapp;
+package fi.otm.wellnessapp.ui;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
@@ -53,7 +54,12 @@ public class NewMealMenu implements Initializable {
 
     @FXML
     private Button removeFoodButton;
-    
+    @FXML
+    private TextArea foodInfoField;
+
+    @FXML
+    private Button backButton;
+
     private UiStructure us = UiStructure.getInstance();
 
     @FXML
@@ -88,16 +94,16 @@ public class NewMealMenu implements Initializable {
 
     @FXML
     void swapPanes(ActionEvent event) {
+        this.timePane.setVisible(false);
+        this.foodPane.setVisible(true);
 
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.foodPane.setVisible(false);
-        this.timePane.setVisible(true);
+
         this.datePicker.setValue(LocalDate.now());
-        
+
     }
 
 }
-

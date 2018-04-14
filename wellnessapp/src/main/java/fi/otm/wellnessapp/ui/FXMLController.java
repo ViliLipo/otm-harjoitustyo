@@ -1,4 +1,4 @@
-package fi.otm.wellnessapp;
+package fi.otm.wellnessapp.ui;
 
 import fi.otm.wellnessapp.structure.Meal;
 import java.io.IOException;
@@ -64,7 +64,7 @@ public class FXMLController implements Initializable {
 
     private void launchNewMealMenu() {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/fxml/newMealMenu.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/fxml/NewMealMenu.fxml"));
             Scene scene = new Scene(root);
             Stage theStage = (Stage) this.ap.getScene().getWindow();
             theStage.setScene(scene);

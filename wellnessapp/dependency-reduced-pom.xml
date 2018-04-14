@@ -145,7 +145,7 @@
     </dependency>
   </dependencies>
   <properties>
-    <mainClass>fi.otm.wellnessapp.MainApp</mainClass>
+    <mainClass>fi.otm.wellnessapp.ui.MainApp</mainClass>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 </project>

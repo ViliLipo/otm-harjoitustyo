@@ -1,4 +1,4 @@
-package fi.otm.wellnessapp;
+package fi.otm.wellnessapp.ui;
 
 import fi.otm.wellnessapp.dao.FoodItemStructure;
 import fi.otm.wellnessapp.dao.NutritionalComponentStructure;
