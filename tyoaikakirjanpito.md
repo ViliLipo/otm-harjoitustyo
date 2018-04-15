@@ -13,4 +13,4 @@
 |13.4|3| Gui jatkoa|
 |14.4| 3| UI |
 |15.4| 3| Dao, ui, diagrammi|
-|yht| 16| |
+|yht| 27| |
