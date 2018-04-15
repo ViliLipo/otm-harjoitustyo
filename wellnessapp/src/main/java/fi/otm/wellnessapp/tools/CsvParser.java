@@ -7,7 +7,7 @@ package fi.otm.wellnessapp.tools;
 
 import fi.otm.wellnessapp.dao.FoodItemDaoSqlite3;
 import fi.otm.wellnessapp.dao.NutritionalComponentDaoSqlite3;
-import fi.otm.wellnessapp.dao.NutritionalComponentStructure;
+import fi.otm.wellnessapp.structure.NutritionalComponentStructure;
 import fi.otm.wellnessapp.structure.FoodItem;
 import fi.otm.wellnessapp.structure.NutritionalComponent;
 import java.io.BufferedReader;

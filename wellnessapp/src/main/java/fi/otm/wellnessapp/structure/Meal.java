@@ -5,7 +5,6 @@
  */
 package fi.otm.wellnessapp.structure;
 
-import fi.otm.wellnessapp.dao.NutritionalComponentStructure;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -48,11 +47,19 @@ public class Meal implements Comparable {
         this.foodItems.put(fi, a);
     }
 
+    public void removeFoodItem(FoodItem fi) {
+        this.foodItems.remove(fi);
+    }
+
     public HashMap<NutritionalComponent, Double> getTotalNutritionalValues() {
         if (this.totalNutritionalValues == null) {
             this.buildTotalNutritionalValues();
         }
         return this.totalNutritionalValues;
+    }
+
+    public HashMap<FoodItem, Double> getFoodItems() {
+        return this.foodItems;
     }
 
     /*
@@ -93,7 +100,7 @@ public class Meal implements Comparable {
         NutritionalComponentStructure ncs = NutritionalComponentStructure.getNutrititonalComponentStructure();
         Double energy = this.getTotalNutritionalValues().get(ncs.getNutCompByName("ENERC"));
         energy = energy / 4.1868;
-        String s = dateString + energy.toString() + " kcal";
+        String s = dateString +" : " +  String.format("%.2f", energy) + "kcal";
         return s;
 
     }

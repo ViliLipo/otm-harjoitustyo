@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="ap" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fi.otm.wellnessapp.ui.FXMLController">
+<AnchorPane fx:id="ap" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fi.otm.wellnessapp.ui.MainMenuController">
    <children>
       <Canvas fx:id="canvas" height="314.0" layoutX="48.0" layoutY="117.0" width="569.0" AnchorPane.bottomAnchor="164.0" AnchorPane.leftAnchor="48.0" AnchorPane.rightAnchor="383.0" AnchorPane.topAnchor="117.0" />
       <Label layoutX="29.0" layoutY="28.0" prefHeight="59.0" prefWidth="212.0" text="WellnessApp" AnchorPane.leftAnchor="29.0" AnchorPane.topAnchor="28.0">

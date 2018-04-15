@@ -5,6 +5,7 @@
  */
 package fi.otm.wellnessapp.dao;
 
+import fi.otm.wellnessapp.structure.NutritionalComponentStructure;
 import fi.otm.wellnessapp.structure.FoodItem;
 import fi.otm.wellnessapp.structure.NutritionalComponent;
 import java.sql.PreparedStatement;

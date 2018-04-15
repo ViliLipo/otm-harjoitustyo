@@ -18,7 +18,7 @@ public class UiStructure {
     private String dataBaseName;
     
     private LoginController loginController;
-    private FXMLController main;
+    private MainMenuController main;
     private UiStructure() {
         
     }
@@ -42,7 +42,7 @@ public class UiStructure {
         this.loginController = lc;
     }
     
-    public void setFXMLController(FXMLController contro) {
+    public void setFXMLController(MainMenuController contro) {
         this.main = contro;
     }
     

@@ -9,4 +9,8 @@
 |4.4| 3 | Tietokantarajapinta|
 |5.4| 3 | Tietokantarajapinta|
 |6.4| 2 | GUI alku |
-|yht| 16| | 
+|12.4| 2| checkstyle ja testejä|
+|13.4|3| Gui jatkoa|
+|14.4| 3| UI |
+|15.4| 3| Dao, ui, diagrammi|
+|yht| 16| |

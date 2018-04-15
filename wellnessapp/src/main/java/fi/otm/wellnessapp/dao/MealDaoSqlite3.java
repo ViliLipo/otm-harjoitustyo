@@ -5,6 +5,7 @@
  */
 package fi.otm.wellnessapp.dao;
 
+import fi.otm.wellnessapp.structure.FoodItemStructure;
 import fi.otm.wellnessapp.structure.Meal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -30,17 +31,14 @@ public class MealDaoSqlite3 implements MealDao {
         this.scm = Sqlite3ConnectionManager.getConnectionManager(filename);
     }
 
-
-
     private void resolveFoodItems(ArrayList<Meal> mealList) {
         mealList.stream().forEach((Meal meal) -> {
             this.resolveFoodItems(meal);
         });
     }
-    
+
     private void resolveFoodItems(Meal meal) {
-        String sqlQuery = "SELECT * FROM InAMeal"
-                + "WHERE MealID = (?);";
+        String sqlQuery = "SELECT * FROM InAMeal WHERE MealID = (?);";
         FoodItemStructure fis = FoodItemStructure.getFoodItemStructure(this.filename);
         try {
             PreparedStatement prep;
@@ -118,12 +116,10 @@ public class MealDaoSqlite3 implements MealDao {
         }
         return meal;
     }
-    
+
     private void addCore(Meal meal) throws SQLException {
         String sqlInsert = "INSERT INTO MEAL (UserID, Time) "
                 + "VALUES (?,?)";
-        String sqlInsertInAMeal = "INSERT INTO InAMeal (MealID, FoodID, Amount)"
-                + "VALUES (?,?,?)";
         PreparedStatement prep = scm.connect().prepareStatement(sqlInsert);
         prep.setInt(1, meal.getUserId());
         prep.setTimestamp(2, new java.sql.Timestamp(meal.getTime().getTime()));
@@ -132,8 +128,23 @@ public class MealDaoSqlite3 implements MealDao {
         Statement stmnt = scm.connect().createStatement();
         ResultSet rs = stmnt.executeQuery(idQuery);
         meal.setMealId(rs.getInt(1));
-        
-        
+        this.addMealFoodRelation(meal);
+    }
+
+    private void addMealFoodRelation(Meal meal) {
+        String sqlInsertInAMeal = "INSERT INTO InAMeal (MealID, FoodID, Amount)"
+                + "VALUES (?,?,?)";
+        meal.getFoodItems().entrySet().forEach(e -> {
+            try {
+                PreparedStatement prep = scm.connect().prepareStatement(sqlInsertInAMeal);
+                prep.setInt(1, meal.getMealId());
+                prep.setInt(2, e.getKey().getId());
+                prep.setString(3, e.getValue().toString());
+                prep.executeUpdate();
+            } catch (SQLException ex) {
+                Logger.getLogger(MealDaoSqlite3.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
     }
 
     @Override

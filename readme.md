@@ -6,10 +6,11 @@
 WellnessApp on kursille Ohjelmistotekniikan menetelmät laadittu harjoitustyo.
 Sovelluksen tarkoituksena on auttaa käyttäjäänsä ruokavalion seuraamisessa.
 Sovelluksen ravintoaineiden tiedot ovat osa Finellin avointa dataa.
-Viikko3 kohdalla tietokantarajapinta sekä kirjautuminen toimii.
+Viikko3 kohdalla tietokantarajapinta sekä kirjautuminen toimiigit .
 Tietokantarajapinnan yksikkötestit on aloitettu.
 Projektin tietokantarajapinta on hieman paisunut ja sen takia toiminnallisuudet
-laahaavat jäljessä.
+laahaavat jäljessä. Tällä hetkellä voi kirjautua, luoda tunnuksen ja tarkastella
+ruoka-aineiden ravintoarvoja.
 
 ### Komentoja
 - Testikattavuus $ mvn test jacoco:report

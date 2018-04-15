@@ -1,7 +1,7 @@
 package fi.otm.wellnessapp.ui;
 
-import fi.otm.wellnessapp.dao.FoodItemStructure;
-import fi.otm.wellnessapp.dao.NutritionalComponentStructure;
+import fi.otm.wellnessapp.structure.FoodItemStructure;
+import fi.otm.wellnessapp.structure.NutritionalComponentStructure;
 import fi.otm.wellnessapp.dao.UserDao;
 import fi.otm.wellnessapp.dao.UserDaoSqlite3;
 import fi.otm.wellnessapp.structure.Meal;

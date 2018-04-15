@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1000.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fi.otm.wellnessapp.ui.NewMealMenu">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1000.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fi.otm.wellnessapp.ui.NewMealMenuController">
     <stylesheets>
         <URL value="@/styles/newmealmenu.css" />
     </stylesheets>
@@ -38,17 +38,17 @@
       </AnchorPane>
       <AnchorPane fx:id="foodPane" layoutX="64.0" layoutY="21.0" prefHeight="554.0" prefWidth="891.0" visible="false" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="64.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="21.0">
          <children>
-            <ListView fx:id="foodView" layoutX="109.0" layoutY="171.0" prefHeight="185.0" prefWidth="334.0" AnchorPane.bottomAnchor="244.0" AnchorPane.leftAnchor="109.0" AnchorPane.rightAnchor="557.0" AnchorPane.topAnchor="171.0" />
-            <ComboBox fx:id="foodComBox" layoutX="300.0" layoutY="73.0" onAction="#foodSelected" prefHeight="26.0" prefWidth="485.0" />
-            <TextField fx:id="filterField" layoutX="109.0" layoutY="73.0" onKeyTyped="#filterFood" />
-            <Button fx:id="addFoodButton" layoutX="300.0" layoutY="135.0" mnemonicParsing="false" onAction="#addFood" text="Lisää" />
-            <TextField fx:id="amountField" layoutX="185.0" layoutY="135.0" prefHeight="26.0" prefWidth="80.0" />
-            <Label layoutX="110.0" layoutY="140.0" text="Määrä" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="449.0" AnchorPane.topAnchor="140.0" />
+            <ListView fx:id="foodView" layoutX="109.0" layoutY="171.0" prefHeight="213.0" prefWidth="332.0" AnchorPane.bottomAnchor="170.0" AnchorPane.leftAnchor="109.0" AnchorPane.rightAnchor="450.0" AnchorPane.topAnchor="171.0" />
+            <ComboBox fx:id="foodComBox" layoutX="453.0" layoutY="73.0" onAction="#foodSelected" prefHeight="26.0" prefWidth="385.0" />
+            <TextField fx:id="filterField" layoutX="110.0" layoutY="73.0" onKeyTyped="#filterFood" prefHeight="26.0" prefWidth="184.0" />
+            <Button fx:id="addFoodButton" layoutX="230.0" layoutY="135.0" mnemonicParsing="false" onAction="#addFood" text="Lisää" />
+            <TextField fx:id="amountField" layoutX="150.0" layoutY="135.0" prefHeight="26.0" prefWidth="80.0" />
+            <Label layoutX="109.0" layoutY="140.0" prefHeight="16.0" prefWidth="58.0" text="Määrä" AnchorPane.leftAnchor="109.0" AnchorPane.rightAnchor="724.0" AnchorPane.topAnchor="140.0" />
             <Label layoutX="110.0" layoutY="47.0" text="Suodatin" />
-            <Label layoutX="297.0" layoutY="47.0" text="Ruoka" />
+            <Label layoutX="453.0" layoutY="47.0" text="Ruoka" />
             <Button fx:id="continueButton" layoutX="787.0" layoutY="408.0" mnemonicParsing="false" onAction="#closeNewFoodWindow" text="Jatka" />
-            <Button fx:id="removeFoodButton" layoutX="375.0" layoutY="135.0" mnemonicParsing="false" onAction="#removeFood" prefHeight="26.0" prefWidth="66.0" text="Poista" />
-            <TextArea fx:id="foodInfoField" editable="false" layoutX="486.0" layoutY="111.0" prefHeight="273.0" prefWidth="290.0" />
+            <Button fx:id="removeFoodButton" layoutX="282.0" layoutY="135.0" mnemonicParsing="false" onAction="#removeFood" prefHeight="26.0" prefWidth="66.0" text="Poista" />
+            <TextArea fx:id="foodInfoField" editable="false" layoutX="452.0" layoutY="111.0" prefHeight="273.0" prefWidth="385.0" />
          </children>
       </AnchorPane>
    </children>
