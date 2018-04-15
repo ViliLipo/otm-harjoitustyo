@@ -1,6 +1,6 @@
 # Arkkitehtuurikuvaus
 
-![Luokkakaavio](https://github.com/ViliLipo/otm-harjoitustyo/blob/master/class_diagram.png)
+![Luokkakaavio](https://github.com/ViliLipo/otm-harjoitustyo/blob/master/dokumentaatio/class_diagram.png)
 
 
 
