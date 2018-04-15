@@ -1,21 +1,12 @@
 package fi.otm.wellnessapp.ui;
 
-import fi.otm.wellnessapp.structure.FoodItemStructure;
-import fi.otm.wellnessapp.structure.NutritionalComponentStructure;
-import fi.otm.wellnessapp.dao.UserDao;
-import fi.otm.wellnessapp.dao.UserDaoSqlite3;
-import fi.otm.wellnessapp.structure.Meal;
-import fi.otm.wellnessapp.structure.User;
-import fi.otm.wellnessapp.tools.CsvParser;
-import fi.otm.wellnessapp.tools.Sqlite3Utils;
-import java.util.Date;
+import fi.otm.wellnessapp.structure.WellnessService;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 
 public class MainApp extends Application {
 
@@ -24,8 +15,7 @@ public class MainApp extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"));
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/styles/Styles.css");
-        UiStructure us = UiStructure.getInstance();
-        us.setDataBaseName("jdbc:sqlite:src/main/resources/sqlite/appDb.sqlite3");
+
         stage.setTitle("WellnessApp");
         stage.setScene(scene);
         stage.show();

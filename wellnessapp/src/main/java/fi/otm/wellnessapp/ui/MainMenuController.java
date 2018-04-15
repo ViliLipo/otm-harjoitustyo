@@ -1,5 +1,6 @@
 package fi.otm.wellnessapp.ui;
 
+import fi.otm.wellnessapp.structure.WellnessService;
 import fi.otm.wellnessapp.structure.Meal;
 import java.io.IOException;
 import java.net.URL;
@@ -24,7 +25,7 @@ import javafx.stage.Stage;
 
 public class MainMenuController implements Initializable {
 
-    private UiStructure us;
+    private WellnessService ws;
     @FXML
     private AnchorPane ap;
     @FXML
@@ -75,8 +76,8 @@ public class MainMenuController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        us = UiStructure.getInstance();
-        this.userNameLabel.setText(us.getUser().getUserName());
-        this.mealHistory.getItems().setAll(us.getUser().getMealList());
+        ws = WellnessService.getInstance();
+        this.userNameLabel.setText(ws.getUser().getUserName());
+        this.mealHistory.getItems().setAll(ws.getUser().getMealList());
     }
 }

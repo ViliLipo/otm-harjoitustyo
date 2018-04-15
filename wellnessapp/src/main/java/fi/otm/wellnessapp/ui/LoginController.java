@@ -5,6 +5,7 @@
  */
 package fi.otm.wellnessapp.ui;
 
+import fi.otm.wellnessapp.structure.WellnessService;
 import fi.otm.wellnessapp.dao.UserDao;
 import fi.otm.wellnessapp.dao.UserDaoSqlite3;
 import fi.otm.wellnessapp.structure.User;
@@ -44,7 +45,7 @@ public class LoginController implements Initializable {
     @FXML
     private Button newUserButton;
 
-    private UiStructure us;
+    private WellnessService ws;
 
     @FXML
     void newUser(ActionEvent event) {
@@ -54,10 +55,7 @@ public class LoginController implements Initializable {
         } else {
             String name = this.userNameField.getText();
             String password = this.passwordField.getText();
-            User user = new User(name, User.md5Hash(password));
-            UserDao userDao = new UserDaoSqlite3(us.getDataBaseName());
-            userDao.addUser(user);
-            us.setUser(user);
+            ws.createNewUser(name, password);
             this.launchMainUi();
         }
 
@@ -69,17 +67,14 @@ public class LoginController implements Initializable {
                 && !this.passwordField.getText().contentEquals("")) {
             String userName = this.userNameField.getText();
             String password = this.passwordField.getText();
-            UserDao userDao = new UserDaoSqlite3(us.getDataBaseName());
-            User user = userDao.getUser(userName, User.md5Hash(password));
-            if (user == null) {
-                userNameField.clear();
-                userNameField.setPromptText("Invalid credentials");
-            } else {
-                us.setUser(user);
-                System.out.println(user.getDailyCalorieGoal());
+            System.out.println("first");
+            if (ws.login(userName, password)) {
+                System.out.println(ws.getUser().getDailyCalorieGoal());
                 System.out.println("login succesful");
                 this.launchMainUi();
-
+            } else {
+                userNameField.clear();
+                userNameField.setPromptText("Invalid credentials");
             }
         }
         System.out.println("submit");
@@ -105,8 +100,9 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.us = UiStructure.getInstance();
-        this.us.setLoginController(this);
+        WellnessService.init("jdbc:sqlite:src/main/resources/sqlite/appDb.sqlite3");
+        this.ws = WellnessService.getInstance();
+        System.out.println(ws.getFis().getFoodItemById(5).getName());
         Sqlite3Utils.initDb("src/main/resources/sqlite/dataBaseSchema.sqlite3",
                 "jdbc:sqlite:src/main/resources/sqlite/appDb.sqlite3", "src/main/resources/csv/component.csv",
                 "src/main/resources/csv/foodname_FI.csv", "src/main/resources/csv/component_value.csv");

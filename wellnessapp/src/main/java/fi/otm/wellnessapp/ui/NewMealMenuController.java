@@ -1,5 +1,6 @@
 package fi.otm.wellnessapp.ui;
 
+import fi.otm.wellnessapp.structure.WellnessService;
 import fi.otm.wellnessapp.structure.FoodItemStructure;
 import fi.otm.wellnessapp.dao.MealDao;
 import fi.otm.wellnessapp.dao.MealDaoSqlite3;
@@ -76,16 +77,14 @@ public class NewMealMenuController implements Initializable {
 
     @FXML
     private Button backButton;
-
-    private UiStructure us = UiStructure.getInstance();
-    private Meal newMeal;
     private FoodItem foodToAdd;
+    private WellnessService ws ;
 
     @FXML
     void addFood(ActionEvent event) {
         Double d = this.parseAmount();
         if (d != null) {
-            this.newMeal.addFoodItem(foodToAdd, d);
+            this.ws.addFoodToNewMeal(foodToAdd, d);
             this.displayFoodItems();
         }
 
@@ -93,7 +92,7 @@ public class NewMealMenuController implements Initializable {
     
     private void displayFoodItems() {
          this.foodView.getItems().clear();
-         this.newMeal.getFoodItems().entrySet().stream().forEach((Entry<FoodItem, Double> e) -> {
+         this.ws.getNewMeal().getFoodItems().entrySet().stream().forEach((Entry<FoodItem, Double> e) -> {
              String name = e.getKey().getName();
              Double amount = e.getValue();
              this.foodView.getItems().add(String.format("%s : %.2fg", name, amount));
@@ -113,9 +112,7 @@ public class NewMealMenuController implements Initializable {
 
     @FXML
     void closeNewFoodWindow(ActionEvent event) {
-        this.us.getUser().addMeal(this.newMeal);
-        MealDao md = new MealDaoSqlite3(us.getDataBaseName());
-        md.addOne(newMeal);
+        this.ws.addNewMealToUser();
         this.launchMainUi();
 
     }
@@ -136,12 +133,11 @@ public class NewMealMenuController implements Initializable {
     void filterFood(KeyEvent event) {
         System.out.println("filter food");
         String filter = this.filterField.getText();
-        FoodItemStructure fis = FoodItemStructure.getFoodItemStructure(us.getDataBaseName());
         if (filter.contentEquals("")) {
-            this.foodComBox.getItems().setAll(fis.getNameList());
+            this.foodComBox.getItems().setAll(ws.getFis().getNameList());
             this.foodComBox.setValue(this.foodComBox.getItems().get(0));
         } else {
-            this.foodComBox.getItems().setAll(fis.filteredNameList(filter));
+            this.foodComBox.getItems().setAll(ws.getFis().filteredNameList(filter));
             try {
                 this.foodComBox.setValue(this.foodComBox.getItems().get(0));
             } catch (IndexOutOfBoundsException ex) {
@@ -154,8 +150,7 @@ public class NewMealMenuController implements Initializable {
 
     @FXML
     void foodSelected(ActionEvent event) {
-        FoodItemStructure fis = FoodItemStructure.getFoodItemStructure(us.getDataBaseName());
-        this.foodToAdd = fis.getFoodItemByName(this.foodComBox.getValue());
+        this.foodToAdd = ws.getFis().getFoodItemByName(this.foodComBox.getValue());
         this.foodInfoField.setText(this.foodToAdd.info());
 
     }
@@ -165,8 +160,7 @@ public class NewMealMenuController implements Initializable {
         String label = this.foodView.getSelectionModel().getSelectedItem();
         if (!(label == null || label.contentEquals(""))) {
             String foodName = label.split(" :")[0];
-            FoodItemStructure fis = FoodItemStructure.getFoodItemStructure(us.getDataBaseName());
-            this.newMeal.removeFoodItem(fis.getFoodItemByName(foodName));
+            this.ws.removeFoodItemFromNewMeal(foodName);
             this.displayFoodItems();
         }
     }
@@ -179,7 +173,7 @@ public class NewMealMenuController implements Initializable {
     @FXML
     void swapPanes(ActionEvent event) {
         if (this.parseTime() != null) {
-            this.newMeal = new Meal(this.parseTime(), us.getUser().getUserId());
+            this.ws.setNewMeal(new Meal(this.parseTime(), ws.getUser().getUserId()));
             this.timePane.setVisible(false);
             this.foodPane.setVisible(true);
         } else {
@@ -222,9 +216,9 @@ public class NewMealMenuController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        FoodItemStructure fis = FoodItemStructure.getFoodItemStructure(us.getDataBaseName());
+        ws = WellnessService.getInstance();
         this.datePicker.setValue(LocalDate.now());
-        this.foodComBox.getItems().setAll(fis.getNameList());
+        this.foodComBox.getItems().setAll(ws.getFis().getNameList());
         this.foodComBox.setValue(this.foodComBox.getItems().get(0));
 
     }
