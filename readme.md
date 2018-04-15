@@ -1,7 +1,7 @@
 ## WellnessApp
 ### Dokumentaatio
 - [Vaatimusmäärittely](https://github.com/ViliLipo/otm-harjoitustyo/blob/master/requirements.md)
-- ![Työaikakirjanpito](https://github.com/ViliLipo/otm-harjoitustyo/blob/master/tyoaikakirjanpito.md)
+- [Työaikakirjanpito](https://github.com/ViliLipo/otm-harjoitustyo/blob/master/tyoaikakirjanpito.md)
 - Luokkakaavio
 ![Luokkakaavio](https://github.com/ViliLipo/otm-harjoitustyo/blob/master/class_diagram.png)
 ### Esittely
