@@ -9,6 +9,7 @@ import fi.otm.wellnessapp.dao.MealDao;
 import fi.otm.wellnessapp.dao.MealDaoSqlite3;
 import fi.otm.wellnessapp.dao.UserDao;
 import fi.otm.wellnessapp.dao.UserDaoSqlite3;
+import fi.otm.wellnessapp.tools.Sqlite3Utils;
 
 /**
  *
@@ -25,6 +26,9 @@ public class WellnessService {
 
     private WellnessService(String dataBaseName) {
         this.dataBaseName = dataBaseName;
+        Sqlite3Utils.initDb("src/main/resources/sqlite/dataBaseSchema.sqlite3",
+                "jdbc:sqlite:src/main/resources/sqlite/appDb.sqlite3", "src/main/resources/csv/component.csv",
+                "src/main/resources/csv/foodname_FI.csv", "src/main/resources/csv/component_value.csv");
         fis = FoodItemStructure.getFoodItemStructure(dataBaseName);
         ncs = NutritionalComponentStructure.getNutrititonalComponentStructure(dataBaseName);
         newMeal = null;
@@ -99,7 +103,7 @@ public class WellnessService {
             this.newMeal = null;
         }
     }
-    
+
     public FoodItemStructure getFis() {
         return this.fis;
     }

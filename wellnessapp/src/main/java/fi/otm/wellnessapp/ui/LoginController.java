@@ -103,9 +103,6 @@ public class LoginController implements Initializable {
         WellnessService.init("jdbc:sqlite:src/main/resources/sqlite/appDb.sqlite3");
         this.ws = WellnessService.getInstance();
         System.out.println(ws.getFis().getFoodItemById(5).getName());
-        Sqlite3Utils.initDb("src/main/resources/sqlite/dataBaseSchema.sqlite3",
-                "jdbc:sqlite:src/main/resources/sqlite/appDb.sqlite3", "src/main/resources/csv/component.csv",
-                "src/main/resources/csv/foodname_FI.csv", "src/main/resources/csv/component_value.csv");
     }
 
 }
