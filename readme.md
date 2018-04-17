@@ -16,6 +16,19 @@ ruoka-aineiden ravintoarvoja. Aterioita voi lisätä käyttäjälle.
 
 
 ### Komentoja
-- Testikattavuus $ mvn test jacoco:report
-- Paketointi $ mvn package
-- Rivimäärä  $ find . -name "*.java" | xargs wc -l
+- Testikattavuus
+```
+ $ mvn test jacoco:report
+ ```
+- Paketointi
+```
+ $ mvn package
+ ```
+- Rivimäärä
+```
+$ find . -name  '.java' | xargs wc -l
+```
+- Checkstyle
+```
+$ mvn jxr:jxr checkstyle:checkstyle
+ ```

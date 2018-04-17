@@ -100,7 +100,7 @@ public class Meal implements Comparable {
         NutritionalComponentStructure ncs = NutritionalComponentStructure.getNutrititonalComponentStructure();
         Double energy = this.getTotalNutritionalValues().get(ncs.getNutCompByName("ENERC"));
         energy = energy / 4.1868;
-        String s = dateString +" : " +  String.format("%.2f", energy) + "kcal";
+        String s = dateString + " : " +  String.format("%.2f", energy) + "kcal";
         return s;
 
     }
