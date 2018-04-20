@@ -4,6 +4,7 @@ import fi.otm.wellnessapp.structure.WellnessService;
 import fi.otm.wellnessapp.structure.Meal;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -79,5 +80,7 @@ public class MainMenuController implements Initializable {
         ws = WellnessService.getInstance();
         this.userNameLabel.setText(ws.getUser().getUserName());
         this.mealHistory.getItems().setAll(ws.getUser().getMealList());
+        DrawUtil du = new DrawUtil(this.canvas, this.ws.getUser());
+        du.drawDiagram(new Date());
     }
 }

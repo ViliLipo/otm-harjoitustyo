@@ -81,6 +81,7 @@ public class FoodItemDaoSqlite3Test {
 
         } catch (SQLException ex) {
             Logger.getLogger(FoodItemDaoSqlite3Test.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("BRICK");
         }
         energy = new NutritionalComponent("ENERC", "kj", "ENER", "ENER");
     }
