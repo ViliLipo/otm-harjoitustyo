@@ -50,11 +50,11 @@ public class User {
     public String getUserName() {
         return this.userName;
     }
-    
 
     public String getPasswordHash() {
         return this.passwordHash;
     }
+
     public String getUserNameHash() {
         return this.md5Hash(userName);
     }
@@ -105,7 +105,7 @@ public class User {
         cal.roll(Calendar.MILLISECOND, 60000);
         int startDay = cal.get(Calendar.DAY_OF_YEAR);
         int startYear = cal.get(Calendar.YEAR);
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 7; i++) {
             int day = startDay - i;
             cal.set(Calendar.DAY_OF_YEAR, day);
             listForWeek.add(this.dailyScore(new Date(cal.getTimeInMillis())));
@@ -113,11 +113,27 @@ public class User {
         return listForWeek;
     }
 
+    public ArrayList<Double> getWeeksCalories(Date time) {
+        ArrayList<Double> values = new ArrayList<>();
+        NutritionalComponentStructure ncs = NutritionalComponentStructure.getNutrititonalComponentStructure();
+        this.weekBeforeDate(time).stream().forEach(map -> {
+            Double d = map.get(ncs.getNutCompByName("ENERC"));
+            if (d != null) {
+                values.add((d / 4.1868));
+            } else {
+                values.add(null);
+            }
+        });
+        return values;
+    }
+
     public HashMap<NutritionalComponent, Double> dailyScore(Date time) {
         HashMap<NutritionalComponent, Double> dailyScore = new HashMap<>();
 
         this.mealList.stream().forEach((Meal meal) -> {
             if (equalDayOfDate(time, meal.getTime())) {
+                System.out.println(time);
+                System.out.println(meal.getTime());
                 HashMap<NutritionalComponent, Double> ncMap = meal.getTotalNutritionalValues();
                 ncMap.keySet().parallelStream().forEach((NutritionalComponent nc) -> {
                     Double value = ncMap.get(nc);
@@ -141,6 +157,7 @@ public class User {
                 == cl2.get(Calendar.DAY_OF_YEAR));
 
     }
+
     public static String md5Hash(String string) {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");

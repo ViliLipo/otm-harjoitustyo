@@ -4,6 +4,7 @@ import fi.otm.wellnessapp.structure.WellnessService;
 import fi.otm.wellnessapp.structure.Meal;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -43,6 +44,8 @@ public class MainMenuController implements Initializable {
 
     @FXML
     private ListView<Meal> mealHistory;
+    
+    private DrawUtil du;
 
     @FXML
     void historyClicked(MouseEvent event) {
@@ -55,8 +58,14 @@ public class MainMenuController implements Initializable {
     }
 
     @FXML
-    void sliderDone(DragEvent event) {
-
+    void sliderDone(MouseEvent event) {
+        System.out.println(this.canvasSlider.getValue());
+        int dif =(int) Math.floor((100- this.canvasSlider.getValue()) / 3);
+        
+        Calendar cl = Calendar.getInstance();
+        cl.setTime(new Date());
+        cl.add(Calendar.DAY_OF_MONTH, -dif);
+        du.drawDiagram(cl.getTime());
     }
 
     @FXML
@@ -80,7 +89,7 @@ public class MainMenuController implements Initializable {
         ws = WellnessService.getInstance();
         this.userNameLabel.setText(ws.getUser().getUserName());
         this.mealHistory.getItems().setAll(ws.getUser().getMealList());
-        DrawUtil du = new DrawUtil(this.canvas, this.ws.getUser());
+        du = new DrawUtil(this.canvas, this.ws.getUser());
         du.drawDiagram(new Date());
     }
 }
