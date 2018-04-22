@@ -9,6 +9,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.StringJoiner;
 
 /**
  *
@@ -45,6 +46,7 @@ public class Meal implements Comparable {
     public void addFoodItem(FoodItem fi, double amount) {
         Double a = amount;
         this.foodItems.put(fi, a);
+        this.buildTotalNutritionalValues();
     }
 
     public void removeFoodItem(FoodItem fi) {
@@ -100,9 +102,17 @@ public class Meal implements Comparable {
         NutritionalComponentStructure ncs = NutritionalComponentStructure.getNutrititonalComponentStructure();
         Double energy = this.getTotalNutritionalValues().get(ncs.getNutCompByName("ENERC"));
         energy = energy / 4.1868;
-        String s = dateString + " : " +  String.format("%.2f", energy) + "kcal";
+        String s = dateString + " : " + String.format("%.2f", energy) + "kcal";
         return s;
+    }
 
+    public String info() {
+        StringJoiner sj = new StringJoiner("\n");
+        this.foodItems.forEach((k, v) -> {
+            String pair = k.getName().split(",")[0] + " määrä: " + String.format("%.2f", v) + "g";
+            sj.add(pair);
+        });
+        return sj.toString();
     }
 
 }

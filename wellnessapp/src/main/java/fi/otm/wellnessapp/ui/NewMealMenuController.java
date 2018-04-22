@@ -93,7 +93,7 @@ public class NewMealMenuController implements Initializable {
     private void displayFoodItems() {
         this.foodView.getItems().clear();
         this.ws.getNewMeal().getFoodItems().entrySet().stream().forEach((Entry<FoodItem, Double> e) -> {
-            String name = e.getKey().getName();
+            String name = e.getKey().getName().split(",")[0];
             Double amount = e.getValue();
             this.foodView.getItems().add(String.format("%s : %.2fg", name, amount));
         });
@@ -113,6 +113,12 @@ public class NewMealMenuController implements Initializable {
     @FXML
     void closeNewFoodWindow(ActionEvent event) {
         this.ws.addNewMealToUser();
+        this.launchMainUi();
+
+    }
+        @FXML
+    void onBackPressed(ActionEvent event) {
+        this.ws.setNewMeal(null);
         this.launchMainUi();
 
     }
@@ -185,7 +191,6 @@ public class NewMealMenuController implements Initializable {
     }
 
     private Date parseTime() {
-        Date d = new Date();
         Calendar cl = Calendar.getInstance();
         String hour = this.hourField.getText();
         String minute = this.minuteField.getText();
@@ -196,18 +201,16 @@ public class NewMealMenuController implements Initializable {
             cl.setTime((asDate(this.datePicker.getValue())));
             int hourvalue = Integer.parseInt(hour);
             int minutevalue = Integer.parseInt(minute);
-            if (minutevalue < 60 && minutevalue > 0 && hourvalue < 24 && hourvalue > 0) {
+            if (minutevalue < 60 && minutevalue >= 0 && hourvalue < 24 && hourvalue >= 0) {
                 cl.add(Calendar.HOUR_OF_DAY, hourvalue);
                 cl.add(Calendar.MINUTE, minutevalue);
                 return cl.getTime();
             } else {
                 return null;
             }
-
         } catch (NumberFormatException ex) {
             return null;
         }
-
     }
 
     public static Date asDate(LocalDate localDate) {

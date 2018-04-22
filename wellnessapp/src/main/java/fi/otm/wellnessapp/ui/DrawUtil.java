@@ -31,19 +31,18 @@ public class DrawUtil {
     }
 
     public void drawDiagram(Date start) {
-        this.canvas.getGraphicsContext2D().setFill(Color.WHITE);
-        this.canvas.getGraphicsContext2D().fillRect(0, 0, this.canvas.getWidth(),
-                this.canvas.getHeight());
+        this.canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+        this.drawBars(start);
         this.drawScale();
         this.drawYAxis(this.canvas.getGraphicsContext2D());
         this.drawBaseLine(this.canvas.getGraphicsContext2D());
         this.drawGoal(this.canvas.getGraphicsContext2D());
-        this.drawBars(start);
     }
 
     private void drawBars(Date start) {
         int i = 0;
         ArrayList<Double> weeksCalories = this.user.getWeeksCalories(start);
+        //System.out.println(weeksCalories);
         Calendar cl = Calendar.getInstance();
         cl.setTime(start);
         cl.add(Calendar.DAY_OF_MONTH, -6);
@@ -58,7 +57,7 @@ public class DrawUtil {
 
     private void drawScale() {
         GraphicsContext gc = this.canvas.getGraphicsContext2D();
-        gc.setStroke(Color.AQUA);
+        gc.setStroke(Color.INDIANRED);
         gc.setLineWidth(1);
         for (int i = 1; i < 9; i++) {
             double y = i * (canvas.getHeight() / 10);
@@ -71,18 +70,29 @@ public class DrawUtil {
 
     private void drawOneBar(GraphicsContext gc, Double calories, int start, Date d) {
         if (calories != null) {
-            gc.setFill(Color.GREEN);
-            int width = this.calcSegmentSizeX() / 5;
+            pickColor(gc, calories);
+            int width = this.calcSegmentSizeX() / 3;
             Double height = calories / this.scaleCaloriePerPixel();
             //System.out.println("DEBUG: drawOneBar height -> " + height);
-            double x = start + 2 * width;
+            int x = start + width;
             double y = this.getBaseLine() - height;
             //System.out.println("DEBUG: drawOneBar y -> " + y);
             gc.fillRect(x, y, width, height);
         }
+        int x2 = start + this.calcSegmentSizeX() / 3;
         gc.setStroke(Color.BLACK);
         String date = new SimpleDateFormat("dd.MM").format(d);
-        gc.strokeText(date, start, this.getBaseLine() + 15);
+        gc.strokeText(date, x2, this.getBaseLine() + 15);
+    }
+
+    private void pickColor(GraphicsContext gc, Double calories) {
+        if (Math.abs(user.getDailyCalorieGoal() - calories) > user.getDailyCalorieGoal() * 0.4d) {
+            gc.setFill(Color.RED);
+        } else if (Math.abs(user.getDailyCalorieGoal() - calories) > user.getDailyCalorieGoal() * 0.2d) {
+            gc.setFill(Color.ORANGE);
+        } else {
+            gc.setFill(Color.LIMEGREEN);
+        }
     }
 
     public int calcSegmentSizeX() {

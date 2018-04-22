@@ -32,7 +32,7 @@ import org.junit.Ignore;
  */
 public class FoodItemDaoSqlite3Test {
 
-    private final String testDbName = "src/main/resources/sqlite/testDb.sqlite3";
+    private final String testDbName = "db/testDb.sqlite3";
 
     private NutritionalComponent energy;
 
@@ -44,7 +44,8 @@ public class FoodItemDaoSqlite3Test {
         File file = new File(testDbName);
         file.delete();
         Sqlite3ConnectionManager.reset();
-        Sqlite3Utils.setupSchema("src/main/resources/sqlite/dataBaseSchema.sqlite3", ("jdbc:sqlite:" + testDbName));
+        Sqlite3Utils s3u = new Sqlite3Utils();
+        s3u.setupSchema("sqlite/dataBaseSchema.sqlite3", (testDbName));
         String insert = "INSERT INTO Component "
                 + "VALUES(?,?,?,?)";
         String insert2 = "INSERT INTO ComponentValue VALUES(?,?,?)";
@@ -88,6 +89,8 @@ public class FoodItemDaoSqlite3Test {
 
     @After
     public void tearDown() {
+        File file = new File(testDbName);
+        file.delete();
     }
 
     /**
@@ -96,7 +99,7 @@ public class FoodItemDaoSqlite3Test {
     @Test
     public void testGetAll() {
         System.out.println("getAll");
-        FoodItemDaoSqlite3 instance = new FoodItemDaoSqlite3("jdbc:sqlite:" + testDbName);
+        FoodItemDaoSqlite3 instance = new FoodItemDaoSqlite3(testDbName);
         FoodItem sweetroll = new FoodItem(2, "pulla", "fi");
         NutritionalComponent nc = new NutritionalComponent("ENERC", "kj", "ENER", "ENER");
         sweetroll.addContents(600.00, nc);
@@ -114,7 +117,7 @@ public class FoodItemDaoSqlite3Test {
     @Test
     public void testGetOne() {
         System.out.println("getOne");
-        FoodItemDaoSqlite3 instance = new FoodItemDaoSqlite3("jdbc:sqlite:" + testDbName);
+        FoodItemDaoSqlite3 instance = new FoodItemDaoSqlite3(testDbName);
         FoodItem result = instance.getOne(1);
         assertEquals("lihapulla", result.getName());
         double d = result.getContents().get(new NutritionalComponent("ENERC", "kj", "ENER", "ENER"));
@@ -129,7 +132,7 @@ public class FoodItemDaoSqlite3Test {
         System.out.println("addOne");
         FoodItem fi = new FoodItem(3, "Rinkeli", "fi");
         fi.addContents(300.0d, energy);
-        FoodItemDaoSqlite3 instance = new FoodItemDaoSqlite3("jdbc:sqlite:"+testDbName);
+        FoodItemDaoSqlite3 instance = new FoodItemDaoSqlite3(testDbName);
         instance.addOne(fi);
         String query = "SELECT * FROM FoodNameFi WHERE FoodID = (?)";
         String query2 = "SELECT * FROM ComponentValue WHERE FoodID = (?)";
@@ -161,7 +164,7 @@ public class FoodItemDaoSqlite3Test {
         System.out.println("addAll");
         FoodItem fi = new FoodItem(3, "Rinkeli", "fi");
         fi.addContents(300.0d, energy);
-        FoodItemDaoSqlite3 instance = new FoodItemDaoSqlite3("jdbc:sqlite:" + testDbName);
+        FoodItemDaoSqlite3 instance = new FoodItemDaoSqlite3(testDbName);
         FoodItem fi2 = new FoodItem(4, "muna", "fi");
         String query = "SELECT * FROM FoodNameFi";
         List<FoodItem> fiList = new ArrayList<>();
@@ -192,7 +195,7 @@ public class FoodItemDaoSqlite3Test {
     public void testRemove() {
         System.out.println("remove");
         FoodItem meatBall = new FoodItem(1, "lihapulla", "fi");
-        FoodItemDaoSqlite3 instance = new FoodItemDaoSqlite3("jdbc:sqlite:" + testDbName);
+        FoodItemDaoSqlite3 instance = new FoodItemDaoSqlite3(testDbName);
         instance.remove(meatBall);
         String query = "SELECT * FROM FoodNameFi";
         try {

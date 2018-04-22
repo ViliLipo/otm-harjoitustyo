@@ -11,9 +11,11 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -88,6 +90,8 @@ public class User {
     }
 
     public ArrayList<Meal> getMealList() {
+        Collections.sort(mealList);
+        Collections.reverse(mealList);
         return this.mealList;
     }
 
@@ -104,7 +108,6 @@ public class User {
         cal.roll(Calendar.MINUTE, 60);
         cal.roll(Calendar.MILLISECOND, 60000);
         int startDay = cal.get(Calendar.DAY_OF_YEAR);
-        int startYear = cal.get(Calendar.YEAR);
         for (int i = 0; i < 7; i++) {
             int day = startDay - i;
             cal.set(Calendar.DAY_OF_YEAR, day);
@@ -129,18 +132,16 @@ public class User {
 
     public HashMap<NutritionalComponent, Double> dailyScore(Date time) {
         HashMap<NutritionalComponent, Double> dailyScore = new HashMap<>();
-
         this.mealList.stream().forEach((Meal meal) -> {
             if (equalDayOfDate(time, meal.getTime())) {
                 System.out.println(time);
                 System.out.println(meal.getTime());
                 HashMap<NutritionalComponent, Double> ncMap = meal.getTotalNutritionalValues();
-                ncMap.keySet().parallelStream().forEach((NutritionalComponent nc) -> {
-                    Double value = ncMap.get(nc);
-                    Double oldValue = dailyScore.put(nc, value);
-                    if (oldValue != null) {
-                        dailyScore.put(nc, value + oldValue);
-                    }
+                ncMap.entrySet().forEach((Entry<NutritionalComponent, Double> e) -> {
+                   Double oldValue = dailyScore.put(e.getKey(), e.getValue());
+                   if (oldValue != null) {
+                       dailyScore.put(e.getKey(), e.getValue() + oldValue);
+                   }
                 });
             }
         });

@@ -31,18 +31,15 @@ import java.util.logging.Logger;
  */
 public class CsvParser {
 
-    private static ArrayList<String> lines(String filename) throws FileNotFoundException {
+    private ArrayList<String> lines(String filename) throws FileNotFoundException {
         try {
-            URL url = Paths.get(filename).toUri().toURL();
-            InputStreamReader fr = new InputStreamReader(url.openStream(), "windows-1252");
+            InputStreamReader fr = new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream(filename), "windows-1252");
             BufferedReader br = new BufferedReader(fr);
             ArrayList<String> lines = new ArrayList<>();
             br.lines().forEach(line -> {
                 lines.add(line);
             });
             return lines;
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(CsvParser.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(CsvParser.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -50,7 +47,7 @@ public class CsvParser {
         return null;
     }
 
-    private static ArrayList<NutritionalComponent> parseComponents(String filename) {
+    private ArrayList<NutritionalComponent> parseComponents(String filename) {
         try {
             ArrayList<String> lines = lines(filename);
             Iterator<String> iterator = lines.iterator();
@@ -71,7 +68,7 @@ public class CsvParser {
         return null;
     }
 
-    public static void convertComponentCSVtoSQLITE(String filename, String dbname) {
+    public void convertComponentCSVtoSQLITE(String filename, String dbname) {
         ArrayList<NutritionalComponent> ncList = parseComponents(filename);
         NutritionalComponentDaoSqlite3 ncDao = new NutritionalComponentDaoSqlite3(dbname);
         for (NutritionalComponent nc : ncList) {
@@ -79,7 +76,7 @@ public class CsvParser {
         }
     }
 
-    private static ArrayList<FoodItem> parseItems(String filename) {
+    private ArrayList<FoodItem> parseItems(String filename) {
         ArrayList<FoodItem> fiList = new ArrayList<>();
         try {
             ArrayList<String> lines = lines(filename);
@@ -96,7 +93,7 @@ public class CsvParser {
         return fiList;
     }
 
-    private static void resolveNutritionFoodRelations(String componentValueFile, String dataBaseName, ArrayList<FoodItem> fiList) {
+    private void resolveNutritionFoodRelations(String componentValueFile, String dataBaseName, ArrayList<FoodItem> fiList) {
         HashMap<Integer, FoodItem> fiMap = new HashMap<>();
         fiList.stream().forEach(foodItem -> {
             fiMap.put(foodItem.getId(), foodItem);
@@ -140,7 +137,7 @@ public class CsvParser {
     * In order for this to work components must be
     * written to the db first
      */
-    public static void convertFoodItems(String componentValueFile, String foodItemFile, String dbName) {
+    public  void convertFoodItems(String componentValueFile, String foodItemFile, String dbName) {
         ArrayList<FoodItem> fiList = parseItems(foodItemFile);
         resolveNutritionFoodRelations(componentValueFile, dbName, fiList);
         FoodItemDaoSqlite3 fid = new FoodItemDaoSqlite3(dbName);

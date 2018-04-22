@@ -52,7 +52,7 @@ public class FoodItem implements Comparable {
     public String info() {
         String info = this.name + "\n";
         Double enerVal = this.getContents().get(this.contentName.get("ENERC")) / 4.1868;
-        String energy = "Energiaa : " + String.format("%.2f", enerVal) + "kcal/100g \n";
+        String energy = "Energiaa : " + String.format("%.2f", enerVal) + "kcal/100g\n";
         Double fatVal = this.getContents().get(this.contentName.get("FAT"));
         String fat = "Rasvaa : " + String.format("%.2f", fatVal) + "g/100g\n";
         Double protVal = this.getContents().get(this.contentName.get("PROT"));

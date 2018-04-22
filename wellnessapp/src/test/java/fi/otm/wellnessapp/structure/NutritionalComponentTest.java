@@ -15,17 +15,18 @@ import static org.junit.Assert.*;
  * @author vili
  */
 public class NutritionalComponentTest {
+
     NutritionalComponent nc;
-    
+
     public NutritionalComponentTest() {
     }
-    
+
     @Before
     public void setUp() {
         nc = new NutritionalComponent("Test", "Unit", "Class", "Classp");
-        
+
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -40,8 +41,6 @@ public class NutritionalComponentTest {
         String result = instance.getName();
         assertEquals("Test", result);
     }
-
-
 
     /**
      * Test of getUnit method, of class NutritionalComponent.
@@ -86,7 +85,7 @@ public class NutritionalComponentTest {
     public void testHashCode() {
         System.out.println("hashCode");
         NutritionalComponent instance = nc;
-        int expResult = ((String)"Test").hashCode();
+        int expResult = ((String) "Test").hashCode();
         int result = instance.hashCode();
         assertEquals(expResult, result);
     }
@@ -102,9 +101,13 @@ public class NutritionalComponentTest {
         boolean expResult = true;
         boolean result = instance.equals(o);
         assertEquals(expResult, result);
-        o = new NutritionalComponent("TEST2","Test","TEst","test");
+        o = new NutritionalComponent("TEST2", "Test", "TEst", "test");
         result = instance.equals(o);
         assertEquals(false, result);
+        o = new Object();
+        expResult = false;
+        result = instance.equals(o);
+        assertFalse(result);
     }
-    
+
 }

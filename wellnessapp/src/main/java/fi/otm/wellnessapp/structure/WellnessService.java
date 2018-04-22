@@ -26,9 +26,10 @@ public class WellnessService {
 
     private WellnessService(String dataBaseName) {
         this.dataBaseName = dataBaseName;
-        Sqlite3Utils.initDb("src/main/resources/sqlite/dataBaseSchema.sqlite3",
-                "jdbc:sqlite:src/main/resources/sqlite/appDb.sqlite3", "src/main/resources/csv/component.csv",
-                "src/main/resources/csv/foodname_FI.csv", "src/main/resources/csv/component_value.csv");
+        Sqlite3Utils s3u = new Sqlite3Utils();
+        s3u.initDb("sqlite/dataBaseSchema.sqlite3",
+                "db/appDb.sqlite3", "csv/component.csv",
+                "csv/foodname_FI.csv", "csv/component_value.csv");
         fis = FoodItemStructure.getFoodItemStructure(dataBaseName);
         ncs = NutritionalComponentStructure.getNutrititonalComponentStructure(dataBaseName);
         newMeal = null;

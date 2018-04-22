@@ -100,7 +100,7 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        WellnessService.init("jdbc:sqlite:src/main/resources/sqlite/appDb.sqlite3");
+        WellnessService.init("db/appDb.sqlite3");
         this.ws = WellnessService.getInstance();
         System.out.println(ws.getFis().getFoodItemById(5).getName());
     }

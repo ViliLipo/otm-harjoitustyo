@@ -24,6 +24,10 @@ public class FoodItemTest {
     @Before
     public void setUp() {
         fi = new FoodItem(1, "lihapulla", "fi");
+        fi.addContents(100, new NutritionalComponent("ENERC", "kj", "ENER", "ENER"));
+        fi.addContents(20, new NutritionalComponent("FAT", "g", "FAT", "FAT"));
+        fi.addContents(10, new NutritionalComponent("PROT", "g", "PROT", "PROT"));
+        fi.addContents(5, new NutritionalComponent("SUGAR", "g", "SUG", "SUG"));
     }
     
     @After
@@ -107,6 +111,8 @@ public class FoodItemTest {
         expResult = false;
         result = instance.equals(o);
         assertEquals(expResult, result);
+        result = instance.equals(new Object());
+        assertFalse(result);
     }
 
     /**
@@ -122,6 +128,17 @@ public class FoodItemTest {
         assertEquals(expResult, result);
         assertEquals(0, fi.compareTo(fi));
         assertEquals(1, ((FoodItem)o).compareTo(fi));
+        assertEquals(0, fi.compareTo(new Object()));
     }
-    
+    @Test
+    public void testInfo() {
+        String expResult = "lihapulla\n"
+                + "Energiaa : 23.88kcal/100g\n"
+                + "Rasvaa : 20.00g/100g\n"
+                + "Proteiinia : 10.00g/100g\n"
+                + "Sokeria : 5.00g/100g\n";
+        System.out.println(expResult);
+        System.out.println(fi.info());
+        assertEquals(expResult, fi.info());
+    }
 }
