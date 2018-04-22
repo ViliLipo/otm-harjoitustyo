@@ -45,7 +45,6 @@ public class Sqlite3ConnectionManager {
     
     public Connection connect() throws SQLException {
         if ((this.conn == null) || this.conn.isClosed()) {
-            System.out.println("CONNECTION : " + "jdbc:sqlite:" + dbName);
             this.conn = DriverManager.getConnection("jdbc:sqlite:" + dbName);
             conn.setAutoCommit(false);
         }

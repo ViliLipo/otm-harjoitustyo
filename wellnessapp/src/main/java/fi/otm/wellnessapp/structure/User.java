@@ -138,10 +138,10 @@ public class User {
                 System.out.println(meal.getTime());
                 HashMap<NutritionalComponent, Double> ncMap = meal.getTotalNutritionalValues();
                 ncMap.entrySet().forEach((Entry<NutritionalComponent, Double> e) -> {
-                   Double oldValue = dailyScore.put(e.getKey(), e.getValue());
-                   if (oldValue != null) {
-                       dailyScore.put(e.getKey(), e.getValue() + oldValue);
-                   }
+                    Double oldValue = dailyScore.put(e.getKey(), e.getValue());
+                    if (oldValue != null) {
+                        dailyScore.put(e.getKey(), e.getValue() + oldValue);
+                    }
                 });
             }
         });

@@ -116,7 +116,8 @@ public class NewMealMenuController implements Initializable {
         this.launchMainUi();
 
     }
-        @FXML
+
+    @FXML
     void onBackPressed(ActionEvent event) {
         this.ws.setNewMeal(null);
         this.launchMainUi();
