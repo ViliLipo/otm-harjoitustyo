@@ -11,7 +11,7 @@ import java.util.HashMap;
  *
  * @author vili
  */
-public class FoodItem implements Comparable {
+public class FoodItem implements Comparable<FoodItem> {
 
     private final int id;
     private final String name;
@@ -78,18 +78,15 @@ public class FoodItem implements Comparable {
         }
     }
 
+
     @Override
-    public int compareTo(Object o) {
-        if (o.getClass().equals(this.getClass())) {
-            FoodItem fo = (FoodItem) o;
-            if (this.id > fo.getId()) {
-                return 1;
-            } else if (this.id < fo.getId()) {
-                return -1;
-            } else {
-                return 0;
-            }
+    public int compareTo(FoodItem fo) {
+        if (this.id > fo.getId()) {
+            return 1;
+        } else if (this.id < fo.getId()) {
+            return -1;
+        } else {
+            return 0;
         }
-        return 0;
     }
 }

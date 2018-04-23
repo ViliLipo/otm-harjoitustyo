@@ -121,14 +121,14 @@ public class FoodItemTest {
     @Test
     public void testCompareTo() {
         System.out.println("compareTo");
-        Object o = new FoodItem(2, "Makarooni", "fi");
+        FoodItem o = new FoodItem(2, "Makarooni", "fi");
         FoodItem instance = fi;
         int expResult = -1;
         int result = instance.compareTo(o);
         assertEquals(expResult, result);
         assertEquals(0, fi.compareTo(fi));
-        assertEquals(1, ((FoodItem)o).compareTo(fi));
-        assertEquals(0, fi.compareTo(new Object()));
+        assertEquals(1, o.compareTo(fi));
+        assertEquals(-1, fi.compareTo(o));
     }
     @Test
     public void testInfo() {

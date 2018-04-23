@@ -13,4 +13,8 @@
 |13.4|3| Gui jatkoa|
 |14.4| 3| UI |
 |15.4| 3| Dao, ui, diagrammi|
-|yht| 27| |
+|20.4|4| pylväsdiagrammin piirtäminen|
+|22.4| 2| tiedostopolkujen debuggaaminen |
+|22.4| 2| lisää testejä|
+|23.4| 3| sekvenssi kaavio ja release|
+|yht| 38| |

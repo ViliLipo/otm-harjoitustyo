@@ -15,11 +15,11 @@ import java.util.StringJoiner;
  *
  * @author vili
  */
-public class Meal implements Comparable {
+public class Meal implements Comparable<Meal> {
 
     private final int userId;
     private Date time;
-    private int mealId;
+    private int mealId = -1;
 
     private HashMap<FoodItem, Double> foodItems;
     private HashMap<NutritionalComponent, Double> totalNutritionalValues;
@@ -90,9 +90,23 @@ public class Meal implements Comparable {
     }
 
     @Override
-    public int compareTo(Object o) {
-        Meal m = (Meal) o;
-        return this.time.compareTo(m.getTime());
+    public int hashCode() {
+        return this.time.hashCode() + this.userId;
+    }
+
+    @Override
+    public int compareTo(Meal o) {
+        if (o.getClass() == this.getClass()) {
+            Meal m = (Meal) o;
+            return this.time.compareTo(m.getTime());
+        } else {
+            return 0;
+        }
+    }
+    @Override
+    public boolean equals(Object o) {
+        return (this.getClass() == o.getClass()
+                && this.hashCode() == o.hashCode());
     }
 
     @Override

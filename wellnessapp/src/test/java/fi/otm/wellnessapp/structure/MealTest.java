@@ -150,7 +150,7 @@ public class MealTest {
     @Test
     public void testCompareTo() {
         System.out.println("compareTo");
-        Object o = meal;
+        Meal o = meal;
         Meal instance = meal;
         int expResult = 0;
         int result = instance.compareTo(o);
