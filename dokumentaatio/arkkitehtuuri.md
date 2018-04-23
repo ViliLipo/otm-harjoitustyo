@@ -2,7 +2,7 @@
 
 ![Luokkakaavio](https://github.com/ViliLipo/otm-harjoitustyo/blob/master/dokumentaatio/class_diagram.png)
 
-![Sekvenssi kaavio uuden ruuan lisäämisestä]()
+![Sekvenssi kaavio uuden ruuan lisäämisestä](https://github.com/ViliLipo/otm-harjoitustyo/blob/master/dokumentaatio/sequence_newMeal.png)
 
 Ohjelma noudattelee kolmeosaista pakkausrakennetta, ja paketit ilmenevät
 luokkakaaviosta.
