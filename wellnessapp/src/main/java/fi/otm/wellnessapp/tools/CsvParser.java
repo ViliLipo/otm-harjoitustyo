@@ -107,7 +107,7 @@ public class CsvParser {
             lines.stream().forEach(line -> {
                 handleOneRelationLine(line, fiMap, ncs);
             });
-            System.out.println("DONE");
+            //System.out.println("DONE");
         } catch (FileNotFoundException ex) {
             Logger.getLogger(CsvParser.class.getName()).log(Level.SEVERE, null, ex);
         }

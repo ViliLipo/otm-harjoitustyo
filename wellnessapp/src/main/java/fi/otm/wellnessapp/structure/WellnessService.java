@@ -19,16 +19,15 @@ public class WellnessService {
 
     private static WellnessService singleton;
     private User user;
-    private String dataBaseName;
+    private final String dataBaseName = "db/appDb.sqlite3";
     private FoodItemStructure fis;
     private NutritionalComponentStructure ncs;
     private Meal newMeal;
 
-    private WellnessService(String dataBaseName) {
-        this.dataBaseName = dataBaseName;
+    private WellnessService() {
         Sqlite3Utils s3u = new Sqlite3Utils();
         s3u.initDb("sqlite/dataBaseSchema.sqlite3",
-                "db/appDb.sqlite3", "csv/component.csv",
+                dataBaseName, "csv/component.csv",
                 "csv/foodname_FI.csv", "csv/component_value.csv");
         fis = FoodItemStructure.getFoodItemStructure(dataBaseName);
         ncs = NutritionalComponentStructure.getNutrititonalComponentStructure(dataBaseName);
@@ -36,15 +35,13 @@ public class WellnessService {
         user = null;
     }
 
-    public static void init(String dataBaseName) {
+    public static WellnessService getInstance()  {
         if (singleton == null) {
-            singleton = new WellnessService(dataBaseName);
+            singleton = new WellnessService();
         }
-    }
-
-    public static WellnessService getInstance() {
         return singleton;
     }
+
 
     public void createNewUser(String username, String password) {
         User userN = new User(username, User.md5Hash(password));
@@ -70,10 +67,6 @@ public class WellnessService {
 
     public User getUser() {
         return this.user;
-    }
-
-    public void setDataBaseName(String name) {
-        this.dataBaseName = name;
     }
 
     public String getDataBaseName() {

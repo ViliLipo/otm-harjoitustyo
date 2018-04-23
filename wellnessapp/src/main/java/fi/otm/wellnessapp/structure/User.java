@@ -134,8 +134,8 @@ public class User {
         HashMap<NutritionalComponent, Double> dailyScore = new HashMap<>();
         this.mealList.stream().forEach((Meal meal) -> {
             if (equalDayOfDate(time, meal.getTime())) {
-                System.out.println(time);
-                System.out.println(meal.getTime());
+                //System.out.println(time);
+                //System.out.println(meal.getTime());
                 HashMap<NutritionalComponent, Double> ncMap = meal.getTotalNutritionalValues();
                 ncMap.entrySet().forEach((Entry<NutritionalComponent, Double> e) -> {
                     Double oldValue = dailyScore.put(e.getKey(), e.getValue());

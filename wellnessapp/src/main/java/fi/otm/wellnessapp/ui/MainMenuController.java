@@ -21,7 +21,6 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
-import javafx.scene.input.DragEvent;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -73,7 +72,7 @@ public class MainMenuController implements Initializable {
         Calendar cl = Calendar.getInstance();
         cl.setTime(new Date());
         cl.add(Calendar.DAY_OF_MONTH, -dif);
-        System.out.println(cl.getTime());
+        //System.out.println(cl.getTime());
         du.drawDiagram(cl.getTime());
     }
     

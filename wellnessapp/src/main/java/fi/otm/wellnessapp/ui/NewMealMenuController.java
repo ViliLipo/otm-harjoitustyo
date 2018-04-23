@@ -138,7 +138,7 @@ public class NewMealMenuController implements Initializable {
 
     @FXML
     void filterFood(KeyEvent event) {
-        System.out.println("filter food");
+        //System.out.println("filter food");
         String filter = this.filterField.getText();
         if (filter.contentEquals("")) {
             this.foodComBox.getItems().setAll(ws.getFis().getNameList());
@@ -195,9 +195,6 @@ public class NewMealMenuController implements Initializable {
         Calendar cl = Calendar.getInstance();
         String hour = this.hourField.getText();
         String minute = this.minuteField.getText();
-        if (minute.contentEquals("") || hour.contentEquals("")) {
-            return null;
-        }
         try {
             cl.setTime((asDate(this.datePicker.getValue())));
             int hourvalue = Integer.parseInt(hour);

@@ -6,7 +6,6 @@
 package fi.otm.wellnessapp.structure;
 
 import fi.otm.wellnessapp.dao.NutritionalComponentDaoSqlite3;
-import fi.otm.wellnessapp.structure.NutritionalComponent;
 import java.util.ArrayList;
 import java.util.HashMap;
 

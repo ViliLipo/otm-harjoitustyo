@@ -69,7 +69,6 @@ public class LoginController implements Initializable {
             String password = this.passwordField.getText();
             System.out.println("first");
             if (ws.login(userName, password)) {
-                System.out.println(ws.getUser().getDailyCalorieGoal());
                 System.out.println("login succesful");
                 this.launchMainUi();
             } else {
@@ -100,9 +99,7 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        WellnessService.init("db/appDb.sqlite3");
         this.ws = WellnessService.getInstance();
-        System.out.println(ws.getFis().getFoodItemById(5).getName());
     }
 
 }
