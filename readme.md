@@ -7,12 +7,11 @@
 WellnessApp on kursille Ohjelmistotekniikan menetelmät laadittu harjoitustyo.
 Sovelluksen tarkoituksena on auttaa käyttäjäänsä ruokavalion seuraamisessa.
 Sovelluksen ravintoaineiden tiedot ovat osa Finellin avointa dataa.
-### Status
-Viikko3 kohdalla tietokantarajapinta sekä kirjautuminen toimii.
-Tietokantarajapinnan yksikkötestit on aloitettu.
-Projektin tietokantarajapinta on hieman paisunut ja sen takia toiminnallisuudet
-laahaavat jäljessä. Tällä hetkellä voi kirjautua, luoda tunnuksen ja tarkastella
-ruoka-aineiden ravintoarvoja. Aterioita voi lisätä käyttäjälle.
+### Status viikko 5
+
+Tällä hetkellä voi kirjautua, luoda tunnuksen ja tarkastella
+ruoka-aineiden ravintoarvoja. Aterioita voi lisätä käyttäjälle. Sovellus
+piirtää pylväsdiagrammin käyttäjän edellisen kuukauden päivittäisistä kaloreista.
 
 
 ### Komentoja
@@ -32,3 +31,5 @@ $ find . -name  '.java' | xargs wc -l
 ```
 $ mvn jxr:jxr checkstyle:checkstyle
  ```
+### Julkaisut
+[wellnessapp0.1.0](https://github.com/ViliLipo/otm-harjoitustyo/releases/tag/0.1.0)

@@ -119,7 +119,7 @@ public class User {
     public ArrayList<Double> getWeeksCalories(Date time) {
         ArrayList<Double> values = new ArrayList<>();
         NutritionalComponentStructure ncs = NutritionalComponentStructure.getNutrititonalComponentStructure();
-        this.weekBeforeDate(time).stream().forEach((HashMap<NutritionalComponent,Double> map) -> {
+        this.weekBeforeDate(time).stream().forEach((HashMap<NutritionalComponent, Double> map) -> {
             Double d = map.get(ncs.getNutCompByName("ENERC"));
             if (d != null) {
                 values.add((d / 4.1868));

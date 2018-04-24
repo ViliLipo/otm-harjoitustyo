@@ -19,7 +19,7 @@ public class WellnessService {
 
     private static WellnessService singleton;
     private User user;
-    private final String dataBaseName = "db/appDb.sqlite3";
+    private final String dataBaseName = System.getProperty("user.home") + "/.WellnessApp/db/appDb.sqlite3";
     private FoodItemStructure fis;
     private NutritionalComponentStructure ncs;
     private Meal newMeal;
