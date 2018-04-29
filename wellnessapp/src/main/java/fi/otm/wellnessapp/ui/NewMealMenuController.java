@@ -93,7 +93,7 @@ public class NewMealMenuController implements Initializable {
     private void displayFoodItems() {
         this.foodView.getItems().clear();
         this.ws.getNewMeal().getFoodItems().entrySet().stream().forEach((Entry<FoodItem, Double> e) -> {
-            String name = e.getKey().getName().split(",")[0];
+            String name = e.getKey().getName();
             Double amount = e.getValue();
             this.foodView.getItems().add(String.format("%s : %.2fg", name, amount));
         });
