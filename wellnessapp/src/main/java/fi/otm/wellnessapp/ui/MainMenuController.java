@@ -51,6 +51,7 @@ public class MainMenuController implements Initializable {
     @FXML
     void historyClicked(MouseEvent event) {
         Meal m = this.mealHistory.getSelectionModel().getSelectedItem();
+        System.out.println(m);
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Ateria");
         alert.setHeaderText("Tietoja ateriasta");
@@ -61,7 +62,7 @@ public class MainMenuController implements Initializable {
     
     @FXML
     void openUserMenu(MouseEvent event) {
-        
+        launchOtherScene("/fxml/UserManagement.fxml");
     }
     
     @FXML
@@ -78,12 +79,12 @@ public class MainMenuController implements Initializable {
     
     @FXML
     void openMealMenu(ActionEvent event) {
-        this.launchNewMealMenu();
+        this.launchOtherScene("/fxml/NewMealMenu.fxml");
     }
     
-    private void launchNewMealMenu() {
+    private void launchOtherScene(String resourcePath) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/fxml/NewMealMenu.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource(resourcePath));
             Scene scene = new Scene(root);
             Stage theStage = (Stage) this.ap.getScene().getWindow();
             theStage.setScene(scene);

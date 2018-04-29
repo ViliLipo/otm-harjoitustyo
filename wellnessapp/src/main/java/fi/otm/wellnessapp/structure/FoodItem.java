@@ -50,17 +50,22 @@ public class FoodItem implements Comparable<FoodItem> {
     }
 
     public String info() {
-        String info = this.name + "\n";
-        Double enerVal = this.getContents().get(this.contentName.get("ENERC")) / 4.1868;
-        String energy = "Energiaa : " + String.format("%.2f", enerVal) + "kcal/100g\n";
-        Double fatVal = this.getContents().get(this.contentName.get("FAT"));
-        String fat = "Rasvaa : " + String.format("%.2f", fatVal) + "g/100g\n";
-        Double protVal = this.getContents().get(this.contentName.get("PROT"));
-        String prot = "Proteiinia : " + String.format("%.2f", protVal) + "g/100g\n";
-        Double sugarVal = this.getContents().get(this.contentName.get("SUGAR"));
-        String sugar = "Sokeria : " + String.format("%.2f", sugarVal) + "g/100g\n";
-        info = info + energy + fat + prot + sugar;
-        return info;
+        try {
+            String info = this.name + "\n";
+            Double enerVal = this.getContents().get(this.contentName.get("ENERC")) / 4.1868;
+            String energy = "Energiaa : " + String.format("%.2f", enerVal) + "kcal/100g\n";
+            Double fatVal = this.getContents().get(this.contentName.get("FAT"));
+            String fat = "Rasvaa : " + String.format("%.2f", fatVal) + "g/100g\n";
+            Double protVal = this.getContents().get(this.contentName.get("PROT"));
+            String prot = "Proteiinia : " + String.format("%.2f", protVal) + "g/100g\n";
+            Double sugarVal = this.getContents().get(this.contentName.get("SUGAR"));
+            String sugar = "Sokeria : " + String.format("%.2f", sugarVal) + "g/100g\n";
+            info = info + energy + fat + prot + sugar;
+            return info;
+        } catch (NullPointerException ex) {
+            System.out.println("Some nutritional info cannot be found");
+            return "FAIL";
+        }
     }
 
     @Override
@@ -70,14 +75,18 @@ public class FoodItem implements Comparable<FoodItem> {
 
     @Override
     public boolean equals(Object o) {
-        if (o.getClass().equals(this.getClass())) {
-            FoodItem fo = (FoodItem) o;
-            return this.id == fo.getId();
-        } else {
+        try {
+            if (o.getClass().equals(this.getClass())) {
+                FoodItem fo = (FoodItem) o;
+                return this.id == fo.getId();
+            } else {
+                return false;
+            }
+        } catch (NullPointerException ex) {
             return false;
         }
-    }
 
+    }
 
     @Override
     public int compareTo(FoodItem fo) {

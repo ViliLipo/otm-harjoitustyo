@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" fx:id="ap" prefHeight="600.0" prefWidth="1000.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/9" fx:controller="fi.otm.wellnessapp.ui.UserManagementController">
+   <children>
+      <Label layoutX="124.0" layoutY="26.0" prefHeight="66.0" prefWidth="278.0" text="Käyttäjänhallinta">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label fx:id="userNameLabel" layoutX="142.0" layoutY="125.0" prefHeight="16.0" prefWidth="105.0" text="Username" />
+      <Label layoutX="142.0" layoutY="220.0" prefHeight="30.0" prefWidth="121.0" text="Vaihda salasana" />
+      <PasswordField fx:id="newPasswordField" layoutX="142.0" layoutY="250.0" promptText="uusi salasana" />
+      <PasswordField fx:id="confirmField" layoutX="142.0" layoutY="293.0" promptText="vahvista salasana" />
+      <Button fx:id="passwordChangeButton" layoutX="142.0" layoutY="330.0" mnemonicParsing="false" onAction="#changePassword" text="Vaihda" />
+      <Label layoutX="522.0" layoutY="207.0" prefHeight="26.0" prefWidth="186.0" text="Aseta tavoite päivittäiselle" />
+      <TextField fx:id="calorieField" layoutX="522.0" layoutY="250.0" onAction="#updateGoals" promptText="kcal" />
+      <Label layoutX="522.0" layoutY="227.0" prefHeight="16.0" prefWidth="171.0" text="kalorisaannille" />
+      <Button fx:id="okButton" layoutX="522.0" layoutY="293.0" mnemonicParsing="false" onAction="#updateCaloriesAlternative" text="OK" />
+      <Label fx:id="goalLabel" layoutX="457.0" layoutY="125.0" text="GoalLabel" />
+      <Button fx:id="backButton" layoutX="32.0" layoutY="26.0" mnemonicParsing="false" onAction="#goBack" text="Takaisin" />
+   </children>
+</AnchorPane>

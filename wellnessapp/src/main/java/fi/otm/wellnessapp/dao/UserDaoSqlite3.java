@@ -81,7 +81,20 @@ public class UserDaoSqlite3 implements UserDao {
 
     @Override
     public void updateUser(User user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sqlUpdate = "UPDATE User SET PasswordHash = (?), "
+                + " DailyKiloJouleGoal =(?) "
+                + " WHERE UserID = (?)";
+        try {
+            PreparedStatement prep = scm.connect().prepareStatement(sqlUpdate);
+            prep.setString(1, user.getPasswordHash());
+            prep.setInt(2, user.getDailyKiloJouleGoal());
+            prep.setInt(3, user.getUserId());
+            prep.executeUpdate();
+            scm.connect().commit();
+            scm.connect().close();
+        } catch  (SQLException ex) {
+            Logger.getLogger(UserDaoSqlite3.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

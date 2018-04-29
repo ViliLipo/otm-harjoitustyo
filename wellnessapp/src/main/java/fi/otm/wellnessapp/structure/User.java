@@ -34,9 +34,9 @@ public class User {
 
     private ArrayList<Meal> mealList;
 
-    public User(String userName, String passwordHash) {
+    public User(String userName, String password) {
         this.userName = userName;
-        this.passwordHash = passwordHash;
+        this.passwordHash = User.md5Hash(password);
         this.mealList = new ArrayList<>();
         this.dailyCalorieGoal = 2000;
     }
@@ -52,14 +52,15 @@ public class User {
     public String getUserName() {
         return this.userName;
     }
+    
+    public void setPassword(String password) {
+        this.passwordHash = User.md5Hash(password);
+    }
 
     public String getPasswordHash() {
         return this.passwordHash;
     }
 
-    public String getUserNameHash() {
-        return md5Hash(userName);
-    }
 
     public void setCalorieGoal(int goal) {
         this.dailyCalorieGoal = goal;
@@ -73,8 +74,8 @@ public class User {
         this.setCalorieGoal((int) Math.floor((value / 4.1868) + 0.5d));
     }
 
-    public double getDailyKiloJouleGoal() {
-        return (double) this.dailyCalorieGoal * 4.1868;
+    public int getDailyKiloJouleGoal() {
+        return ((int) Math.floor((this.dailyCalorieGoal * 4.1868) + 0.5d));
     }
 
     public double getDailyProteinGoal() {
@@ -159,7 +160,7 @@ public class User {
 
     }
 
-    public static String md5Hash(String string) {
+    private static String md5Hash(String string) {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
             try {

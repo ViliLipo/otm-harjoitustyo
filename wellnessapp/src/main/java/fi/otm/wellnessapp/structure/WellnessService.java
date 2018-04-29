@@ -35,16 +35,15 @@ public class WellnessService {
         user = null;
     }
 
-    public static WellnessService getInstance()  {
+    public static WellnessService getInstance() {
         if (singleton == null) {
             singleton = new WellnessService();
         }
         return singleton;
     }
 
-
     public void createNewUser(String username, String password) {
-        User userN = new User(username, User.md5Hash(password));
+        User userN = new User(username, password);
         UserDao userDao = new UserDaoSqlite3(this.getDataBaseName());
         userDao.addUser(userN);
         this.setUser(userN);
@@ -52,7 +51,8 @@ public class WellnessService {
 
     public boolean login(String username, String password) {
         UserDao userDao = new UserDaoSqlite3(this.getDataBaseName());
-        User userN = userDao.getUser(username, User.md5Hash(password));
+        User userN = new User(username, password);
+        userN = userDao.getUser(userN.getUserName(), userN.getPasswordHash());
         if (userN != null) {
             this.setUser(userN);
             return true;
@@ -100,6 +100,23 @@ public class WellnessService {
 
     public FoodItemStructure getFis() {
         return this.fis;
+    }
+
+    public void updateUserCalorieGoal(int goal) {
+        this.user.setCalorieGoal(goal);
+        UserDao ud = new UserDaoSqlite3(this.getDataBaseName());
+        ud.updateUser(user);
+    }
+
+    public boolean updateUserPassword(String password, String confirmation) {
+        if (password.contentEquals(confirmation)) {
+            this.user.setPassword(password);
+            UserDao ud = new UserDaoSqlite3(this.getDataBaseName());
+            ud.updateUser(user);
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

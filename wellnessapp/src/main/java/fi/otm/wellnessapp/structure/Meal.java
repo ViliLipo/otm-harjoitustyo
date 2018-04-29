@@ -103,10 +103,16 @@ public class Meal implements Comparable<Meal> {
             return 0;
         }
     }
+
     @Override
     public boolean equals(Object o) {
-        return (this.getClass() == o.getClass()
-                && this.hashCode() == o.hashCode());
+        try {
+            return (this.getClass() == o.getClass()
+                    && this.hashCode() == o.hashCode());
+        } catch (NullPointerException ex) {
+            return false;
+        }
+
     }
 
     @Override
