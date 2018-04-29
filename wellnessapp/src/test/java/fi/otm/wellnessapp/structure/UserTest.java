@@ -33,7 +33,7 @@ public class UserTest {
 
     @Before
     public void setUp() {
-        user = new User("Matti", "crypted");
+        user = new User("Matti", User.md5Hash("crypted"));
 
     }
 

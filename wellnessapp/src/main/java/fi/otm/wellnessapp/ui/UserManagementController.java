@@ -112,6 +112,8 @@ public class UserManagementController implements Initializable {
         try {
             int value = Integer.parseInt(valstr);
             ws.updateUserCalorieGoal(value);
+            this.userNameLabel.setText(this.ws.getUser().getUserName());
+            this.goalLabel.setText(String.valueOf(ws.getUser().getDailyCalorieGoal()) + "kcal/päivä");
         } catch (NumberFormatException ex) {
             this.calorieField.setPromptText(("Anna tasaluku"));
         }
@@ -120,6 +122,8 @@ public class UserManagementController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         ws = WellnessService.getInstance();
+        this.userNameLabel.setText(this.ws.getUser().getUserName());
+        this.goalLabel.setText(String.valueOf(ws.getUser().getDailyCalorieGoal()) + "kcal/päivä");
     }
 
 }

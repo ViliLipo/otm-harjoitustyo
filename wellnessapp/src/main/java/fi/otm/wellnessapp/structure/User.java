@@ -34,9 +34,9 @@ public class User {
 
     private ArrayList<Meal> mealList;
 
-    public User(String userName, String password) {
+    public User(String userName, String passwordHash) {
         this.userName = userName;
-        this.passwordHash = User.md5Hash(password);
+        this.passwordHash = passwordHash;
         this.mealList = new ArrayList<>();
         this.dailyCalorieGoal = 2000;
     }
@@ -160,7 +160,7 @@ public class User {
 
     }
 
-    private static String md5Hash(String string) {
+    public static String md5Hash(String string) {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
             try {

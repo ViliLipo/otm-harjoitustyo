@@ -7,15 +7,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" fx:id="ap" prefHeight="600.0" prefWidth="1000.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/9" fx:controller="fi.otm.wellnessapp.ui.UserManagementController">
+<AnchorPane id="AnchorPane" fx:id="ap" prefHeight="600.0" prefWidth="1000.0" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fi.otm.wellnessapp.ui.UserManagementController">
    <children>
       <Label layoutX="124.0" layoutY="26.0" prefHeight="66.0" prefWidth="278.0" text="Käyttäjänhallinta">
          <font>
             <Font size="25.0" />
          </font>
       </Label>
-      <Label fx:id="userNameLabel" layoutX="142.0" layoutY="125.0" prefHeight="16.0" prefWidth="105.0" text="Username" />
+      <Label fx:id="userNameLabel" layoutX="142.0" layoutY="125.0" prefHeight="40.0" prefWidth="171.0" text="Username" />
       <Label layoutX="142.0" layoutY="220.0" prefHeight="30.0" prefWidth="121.0" text="Vaihda salasana" />
       <PasswordField fx:id="newPasswordField" layoutX="142.0" layoutY="250.0" promptText="uusi salasana" />
       <PasswordField fx:id="confirmField" layoutX="142.0" layoutY="293.0" promptText="vahvista salasana" />

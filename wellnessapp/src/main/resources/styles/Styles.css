@@ -1,3 +1,29 @@
 .button {
     -fx-font-weight: bold;
 }
+
+.listview {
+    -fx-background-color: transparent
+}
+
+.list-cell:filled:selected:focused, list-cell.filled:selected {
+    -fx-background-color: lightsteelblue;
+    -fx-text-fill: white;
+}
+
+.list-cell:filled:hover {
+    -fx-background-color: lightgray;
+    -fx-text-fill: black;
+}
+#userNameLabel {
+    -fx-font-weight: bold;
+    -fx-font-size: 24pt;
+}
+#userNameLabel:hover {
+    -fx-text-fill: darkgoldenrod;
+}
+
+#backButton > .arrow-button{
+    -fx-background-insets: 0, 1, 2;
+    -fx-background-radius: 5 0 0 5, 4 0 0 4, 3 0 0 3;
+}

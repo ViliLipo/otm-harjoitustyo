@@ -27,61 +27,66 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class MainMenuController implements Initializable {
-    
+
     private WellnessService ws;
     @FXML
     private AnchorPane ap;
     @FXML
     private Canvas canvas;
-    
+
     @FXML
     private Slider canvasSlider;
-    
+
     @FXML
     private Label userNameLabel;
-    
+
     @FXML
     private Button newMealButton;
-    
+
     @FXML
     private ListView<Meal> mealHistory;
-    
+
     private DrawUtil du;
-    
+
     @FXML
     void historyClicked(MouseEvent event) {
-        Meal m = this.mealHistory.getSelectionModel().getSelectedItem();
-        System.out.println(m);
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("Ateria");
-        alert.setHeaderText("Tietoja ateriasta");
-        alert.setContentText(m.info());
-        //System.out.println(m.info());
-        alert.showAndWait();
+        try {
+            Meal m = this.mealHistory.getSelectionModel().getSelectedItem();
+            System.out.println(m);
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Ateria");
+            alert.setHeaderText("Tietoja ateriasta");
+            alert.setContentText(m.info());
+            //System.out.println(m.info());
+            alert.showAndWait();
+        } catch (NullPointerException ex) {
+            System.out.println("Nothing selected");
+        }
+
     }
-    
+
     @FXML
     void openUserMenu(MouseEvent event) {
         launchOtherScene("/fxml/UserManagement.fxml");
     }
-    
+
     @FXML
     void sliderDone(MouseEvent event) {
         //System.out.println(this.canvasSlider.getValue());
         int dif = (int) Math.floor((100 - this.canvasSlider.getValue()) / 3);
-        
+
         Calendar cl = Calendar.getInstance();
         cl.setTime(new Date());
         cl.add(Calendar.DAY_OF_MONTH, -dif);
         //System.out.println(cl.getTime());
         du.drawDiagram(cl.getTime());
     }
-    
+
     @FXML
     void openMealMenu(ActionEvent event) {
         this.launchOtherScene("/fxml/NewMealMenu.fxml");
     }
-    
+
     private void launchOtherScene(String resourcePath) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource(resourcePath));
@@ -92,7 +97,7 @@ public class MainMenuController implements Initializable {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         ws = WellnessService.getInstance();

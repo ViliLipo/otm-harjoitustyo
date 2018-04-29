@@ -43,7 +43,7 @@ public class WellnessService {
     }
 
     public void createNewUser(String username, String password) {
-        User userN = new User(username, password);
+        User userN = new User(username, User.md5Hash(password));
         UserDao userDao = new UserDaoSqlite3(this.getDataBaseName());
         userDao.addUser(userN);
         this.setUser(userN);
@@ -51,7 +51,7 @@ public class WellnessService {
 
     public boolean login(String username, String password) {
         UserDao userDao = new UserDaoSqlite3(this.getDataBaseName());
-        User userN = new User(username, password);
+        User userN = new User(username, User.md5Hash(password));
         userN = userDao.getUser(userN.getUserName(), userN.getPasswordHash());
         if (userN != null) {
             this.setUser(userN);
