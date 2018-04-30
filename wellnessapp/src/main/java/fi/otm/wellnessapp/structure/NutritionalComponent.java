@@ -6,7 +6,7 @@
 package fi.otm.wellnessapp.structure;
 
 /**
- *
+ * Simple class for storing nutritional component data.
  * @author vili
  */
 public class NutritionalComponent {
@@ -15,6 +15,14 @@ public class NutritionalComponent {
     private final String unit;
     private final String cmpClass;
     private final String cmpClassp;
+    
+    /**
+     * 
+     * @param name  name of component
+     * @param unit  unit in which this component is measured
+     * @param cmpClass  Compareclass from open data.
+     * @param cmpClassp compareclassp from open data.
+     */
 
     public NutritionalComponent(String name, String unit, String cmpClass,
             String cmpClassp) {
@@ -44,7 +52,15 @@ public class NutritionalComponent {
     public int hashCode() {
         return this.name.hashCode();
     }
-
+    
+    /**
+     * If Classes are equal, compares this to object o.
+     * Names are unique in application database so that is
+     * used to identify components.
+     * 
+     * @param o     Object to be compared to this
+     * @return boolean  is it a match
+     */
     @Override
     public boolean equals(Object o) {
         if (o.getClass().equals(this.getClass())) {

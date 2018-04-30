@@ -20,6 +20,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Class for managing user and its data
  *
  * @author vili
  */
@@ -34,6 +35,11 @@ public class User {
 
     private ArrayList<Meal> mealList;
 
+    /**
+     *
+     * @param userName Name of this user
+     * @param passwordHash Hashed password, use User.md5Hash(String string)
+     */
     public User(String userName, String passwordHash) {
         this.userName = userName;
         this.passwordHash = passwordHash;
@@ -52,7 +58,7 @@ public class User {
     public String getUserName() {
         return this.userName;
     }
-    
+
     public void setPassword(String password) {
         this.passwordHash = User.md5Hash(password);
     }
@@ -60,7 +66,6 @@ public class User {
     public String getPasswordHash() {
         return this.passwordHash;
     }
-
 
     public void setCalorieGoal(int goal) {
         this.dailyCalorieGoal = goal;
@@ -70,10 +75,20 @@ public class User {
         return this.dailyCalorieGoal;
     }
 
+    /**
+     * Sets users calorie goal with conversion from kilojoule.
+     *
+     * @param value double in kilojoule
+     */
     public void setDailyKiloJouleGoal(double value) {
         this.setCalorieGoal((int) Math.floor((value / 4.1868) + 0.5d));
     }
 
+    /**
+     * Users calorie goal converted to kilojoule
+     *
+     * @return double in kilojoule,
+     */
     public int getDailyKiloJouleGoal() {
         return ((int) Math.floor((this.dailyCalorieGoal * 4.1868) + 0.5d));
     }
@@ -90,6 +105,10 @@ public class User {
         this.mealList = list;
     }
 
+    /**
+     *
+     * @return meals in time order newest first
+     */
     public ArrayList<Meal> getMealList() {
         Collections.sort(mealList);
         Collections.reverse(mealList);
@@ -100,6 +119,14 @@ public class User {
         this.mealList.add(meal);
     }
 
+    /**
+     * Returns nutritional values for 7 days starting from given date and going
+     * back
+     *
+     * @param time
+     * @return list of nutritional values for dates, starting from date given in
+     * parameters and going back.
+     */
     public ArrayList<HashMap<NutritionalComponent, Double>> weekBeforeDate(Date time) {
         ArrayList<HashMap<NutritionalComponent, Double>> listForWeek
                 = new ArrayList<>();
@@ -117,6 +144,12 @@ public class User {
         return listForWeek;
     }
 
+    /**
+     * list of Double values for week going back from the date given
+     *
+     * @param time
+     * @return list of calorie values for week
+     */
     public ArrayList<Double> getWeeksCalories(Date time) {
         ArrayList<Double> values = new ArrayList<>();
         NutritionalComponentStructure ncs = NutritionalComponentStructure.getNutrititonalComponentStructure();
@@ -125,12 +158,19 @@ public class User {
             if (d != null) {
                 values.add((d / 4.1868));
             } else {
-                values.add(null);
+                values.add(0.0);
             }
         });
         return values;
     }
 
+    /**
+     * Complete nutritional values for given date.
+     *
+     * @param time Day that is used
+     * @return data structure containing information of that days nutritional
+     * values
+     */
     public HashMap<NutritionalComponent, Double> dailyScore(Date time) {
         HashMap<NutritionalComponent, Double> dailyScore = new HashMap<>();
         this.mealList.stream().forEach((Meal meal) -> {
@@ -160,6 +200,12 @@ public class User {
 
     }
 
+    /**
+     * Hashes string with md5
+     *
+     * @param string String to be hashed
+     * @return Hashed string
+     */
     public static String md5Hash(String string) {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");

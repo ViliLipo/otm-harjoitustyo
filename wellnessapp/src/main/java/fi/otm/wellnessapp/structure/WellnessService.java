@@ -12,6 +12,7 @@ import fi.otm.wellnessapp.dao.UserDaoSqlite3;
 import fi.otm.wellnessapp.tools.Sqlite3Utils;
 
 /**
+ * Service providing needed functionality to user interface.
  *
  * @author vili
  */
@@ -43,12 +44,26 @@ public class WellnessService {
         return singleton;
     }
 
+    /**
+     * Creates new user and stores it to database
+     *
+     * @param username Name of new user
+     * @param password Password of new user
+     */
     public void createNewUser(String username, String password) {
         User userN = new User(username, User.md5Hash(password));
         UserDao userDao = new UserDaoSqlite3(this.getDataBaseName());
         userDao.addUser(userN);
         this.setUser(userN);
     }
+
+    /**
+     * Logins existing user
+     *
+     * @param username Name of the user
+     * @param password Password of the user
+     * @return success of this login
+     */
 
     public boolean login(String username, String password) {
         UserDao userDao = new UserDaoSqlite3(this.getDataBaseName());
@@ -103,12 +118,23 @@ public class WellnessService {
         return this.fis;
     }
 
+    /**
+     * Updates uses calorie goal and stores it to Database
+     *
+     * @param goal new calorie goal
+     */
     public void updateUserCalorieGoal(int goal) {
         this.user.setCalorieGoal(goal);
         UserDao ud = new UserDaoSqlite3(this.getDataBaseName());
         ud.updateUser(user);
     }
 
+    /**
+     * Updates users password to db if it matches confirmation
+     * @param password  new Password
+     * @param confirmation new Password again
+     * @return is password and confirmation a match
+     */
     public boolean updateUserPassword(String password, String confirmation) {
         if (password.contentEquals(confirmation)) {
             this.user.setPassword(password);

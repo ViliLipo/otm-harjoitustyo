@@ -13,8 +13,10 @@ import java.util.HashMap;
 import java.util.stream.Collectors;
 
 /**
- *
+ * This class provides efficient access to FoodItem dataStructure from
+ * Database. Based on Singleton pattern
  * @author vili
+ * 
  */
 public class FoodItemStructure {
 
@@ -43,7 +45,12 @@ public class FoodItemStructure {
             
         });
     }
-
+    /**
+     * 
+     * @param filename  filename to be used in DAO interface
+     * if this class has not been initialised
+     * @return Instance of this structure
+     */
     public static FoodItemStructure getFoodItemStructure(String filename) {
         if (singleton == null) {
             singleton = new FoodItemStructure(filename);
@@ -54,10 +61,21 @@ public class FoodItemStructure {
     public static void reset() {
         singleton = null;
     }
-
+    
+    /**
+     * 
+     * @param id    Id of the food requested
+     * @return FoodItem that matches id, if not found null.
+     */
     public FoodItem getFoodItemById(int id) {
         return this.mapById.get(id);
     }
+    
+    /**
+     * 
+     * @param name  Name of the food requested
+     * @return FoodItem that matches name, if not found null.
+     */
 
     public FoodItem getFoodItemByName(String name) {
         return this.mapByName.get(name);
@@ -67,7 +85,11 @@ public class FoodItemStructure {
         Collections.sort(this.nameList, String.CASE_INSENSITIVE_ORDER);
         return this.nameList;
     }
-
+    /**
+     * Filter list of names
+     * @param filter    String that is user to filter namelist
+     * @return List of filtered strings
+     */
     public ArrayList<String> filteredNameList(String filter) {
         ArrayList<String> fNameList = new ArrayList<>();
         this.getNameList().stream().filter(name -> name.toLowerCase().contains(filter.toLowerCase()))

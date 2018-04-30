@@ -8,7 +8,7 @@ package fi.otm.wellnessapp.structure;
 import java.util.HashMap;
 
 /**
- *
+ * Class that handles information of foods
  * @author vili
  */
 public class FoodItem implements Comparable<FoodItem> {
@@ -18,7 +18,13 @@ public class FoodItem implements Comparable<FoodItem> {
     private final String language;
     private HashMap<NutritionalComponent, Double> contents;
     private HashMap<String, NutritionalComponent> contentName;
-
+    
+    /**
+     * 
+     * @param id    Database id of this FoodItem
+     * @param name  Name of this FoodItem
+     * @param language  Language of this FoodItem
+     */
     public FoodItem(int id, String name, String language) {
         this.id = id;
         this.name = name;
@@ -38,7 +44,11 @@ public class FoodItem implements Comparable<FoodItem> {
     public String getLanguage() {
         return this.language;
     }
-
+    /**
+     * Adds nutritional component to this food.
+     * @param amount Double in unit specified in NutritionalComponent
+     * @param nc NutritionalComponent to be added
+     */
     public void addContents(double amount, NutritionalComponent nc) {
         Double a = amount;
         this.contents.put(nc, a);
@@ -48,7 +58,11 @@ public class FoodItem implements Comparable<FoodItem> {
     public HashMap<NutritionalComponent, Double> getContents() {
         return this.contents;
     }
-
+    
+    /**
+     * Build String containing relevant information
+     * @return String containing relevant information of this FoodItem 
+     */
     public String info() {
         try {
             String info = this.name + "\n";

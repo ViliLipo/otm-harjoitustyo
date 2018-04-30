@@ -12,8 +12,9 @@ import java.util.HashMap;
 import java.util.StringJoiner;
 
 /**
- *
+ * Class for managing meals
  * @author vili
+ * 
  */
 public class Meal implements Comparable<Meal> {
 
@@ -23,7 +24,11 @@ public class Meal implements Comparable<Meal> {
 
     private HashMap<FoodItem, Double> foodItems;
     private HashMap<NutritionalComponent, Double> totalNutritionalValues;
-
+    /**
+     * 
+     * @param time, time when the meal happened.
+     * @param userId  id from the user that had this meal.
+     */
     public Meal(Date time, int userId) {
         this.userId = userId;
         this.time = time;
@@ -52,7 +57,11 @@ public class Meal implements Comparable<Meal> {
     public void removeFoodItem(FoodItem fi) {
         this.foodItems.remove(fi);
     }
-
+    /**
+     * 
+     * @return HashMap of the combined nutritional values of all food items
+     * in this Meal
+     */
     public HashMap<NutritionalComponent, Double> getTotalNutritionalValues() {
         if (this.totalNutritionalValues == null) {
             this.buildTotalNutritionalValues();
@@ -63,10 +72,9 @@ public class Meal implements Comparable<Meal> {
     public HashMap<FoodItem, Double> getFoodItems() {
         return this.foodItems;
     }
-
-    /*
-       Builds new totalNutritionalValues HashMap from
-        all of the fooditems in the meal.
+    /**
+     * Builds new totalNutritionalValues 
+     * HashMap from all of the fooditems in the meal.
      */
     private void buildTotalNutritionalValues() {
         this.totalNutritionalValues = new HashMap<>();
@@ -114,7 +122,10 @@ public class Meal implements Comparable<Meal> {
         }
 
     }
-
+    /**
+     * 
+     * @return String representation of this meal. 
+     */
     @Override
     public String toString() {
         DateFormat df = new SimpleDateFormat("HH:mm dd/MM/yyyy");
@@ -125,7 +136,10 @@ public class Meal implements Comparable<Meal> {
         String s = dateString + " : " + String.format("%.2f", energy) + "kcal";
         return s;
     }
-
+    /**
+     * 
+     * @return String containing information of this meal 
+     */
     public String info() {
         StringJoiner sj = new StringJoiner("\n");
         this.foodItems.forEach((k, v) -> {
