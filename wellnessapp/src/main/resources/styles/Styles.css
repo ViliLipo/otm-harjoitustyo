@@ -6,11 +6,6 @@
     -fx-background-color: transparent
 }
 
-.list-cell:filled:selected:focused, list-cell.filled:selected {
-    -fx-background-color: lightsteelblue;
-    -fx-text-fill: white;
-}
-
 .list-cell:filled:hover {
     -fx-background-color: lightgray;
     -fx-text-fill: black;

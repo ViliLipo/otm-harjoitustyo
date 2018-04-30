@@ -63,11 +63,10 @@ public class Sqlite3Utils {
         return "";
     }
 
-    public void initDb(String schemafile, String dbname, String compCsv, String foodCsv, String compValCsv) {
+    public void initDb(String schemafile, String dbname, String dbFolderPath, String compCsv, String foodCsv, String compValCsv) {
         String query = "SELECT * FROM Component";
         try {
-            String folderPath = System.getProperty("user.home") + "/.WellnessApp/db";
-            new File(folderPath).mkdirs();
+            new File(dbFolderPath).mkdirs();
             Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbname);
             ResultSet rs = conn.createStatement().executeQuery(query);
             if (!rs.next()) { // empty db

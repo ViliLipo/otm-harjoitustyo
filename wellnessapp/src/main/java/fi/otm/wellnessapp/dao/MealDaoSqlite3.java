@@ -5,6 +5,7 @@
  */
 package fi.otm.wellnessapp.dao;
 
+import fi.otm.wellnessapp.structure.FoodItem;
 import fi.otm.wellnessapp.structure.FoodItemStructure;
 import fi.otm.wellnessapp.structure.Meal;
 import java.sql.PreparedStatement;
@@ -14,6 +15,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -68,6 +70,7 @@ public class MealDaoSqlite3 implements MealDao {
                 mealList.add(m);
             }
             this.resolveFoodItems(mealList);
+            scm.connect().close();
         } catch (SQLException ex) {
             Logger.getLogger(MealDaoSqlite3.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -89,6 +92,7 @@ public class MealDaoSqlite3 implements MealDao {
                 mealList.add(m);
             }
             this.resolveFoodItems(mealList);
+            scm.connect().close();
         } catch (SQLException ex) {
             Logger.getLogger(MealDaoSqlite3.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -111,6 +115,7 @@ public class MealDaoSqlite3 implements MealDao {
                     rs.getInt("UserID"));
             meal.setMealId(rs.getInt("MealID"));
             this.resolveFoodItems(meal);
+            scm.connect().close();
         } catch (SQLException ex) {
             Logger.getLogger(MealDaoSqlite3.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -118,8 +123,7 @@ public class MealDaoSqlite3 implements MealDao {
     }
 
     private void addCore(Meal meal) throws SQLException {
-        String sqlInsert = "INSERT INTO MEAL (UserID, Time) "
-                + "VALUES (?,?)";
+        String sqlInsert = "INSERT INTO MEAL (UserID, Time) VALUES (?,?)";
         PreparedStatement prep = scm.connect().prepareStatement(sqlInsert);
         prep.setInt(1, meal.getUserId());
         prep.setTimestamp(2, new java.sql.Timestamp(meal.getTime().getTime()));
@@ -134,7 +138,7 @@ public class MealDaoSqlite3 implements MealDao {
     private void addMealFoodRelation(Meal meal) {
         String sqlInsertInAMeal = "INSERT INTO InAMeal (MealID, FoodID, Amount)"
                 + "VALUES (?,?,?)";
-        meal.getFoodItems().entrySet().forEach(e -> {
+        meal.getFoodItems().entrySet().forEach((Entry<FoodItem, Double> e) -> {
             try {
                 PreparedStatement prep = scm.connect().prepareStatement(sqlInsertInAMeal);
                 prep.setInt(1, meal.getMealId());

@@ -7,11 +7,15 @@ package fi.otm.wellnessapp.structure;
 
 import fi.otm.wellnessapp.dao.FoodItemDao;
 import fi.otm.wellnessapp.dao.FoodItemDaoSqlite3;
+import fi.otm.wellnessapp.dao.Sqlite3ConnectionManager;
+import fi.otm.wellnessapp.tools.Sqlite3Utils;
+import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -24,9 +28,14 @@ public class MealTest {
 
     private Meal meal;
     private String dbName = "db/fullTestDb.sqlite3";
+    private String dbPath = "db/";
     private Date refer;
 
     public MealTest() {
+        Sqlite3Utils s3u = new Sqlite3Utils();
+        s3u.initDb("sqlite/dataBaseSchema.sqlite3",
+                dbName, dbPath, "csv/component.csv",
+                "csv/foodname_FI.csv", "csv/component_value.csv");
         NutritionalComponentStructure.getNutrititonalComponentStructure(dbName);
         FoodItemStructure.getFoodItemStructure(dbName);
     }
@@ -35,11 +44,18 @@ public class MealTest {
     public void setUp() {
         refer = new Date();
         meal = new Meal(refer, 5);
-
+        NutritionalComponentStructure.reset();
+        FoodItemStructure.reset();
+        Sqlite3ConnectionManager.reset();
     }
 
     @After
     public void tearDown() {
+    }
+    @AfterClass
+    public static void resetDb() {
+        File file  = new File("db/fullTestDb.sqlite3");
+        file.delete();
     }
 
     /**

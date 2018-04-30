@@ -5,11 +5,15 @@
  */
 package fi.otm.wellnessapp.structure;
 
+import fi.otm.wellnessapp.dao.Sqlite3ConnectionManager;
+import fi.otm.wellnessapp.tools.Sqlite3Utils;
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -18,6 +22,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.BeforeClass;
 import org.junit.Ignore;
 
 /**
@@ -27,18 +32,36 @@ import org.junit.Ignore;
 public class UserTest {
 
     private User user;
+    private FoodItemStructure fis;
+    private final String dataBaseName = "db/testDb.sqlite3";
+    private final String dbPath = "db/";
+    private NutritionalComponentStructure ncs;
 
     public UserTest() {
     }
 
+    @BeforeClass
+    public static void oneTimeSetup() {
+        Sqlite3Utils s3u = new Sqlite3Utils();
+        s3u.initDb("sqlite/dataBaseSchema.sqlite3",
+                "db/testDb.sqlite3", "db/", "csv/component.csv",
+                "csv/foodname_FI.csv", "csv/component_value.csv");
+
+    }
+
     @Before
     public void setUp() {
+        Sqlite3ConnectionManager.reset();
         user = new User("Matti", User.md5Hash("crypted"));
-
+        fis = FoodItemStructure.getFoodItemStructure(dataBaseName);
+        ncs = NutritionalComponentStructure.getNutrititonalComponentStructure(dataBaseName);
     }
 
     @After
     public void tearDown() {
+        Sqlite3ConnectionManager.reset();
+        fis.reset();
+        ncs.reset();
     }
 
     /**
@@ -63,6 +86,17 @@ public class UserTest {
         String expResult = "Matti";
         String result = instance.getUserName();
         assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of setPassWord method, of class User.
+     */
+    @Test
+    public void testSetPassword() {
+        System.out.println("setPassword");
+        String expResult = User.md5Hash("password");
+        user.setPassword("password");
+        assertTrue(expResult.contentEquals(user.getPasswordHash()));
     }
 
     /**
@@ -94,8 +128,7 @@ public class UserTest {
     }
 
     /**
-     * Test of setCalorieGoal method, of class User.
-     * And test of getCalorieGoal
+     * Test of setCalorieGoal method, of class User. And test of getCalorieGoal
      */
     @Test
     public void testSetCalorieGoal() {
@@ -106,10 +139,9 @@ public class UserTest {
         assertEquals(3500, instance.getDailyCalorieGoal(), 0.001);
     }
 
-
     /**
-     * Test of setDailyKiloJouleGoal method, of class User.
-     * And Test of getDailyKiloJouleGoal
+     * Test of setDailyKiloJouleGoal method, of class User. And Test of
+     * getDailyKiloJouleGoal
      */
     @Test
     public void testSetDailyKiloJouleGoal() {
@@ -121,10 +153,9 @@ public class UserTest {
         assertEquals(expResult, user.getDailyKiloJouleGoal());
     }
 
-
     /**
-     * Test of getDailyProteinGoal method, of class User.
-     * And test of setDailyProteinGoal
+     * Test of getDailyProteinGoal method, of class User. And test of
+     * setDailyProteinGoal
      */
     @Test
     public void testGetDailyProteinGoal() {
@@ -136,10 +167,8 @@ public class UserTest {
         assertEquals(expResult, result, 0.0);
     }
 
-
     /**
-     * Test of setMealList method, of class User.
-     * And get mealList
+     * Test of setMealList method, of class User. And get mealList
      */
     @Test
     public void testSetMealList() {
@@ -167,22 +196,40 @@ public class UserTest {
     /**
      * Test of weekBeforeDate method, of class User.
      */
-    @Ignore("WIP")@Test
+    @Test
     public void testWeekBeforeDate() {
         System.out.println("weekBeforeDate");
-        Date time = null;
-        User instance = null;
-        ArrayList<HashMap<NutritionalComponent, Double>> expResult = null;
-        ArrayList<HashMap<NutritionalComponent, Double>> result = instance.weekBeforeDate(time);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Date time = new Date();
+        Date time2 = new Date();
+        Calendar cl = Calendar.getInstance();
+        cl.setTime(time2);
+        cl.add(Calendar.DATE, -8);
+        time2 = cl.getTime();
+        User instance = user;
+        Meal meal1 = new Meal(time, user.getUserId());
+        meal1.addFoodItem(fis.getFoodItemById(5), 100);
+        meal1.addFoodItem(fis.getFoodItemById(8), 50);
+        Meal meal2 = new Meal(time, user.getUserId());
+        meal2.addFoodItem(fis.getFoodItemById(6), 100);
+        Meal meal3 = new Meal(time2, user.getUserId());
+        meal3.addFoodItem(fis.getFoodItemById(10), 50);
+        user.addMeal(meal1);
+        user.addMeal(meal2);
+        user.addMeal(meal3);
+        ArrayList<HashMap<NutritionalComponent, Double>> list = user.weekBeforeDate(new Date());
+        assertEquals(7, list.size());
+        HashMap<NutritionalComponent, Double> first = user.dailyScore(new Date());
+        assertEquals(first, list.get(0));
+        HashMap<NutritionalComponent, Double> last = new HashMap<>();
+        assertEquals(last, list.get(6));
+
     }
 
     /**
      * Test of getWeeksCalories method, of class User.
      */
-    @Ignore("WIP")@Test
+    @Ignore("WIP")
+    @Test
     public void testGetWeeksCalories() {
         System.out.println("getWeeksCalories");
         Date time = null;
@@ -197,17 +244,31 @@ public class UserTest {
     /**
      * Test of dailyScore method, of class User.
      */
-    @Ignore("WIP")@Test
+    @Test
     public void testDailyScore() {
         System.out.println("dailyScore");
-        Date time = null;
-        User instance = null;
-        HashMap<NutritionalComponent, Double> expResult = null;
+        Date time = new Date();
+        Date time2 = new Date();
+        Calendar cl = Calendar.getInstance();
+        cl.setTime(time2);
+        cl.add(Calendar.DATE, -1);
+        time2 = cl.getTime();
+        User instance = user;
+        Meal meal1 = new Meal(time, user.getUserId());
+        meal1.addFoodItem(fis.getFoodItemById(5), 100);
+        meal1.addFoodItem(fis.getFoodItemById(8), 50);
+        Meal meal2 = new Meal(time, user.getUserId());
+        meal2.addFoodItem(fis.getFoodItemById(6), 100);
+        Meal meal3 = new Meal(time2, user.getUserId());
+        meal3.addFoodItem(fis.getFoodItemById(10), 50);
+        user.addMeal(meal1);
+        user.addMeal(meal2);
+        user.addMeal(meal3);
         HashMap<NutritionalComponent, Double> result = instance.dailyScore(time);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Double expectedCalories = fis.getFoodItemById(5).getContents().get(ncs.getNutCompByName("ENERC"))
+                + (fis.getFoodItemById(8).getContents().get(ncs.getNutCompByName("ENERC")) / 2)
+                + fis.getFoodItemById(6).getContents().get(ncs.getNutCompByName("ENERC"));
+        assertEquals(expectedCalories, result.get(ncs.getNutCompByName("ENERC")), 0.001);
     }
-
 
 }

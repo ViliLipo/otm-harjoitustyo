@@ -98,4 +98,8 @@ public class FoodItem implements Comparable<FoodItem> {
             return 0;
         }
     }
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }

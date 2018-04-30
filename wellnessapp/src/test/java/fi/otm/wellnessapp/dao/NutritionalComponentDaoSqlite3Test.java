@@ -56,6 +56,7 @@ public class NutritionalComponentDaoSqlite3Test {
             prep.setString(3, "Class");
             prep.setString(4, "Classp");
             prep.executeUpdate();
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(NutritionalComponentDaoSqlite3Test.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -20,6 +20,7 @@ public class WellnessService {
     private static WellnessService singleton;
     private User user;
     private final String dataBaseName = System.getProperty("user.home") + "/.WellnessApp/db/appDb.sqlite3";
+    private final String folderPath = System.getProperty("user.home") + "/.WellnessApp/db/";
     private FoodItemStructure fis;
     private NutritionalComponentStructure ncs;
     private Meal newMeal;
@@ -27,7 +28,7 @@ public class WellnessService {
     private WellnessService() {
         Sqlite3Utils s3u = new Sqlite3Utils();
         s3u.initDb("sqlite/dataBaseSchema.sqlite3",
-                dataBaseName, "csv/component.csv",
+                dataBaseName, folderPath, "csv/component.csv",
                 "csv/foodname_FI.csv", "csv/component_value.csv");
         fis = FoodItemStructure.getFoodItemStructure(dataBaseName);
         ncs = NutritionalComponentStructure.getNutrititonalComponentStructure(dataBaseName);

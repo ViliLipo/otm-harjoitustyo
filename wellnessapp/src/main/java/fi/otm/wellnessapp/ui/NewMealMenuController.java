@@ -221,6 +221,7 @@ public class NewMealMenuController implements Initializable {
         this.datePicker.setValue(LocalDate.now());
         this.foodComBox.getItems().setAll(ws.getFis().getNameList());
         this.foodComBox.setValue(this.foodComBox.getItems().get(0));
+        this.foodInfoField.setText(this.ws.getFis().getFoodItemByName(this.foodComBox.getValue()).info());
 
     }
 

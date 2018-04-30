@@ -46,7 +46,7 @@ public class Meal implements Comparable<Meal> {
     public void addFoodItem(FoodItem fi, double amount) {
         Double a = amount;
         this.foodItems.put(fi, a);
-        this.buildTotalNutritionalValues();
+        this.totalNutritionalValues = null;
     }
 
     public void removeFoodItem(FoodItem fi) {

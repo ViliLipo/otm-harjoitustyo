@@ -45,6 +45,9 @@ public class NutritionalComponentStructure {
         }
         return singleton;
     }
+    public static void reset() {
+        singleton = null;
+    }
     public NutritionalComponent getNutCompByName(String name) {
         return this.structure.get(name);
     }
