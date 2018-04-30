@@ -77,8 +77,8 @@ public class FoodItem implements Comparable<FoodItem> {
             info = info + energy + fat + prot + sugar;
             return info;
         } catch (NullPointerException ex) {
-            System.out.println("Some nutritional info cannot be found");
-            return "FAIL";
+            return "Some nutritional info cannot be found\n"
+                    + "Dataset might be corrupted";
         }
     }
 
