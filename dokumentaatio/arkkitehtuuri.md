@@ -1,8 +1,8 @@
 # Arkkitehtuurikuvaus
 
-![Luokkakaavio](https://github.com/ViliLipo/otm-harjoitustyo/blob/master/dokumentaatio/class_diagram.png)
+![Luokkakaavio](https://raw.githubusercontent.com/ViliLipo/otm-harjoitustyo/master/dokumentaatio/class_diagram.png)
 
-![Sekvenssi kaavio uuden ruuan lisäämisestä](https://github.com/ViliLipo/otm-harjoitustyo/blob/master/dokumentaatio/sequence_newMeal.png)
+![Sekvenssi kaavio uuden ruuan lisäämisestä](https://raw.githubusercontent.com/ViliLipo/otm-harjoitustyo/master/dokumentaatio/sequence_newMeal.png)
 
 Ohjelma noudattelee kolmeosaista pakkausrakennetta, ja paketit ilmenevät
 luokkakaaviosta.
