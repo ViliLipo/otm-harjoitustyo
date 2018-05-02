@@ -101,7 +101,6 @@ public class MealDaoSqlite3 implements MealDao {
 
     @Override
     public Meal getOne(int mealId) {
-        Meal meal = null;
         String sqlQuery = "SELECT * FROM MEAL WHERE MealID = (?);";
         try {
             PreparedStatement prep = scm.connect().prepareStatement(sqlQuery);
@@ -111,15 +110,15 @@ public class MealDaoSqlite3 implements MealDao {
             if (rs.isAfterLast()) {
                 return null; // database did not contain id
             }
-            meal = new Meal(new Date(rs.getTimestamp("Time").getTime()),
-                    rs.getInt("UserID"));
+            Meal meal = new Meal(new Date(rs.getTimestamp("Time").getTime()), rs.getInt("UserID"));
             meal.setMealId(rs.getInt("MealID"));
             this.resolveFoodItems(meal);
             scm.connect().close();
+            return meal;
         } catch (SQLException ex) {
             Logger.getLogger(MealDaoSqlite3.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return meal;
+        return null;
     }
 
     private void addCore(Meal meal) throws SQLException {

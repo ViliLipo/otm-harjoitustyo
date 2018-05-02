@@ -3,6 +3,7 @@
 - [Vaatimusmäärittely](https://github.com/ViliLipo/otm-harjoitustyo/blob/master/requirements.md)
 - [Työaikakirjanpito](https://github.com/ViliLipo/otm-harjoitustyo/blob/master/tyoaikakirjanpito.md)
 - [Arkkitehtuurikuvaus](https://github.com/ViliLipo/otm-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md)
+- [Käyttöohje](https://github.com/ViliLipo/otm-harjoitustyo/blob/master/dokumentaatio/kayttoohje.md)
 ### Esittely
 WellnessApp on kursille Ohjelmistotekniikan menetelmät laadittu harjoitustyo.
 Sovelluksen tarkoituksena on auttaa käyttäjäänsä ruokavalion seuraamisessa.
