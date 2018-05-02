@@ -88,3 +88,8 @@ oikeellinen toiminta on erittäin riippuvainen siihen csv-tiedostoilla syötetyn
 ravintoarvo datan oikeellisuudesta. Esim yksittäisten ruoka-aine ravinto-arvo
 suhteiden puuttuminen voi pahimmassa tapauksessa estää ohjelman mielekkään
 käyttämisen. Ongelma on onneksi rajattu vain siihen ruoka-aineeseen.
+
+### Testaus
+Dao-testien toteutus on hieman kankea koska tietokanta rakennetaan ja puretaan
+useita kertoja niiden aikana. Tämä johtaa siihen, että testaamisessa
+kuluu erittäin pitkä aika n.30s.

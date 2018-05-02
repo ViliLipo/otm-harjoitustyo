@@ -18,7 +18,9 @@ piirtää pylväsdiagrammin käyttäjän edellisen kuukauden päivittäisistä k
 Sovellus täyttää siis vaatimusdokumentin perusvaatimukset.
 Sovelluksen vakautta voidaan kuitenkin yhä parantaa sekä käytettävyyttä nostaa.
 JavaDoc on kirjoitettu structure-paketille ja testikattavuus on noin 70%.
-Erikoistapausten testejä tulisi kuitenkin kirjoittaa lisää.
+Erikoistapausten testejä tulisi kuitenkin kirjoittaa lisää. Testeihin myös
+kuluu liian pitkä aika ja DAO-testejä tulisi optimoida. Tällä hetkellä
+testipatterin suorittamiseen voi kulua jopa 30s.
 
 
 ### Komentoja
