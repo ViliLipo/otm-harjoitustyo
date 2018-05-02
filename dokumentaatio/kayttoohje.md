@@ -27,12 +27,14 @@ Jos taas asensit .deb paketin ohjelman tulisi käynnistyä komennolla
 
 ## Kirjautuminen
 ![kirjautuminen](https://raw.githubusercontent.com/ViliLipo/otm-harjoitustyo/master/dokumentaatio/Login_screen.png)
+
  Ohjelma käynnistyy kirjautumis ruutuun. Uuden käyttäjän voi luoda
  täyttämällä kentät halutulla nimellä ja salasanalla ja painamalla
  "uusi käyttäjä". Kirjautuminen tapahtuu napilla kirjaudu.
 
 ## Päänäkymä
 ![päänäkymä](https://raw.githubusercontent.com/ViliLipo/otm-harjoitustyo/master/dokumentaatio/main_menu.png)
+
 Kirjautumisen jälkeen olet päänäkymässä. Keskellä on pylväsdiagrammi
 päivittäisestä energiasaannista kilokaloreissa. Siinä näkyvät pylväät
 ovat vihreitä, jos päivän arvo on tarpeeksi lähellä tavoitetta, oranssi, jos
@@ -42,6 +44,7 @@ näytetään tarkempia tietoja kyseisestä ateriasta.
 
 ## Aterian lisääminen
 ![aterian_lisääminen](https://raw.githubusercontent.com/ViliLipo/otm-harjoitustyo/master/dokumentaatio/adding_food.png)
+
 Aterian lisäämisen voi aloittaa painamalla "uusi ateria".
 Tämän jälkeen ilmestyvässä näkymässä valitaan kellonaika ja päivämäärä
 aterialle. Tämän jälkeen päästään valikkoon, jossa ateriaan lisätään ruoka-aineita.
@@ -53,5 +56,6 @@ päävalikkoon.
 
 ## Käyttäjän hallinta
 ![käyttäjän hallinta](https://raw.githubusercontent.com/ViliLipo/otm-harjoitustyo/master/dokumentaatio/user_menu.png)
+
 Voit siirtyä käyttäjän hallintaan painamalla käyttäjänimestäsi päävalikossa.
 Tässä näkymässä voit vaihtaa salasanasi ja päivittäisen kaloritarpeesi.
