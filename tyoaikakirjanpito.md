@@ -20,4 +20,5 @@
 |29.4| 3| Käyttäjän hallinta|
 |30.4| 4| Testit- javadoc |
 |2.5| 3 | javadoc, arkkitehtuuri, ja ohjeet|
-|yht| 48| |
+|2.5|2| viilailu ja hinkkaus|
+|yht| 50| |

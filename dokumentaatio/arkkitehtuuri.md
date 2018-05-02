@@ -2,7 +2,6 @@
 
 ![Luokkakaavio](https://raw.githubusercontent.com/ViliLipo/otm-harjoitustyo/master/dokumentaatio/class_diagram.png)
 
-![Sekvenssi kaavio uuden ruuan lisäämisestä](https://raw.githubusercontent.com/ViliLipo/otm-harjoitustyo/master/dokumentaatio/sequence_newMeal.png)
 
 Ohjelma noudattelee kolmeosaista pakkausrakennetta, ja paketit ilmenevät
 luokkakaaviosta.
@@ -34,7 +33,7 @@ on singleton, joka vastaa ravintoarvotiedoista. Se perustuu
 hajautustauluun. Se hakee tiedot rakentajassaan käyttäen DAO:oa.
 FoodItemStructure on singleton joka vastaa ruokaineiden tietojen keräämisestä.
 Se hakee tiedot rakentajassaan DAO:sta. Luokka perustuu hajautustauluihin ja
-listaan ruokaaineiden nimistä. WellnessService on luokka joka vastaa
+listaan ruoka-aineiden nimistä. WellnessService on luokka joka vastaa
 suuremmista toiminnallisista kokonaisuuksista.
 
 Ruoka-aineiden ja ranvinto-aineiden suhteet kuvataan ohjelmassa hajautustaululla
@@ -42,11 +41,15 @@ luokassa FoodItem, jossa jokaista ravinto-arvoa vastaa double lukuarvo.
 Samantapainen rakenne toistuu Meal-luokassa, jossa sitä käytetään
 Aterian ja ruokaineiden suhteen kuvaamiseen.
 
+Käyttäjällä (User) on taas lista omista Aterioistaan(Meal). Tätä listaa
+manipuloimalla luokan User-metodeissa tuotetaan käyttöliittymälle relevanttia
+dataa. Esimerkiksi lista annettua päivää edeltäneiden seitsemän päivän kaloreista.
+
 ## Pysyväistalletus
 
 Pakkauksen wellnessapp.dao luokat huolehtivat tietojen tallettamisesta
 sqlite-tietokantaan. Luokat noudattavat data-access-object suunnittelu mallia
-ja jokaisen tietotyypin tallettamista varten on määrietty oma rajapinta.
+ja jokaisen tietotyypin tallettamista varten on määritelty oma rajapinta.
 
 [Tietokantaskeema.](https://github.com/ViliLipo/otm-harjoitustyo/blob/master/wellnessapp/src/main/resources/sqlite/dataBaseSchema.sqlite3)
 
@@ -66,6 +69,10 @@ Molemmat toiminnot päättyvät siihen, että käytttäjän tiedot haetaan tieto
 ja siirytään päänäkymään.
 
 ### Uuden aterian luominen
+
+![Sekvenssi kaavio uuden ruuan lisäämisestä](https://raw.githubusercontent.com/ViliLipo/otm-harjoitustyo/master/dokumentaatio/sequence_newMeal.png)
+
+
 Aterian luominen aloitetaan päänäkymästä painamalla nappia "uusi ateria".
 Tämä lataa stagelle scenen NewMealMenu. Aterian luomista jatketaan valitsemalla
 sille aika. Jos käyttäjän syöte on epäkelpo, ei ohjelma päästä jatkamaan.

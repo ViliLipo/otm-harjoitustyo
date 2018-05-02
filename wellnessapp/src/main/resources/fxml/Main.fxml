@@ -17,7 +17,7 @@
          </font>
       </Label>
       <Slider fx:id="canvasSlider" layoutX="48.0" layoutY="439.0" majorTickUnit="9.0" onMouseClicked="#sliderClick" onMouseDragged="#sliderDone" prefHeight="16.0" prefWidth="569.0" showTickMarks="true" snapToTicks="true" value="100.0" AnchorPane.bottomAnchor="140.0" AnchorPane.leftAnchor="48.0" AnchorPane.rightAnchor="383.0" AnchorPane.topAnchor="439.0" />
-      <Label fx:id="userNameLabel" layoutX="313.0" layoutY="63.0" onMouseClicked="#openUserMenu" prefHeight="40.0" prefWidth="212.0" text="Username" AnchorPane.bottomAnchor="497.0" AnchorPane.leftAnchor="313.0" AnchorPane.rightAnchor="475.0" AnchorPane.topAnchor="63.0">
+      <Label fx:id="userNameLabel" layoutX="313.0" layoutY="63.0" onMouseClicked="#openUserMenu" prefHeight="40.0" prefWidth="197.0" text="Username" textAlignment="CENTER" AnchorPane.bottomAnchor="497.0" AnchorPane.leftAnchor="313.0" AnchorPane.rightAnchor="490.0" AnchorPane.topAnchor="63.0">
          <font>
             <Font size="16.0" />
          </font>

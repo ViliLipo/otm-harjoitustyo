@@ -26,6 +26,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -124,6 +126,9 @@ public class UserManagementController implements Initializable {
         ws = WellnessService.getInstance();
         this.userNameLabel.setText(this.ws.getUser().getUserName());
         this.goalLabel.setText(String.valueOf(ws.getUser().getDailyCalorieGoal()) + "kcal/päivä");
+        Image image = new Image(this.getClass().getResourceAsStream("/icons/arrow-left.png"));
+        this.backButton.setText("");
+        this.backButton.setGraphic(new ImageView(image));
     }
 
 }

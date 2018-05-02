@@ -28,6 +28,8 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -231,7 +233,9 @@ public class NewMealMenuController implements Initializable {
         this.foodComBox.setValue(this.foodComBox.getItems().get(0));
         this.foodInfoField.setText(this.ws.getFis().getFoodItemByName(this.foodComBox.getValue()).info());
         this.foodToAdd = this.ws.getFis().getFoodItemByName(this.foodComBox.getValue());
-
+        Image image = new Image(this.getClass().getResourceAsStream("/icons/arrow-left.png"));
+        this.backButton.setText("");
+        this.backButton.setGraphic(new ImageView(image));
     }
 
 }

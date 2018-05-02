@@ -23,10 +23,10 @@ komennolla
  java -jar wellnessapp.jar
  ```
 Jos taas asensit .deb paketin ohjelman tulisi käynnistyä komennolla
-`wellnessapp`
+`wellnessapp`, tai sen pitäisi löytyä asennetuista ohjelmista.
 
 ## Kirjautuminen
-![kirjautuminen](https://raw.githubusercontent.com/ViliLipo/otm-harjoitustyo/master/dokumentaatio/Login_screen.png)
+![kirjautuminen](https://raw.githubusercontent.com/ViliLipo/otm-harjoitustyo/master/dokumentaatio/Login_screen_new.png)
 
  Ohjelma käynnistyy kirjautumis ruutuun. Uuden käyttäjän voi luoda
  täyttämällä kentät halutulla nimellä ja salasanalla ja painamalla
@@ -54,7 +54,7 @@ Virheellisen ruuan voi poistaa klikkaamalla sitä laatikosta ja painamalla
 "poista". Kun olet lisännyt haluamasi ruoka-aineet paina ok ja palaat
 päävalikkoon.
 
-## Käyttäjän hallinta
+## Käyttäjänhallinta
 ![käyttäjän hallinta](https://raw.githubusercontent.com/ViliLipo/otm-harjoitustyo/master/dokumentaatio/user_menu.png)
 
 Voit siirtyä käyttäjän hallintaan painamalla käyttäjänimestäsi päävalikossa.
