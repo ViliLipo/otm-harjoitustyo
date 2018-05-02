@@ -1,12 +1,13 @@
 # Käyttöohje
 Lataa WellnessApp, joko -jar tiedostona tai .deb pakettina
-releasesta [release](http://github/ViliLipo/). Huomioi että .deb
-vaatii root-oikeudet asennettavaksi.
+releasesta [release](https://github.com/ViliLipo/otm-harjoitustyo/releases). Huomioi että .deb
+vaatii root-oikeudet asennukseen. Debian-paketit toimivat Debian-pohjaisissa
+Linux-järjestelmissä.
 .deb paketti asennetaan komennolla
 ```
 sudo apt install ./WellnessApp.deb
 ```
-Huomioi, että ohjelman pysyväis talletus tapahtuu kansioon
+Huomioi, että ohjelman pysyväistalletus tapahtuu kansioon
 ```
 ~/.WellnessApp/
 ```
@@ -34,7 +35,8 @@ Kirjautumisen jälkeen olet päänäkymässä. Keskellä on pylväsdiagrammi
 päivittäisestä energiasaannista kilokaloreissa. Siinä näkyvät pylväät
 ovat vihreitä, jos päivän arvo on tarpeeksi lähellä tavoitetta, oranssi, jos
 tavoite on hieman liian kaukana ja punainen jos tavoite on alitettu tai
-ylitetty reilusti.
+ylitetty reilusti. Päänäkymän listaruudusta voi klikata rivejä, jolloin
+näytetään tarkempia tietoja kyseisestä ateriasta.
 
 ## Aterian lisääminen
 Aterian lisäämisen voi aloittaa painamalla "uusi ateria".

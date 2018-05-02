@@ -37,6 +37,11 @@ Se hakee tiedot rakentajassaan DAO:sta. Luokka perustuu hajautustauluihin ja
 listaan ruokaaineiden nimistä. WellnessService on luokka joka vastaa
 suuremmista toiminnallisista kokonaisuuksista.
 
+Ruoka-aineiden ja ranvinto-aineiden suhteet kuvataan ohjelmassa hajautustaululla
+luokassa FoodItem, jossa jokaista ravinto-arvoa vastaa double lukuarvo.
+Samantapainen rakenne toistuu Meal-luokassa, jossa sitä käytetään
+Aterian ja ruokaineiden suhteen kuvaamiseen.
+
 ## Pysyväistalletus
 
 Pakkauksen wellnessapp.dao luokat huolehtivat tietojen tallettamisesta
