@@ -4,15 +4,21 @@
 - [Työaikakirjanpito](https://github.com/ViliLipo/otm-harjoitustyo/blob/master/tyoaikakirjanpito.md)
 - [Arkkitehtuurikuvaus](https://github.com/ViliLipo/otm-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md)
 - [Käyttöohje](https://github.com/ViliLipo/otm-harjoitustyo/blob/master/dokumentaatio/kayttoohje.md)
+
 ### Esittely
 WellnessApp on kursille Ohjelmistotekniikan menetelmät laadittu harjoitustyo.
 Sovelluksen tarkoituksena on auttaa käyttäjäänsä ruokavalion seuraamisessa.
 Sovelluksen ravintoaineiden tiedot ovat osa Finellin avointa dataa.
-### Status viikko 5
+
+### Status viikko 6
 
 Tällä hetkellä voi kirjautua, luoda tunnuksen ja tarkastella
 ruoka-aineiden ravintoarvoja. Aterioita voi lisätä käyttäjälle. Sovellus
 piirtää pylväsdiagrammin käyttäjän edellisen kuukauden päivittäisistä kaloreista.
+Sovellus täyttää siis vaatimusdokumentin perusvaatimukset.
+Sovelluksen vakautta voidaan kuitenkin yhä parantaa sekä käytettävyyttä nostaa.
+JavaDoc on kirjoitettu structure-paketille ja testikattavuus on noin 70%.
+Erikoistapausten testejä tulisi kuitenkin kirjoittaa lisää.
 
 
 ### Komentoja
@@ -32,5 +38,9 @@ $ find . -name  '.java' | xargs wc -l
 ```
 $ mvn jxr:jxr checkstyle:checkstyle
  ```
+- JavaDoc
+```
+$ mvn javadoc:javadoc
+```
 ### Julkaisut
 [wellnessapp0.1.0](https://github.com/ViliLipo/otm-harjoitustyo/releases/tag/0.1.0)
