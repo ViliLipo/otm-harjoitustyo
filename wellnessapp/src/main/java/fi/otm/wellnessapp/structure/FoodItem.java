@@ -9,6 +9,7 @@ import java.util.HashMap;
 
 /**
  * Class that handles information of foods
+ *
  * @author vili
  */
 public class FoodItem implements Comparable<FoodItem> {
@@ -18,12 +19,12 @@ public class FoodItem implements Comparable<FoodItem> {
     private final String language;
     private HashMap<NutritionalComponent, Double> contents;
     private HashMap<String, NutritionalComponent> contentName;
-    
+
     /**
-     * 
-     * @param id    Database id of this FoodItem
-     * @param name  Name of this FoodItem
-     * @param language  Language of this FoodItem
+     *
+     * @param id Database id of this FoodItem
+     * @param name Name of this FoodItem
+     * @param language Language of this FoodItem
      */
     public FoodItem(int id, String name, String language) {
         this.id = id;
@@ -44,8 +45,10 @@ public class FoodItem implements Comparable<FoodItem> {
     public String getLanguage() {
         return this.language;
     }
+
     /**
      * Adds nutritional component to this food.
+     *
      * @param amount Double in unit specified in NutritionalComponent
      * @param nc NutritionalComponent to be added
      */
@@ -58,10 +61,12 @@ public class FoodItem implements Comparable<FoodItem> {
     public HashMap<NutritionalComponent, Double> getContents() {
         return this.contents;
     }
-    
+
     /**
-     * Build String containing relevant information
-     * @return String containing relevant information of this FoodItem 
+     * Build String containing relevant information. Exception on this method
+     * may be caused by bad csv dataset.
+     *
+     * @return String containing relevant information of this FoodItem
      */
     public String info() {
         try {
@@ -87,6 +92,12 @@ public class FoodItem implements Comparable<FoodItem> {
         return this.id;
     }
 
+    /**
+     * Check if object equals this
+     *
+     * @param o object to be compared
+     * @return boolean this.id == o.id
+     */
     @Override
     public boolean equals(Object o) {
         try {
@@ -102,6 +113,12 @@ public class FoodItem implements Comparable<FoodItem> {
 
     }
 
+    /**
+     * Compares FoodItems based on their unique integer id:s
+     *
+     * @param fo FoodItem to be compared with this
+     * @return int
+     */
     @Override
     public int compareTo(FoodItem fo) {
         if (this.id > fo.getId()) {
@@ -112,6 +129,12 @@ public class FoodItem implements Comparable<FoodItem> {
             return 0;
         }
     }
+
+    /**
+     * Is implemented for easy use in ui
+     *
+     * @return name of this FoodItem
+     */
     @Override
     public String toString() {
         return this.name;

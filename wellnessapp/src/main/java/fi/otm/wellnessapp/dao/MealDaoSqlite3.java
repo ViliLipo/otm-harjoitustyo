@@ -150,6 +150,10 @@ public class MealDaoSqlite3 implements MealDao {
             }
         });
     }
+    /**
+     * Adds one meal to database in one transaction
+     * @param meal  Meal to be added
+     */
 
     @Override
     public void addOne(Meal meal) {

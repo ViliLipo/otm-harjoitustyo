@@ -13,10 +13,11 @@ import java.util.HashMap;
 import java.util.stream.Collectors;
 
 /**
- * This class provides efficient access to FoodItem dataStructure from
- * Database. Based on Singleton pattern
+ * This class provides efficient access to FoodItem dataStructure from Database.
+ * Based on Singleton pattern
+ *
  * @author vili
- * 
+ *
  */
 public class FoodItemStructure {
 
@@ -42,13 +43,14 @@ public class FoodItemStructure {
             this.mapById.put(fi.getId(), fi);
             this.nameList.add(fi.getName());
             this.idList.add(fi.getId());
-            
+
         });
     }
+
     /**
-     * 
-     * @param filename  filename to be used in DAO interface
-     * if this class has not been initialised
+     *
+     * @param filename filename to be used in DAO interface if this class has
+     * not been initialised
      * @return Instance of this structure
      */
     public static FoodItemStructure getFoodItemStructure(String filename) {
@@ -57,26 +59,25 @@ public class FoodItemStructure {
         }
         return singleton;
     }
-    
+
     public static void reset() {
         singleton = null;
     }
-    
+
     /**
-     * 
-     * @param id    Id of the food requested
+     *
+     * @param id Id of the food requested
      * @return FoodItem that matches id, if not found null.
      */
     public FoodItem getFoodItemById(int id) {
         return this.mapById.get(id);
     }
-    
+
     /**
-     * 
-     * @param name  Name of the food requested
+     *
+     * @param name Name of the food requested
      * @return FoodItem that matches name, if not found null.
      */
-
     public FoodItem getFoodItemByName(String name) {
         return this.mapByName.get(name);
     }
@@ -85,9 +86,11 @@ public class FoodItemStructure {
         Collections.sort(this.nameList, String.CASE_INSENSITIVE_ORDER);
         return this.nameList;
     }
+
     /**
      * Filter list of names
-     * @param filter    String that is user to filter namelist
+     *
+     * @param filter String that is user to filter namelist
      * @return List of filtered strings
      */
     public ArrayList<String> filteredNameList(String filter) {
@@ -96,7 +99,7 @@ public class FoodItemStructure {
                 .forEach(name -> fNameList.add(name));
         return fNameList;
     }
-    
+
     public ArrayList<FoodItem> getFiList() {
         return this.itemList;
     }

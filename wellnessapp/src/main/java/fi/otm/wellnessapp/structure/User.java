@@ -123,7 +123,7 @@ public class User {
      * Returns nutritional values for 7 days starting from given date and going
      * back
      *
-     * @param time
+     * @param time last day of the observation period.
      * @return list of nutritional values for dates, starting from date given in
      * parameters and going back.
      */
@@ -147,7 +147,7 @@ public class User {
     /**
      * list of Double values for week going back from the date given
      *
-     * @param time
+     * @param time last day of the observation period
      * @return list of calorie values for week
      */
     public ArrayList<Double> getWeeksCalories(Date time) {

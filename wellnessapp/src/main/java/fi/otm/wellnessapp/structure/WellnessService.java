@@ -14,7 +14,7 @@ import fi.otm.wellnessapp.tools.Sqlite3Utils;
 /**
  * Service providing needed functionality to user interface.
  *
- * @author vili
+ * @author Vili Lipo, vili.lipo@helsinki.fi
  */
 public class WellnessService {
 
@@ -49,6 +49,7 @@ public class WellnessService {
      *
      * @param username Name of new user
      * @param password Password of new user
+     *
      */
     public void createNewUser(String username, String password) {
         User userN = new User(username, User.md5Hash(password));
@@ -63,8 +64,9 @@ public class WellnessService {
      * @param username Name of the user
      * @param password Password of the user
      * @return success of this login
+     * @see fi.otm.wellnessapp.dao.UserDaoSqlite3#getUser(java.lang.String,
+     * java.lang.String)
      */
-
     public boolean login(String username, String password) {
         UserDao userDao = new UserDaoSqlite3(this.getDataBaseName());
         User userN = new User(username, User.md5Hash(password));
@@ -105,6 +107,12 @@ public class WellnessService {
         this.newMeal.removeFoodItem(fis.getFoodItemByName(foodname));
     }
 
+    /**
+     * adds this.new meal to this.user and writes the meal to database
+     *
+     * @see
+     * fi.otm.wellnessapp.dao.MealDaoSqlite3#addOne(fi.otm.wellnessapp.structure.Meal)
+     */
     public void addNewMealToUser() {
         if (this.newMeal != null) {
             this.user.addMeal(this.newMeal);
@@ -119,7 +127,7 @@ public class WellnessService {
     }
 
     /**
-     * Updates uses calorie goal and stores it to Database
+     * Updates users calorie goal and stores it to Database
      *
      * @param goal new calorie goal
      */
@@ -131,7 +139,8 @@ public class WellnessService {
 
     /**
      * Updates users password to db if it matches confirmation
-     * @param password  new Password
+     *
+     * @param password new Password
      * @param confirmation new Password again
      * @return is password and confirmation a match
      */
@@ -144,6 +153,19 @@ public class WellnessService {
         } else {
             return false;
         }
+    }
+
+    /**
+     * Removes meal from user and removes meal from database
+     *
+     * @param meal  Meal to be removed
+     * @see
+     * fi.otm.wellnessapp.dao.MealDaoSqlite3#remove(fi.otm.wellnessapp.structure.Meal)
+     */
+    public void removeMeal(Meal meal) {
+        this.user.getMealList().remove(meal);
+        MealDao md = new MealDaoSqlite3(this.dataBaseName);
+        md.remove(meal);
     }
 
 }

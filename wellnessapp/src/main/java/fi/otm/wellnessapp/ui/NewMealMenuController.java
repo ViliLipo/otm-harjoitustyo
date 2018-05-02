@@ -83,7 +83,7 @@ public class NewMealMenuController implements Initializable {
     @FXML
     void addFood(ActionEvent event) {
         Double d = this.parseAmount();
-        if (d != null) {
+        if (d != null && d > 0) {
             this.ws.addFoodToNewMeal(foodToAdd, d);
             this.displayFoodItems();
         }
@@ -93,6 +93,7 @@ public class NewMealMenuController implements Initializable {
     private void displayFoodItems() {
         this.foodView.getItems().clear();
         this.ws.getNewMeal().getFoodItems().entrySet().stream().forEach((Entry<FoodItem, Double> e) -> {
+            System.out.println("Debug @NewMealMenu.displayFoodItems: e = " + e);
             String name = e.getKey().getName();
             Double amount = e.getValue();
             this.foodView.getItems().add(String.format("%s : %.2fg", name, amount));
@@ -225,6 +226,7 @@ public class NewMealMenuController implements Initializable {
         this.foodComBox.getItems().setAll(ws.getFis().getNameList());
         this.foodComBox.setValue(this.foodComBox.getItems().get(0));
         this.foodInfoField.setText(this.ws.getFis().getFoodItemByName(this.foodComBox.getValue()).info());
+        this.foodToAdd = this.ws.getFis().getFoodItemByName(this.foodComBox.getValue());
 
     }
 

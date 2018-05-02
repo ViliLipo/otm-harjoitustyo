@@ -17,4 +17,7 @@
 |22.4| 2| tiedostopolkujen debuggaaminen |
 |22.4| 2| lisää testejä|
 |23.4| 3| sekvenssi kaavio ja release|
-|yht| 38| |
+|29.4| 3| Käyttäjän hallinta|
+|30.4| 4| Testit- javadoc |
+|2.5| 3 | javadoc, arkkitehtuuri, ja ohjeet|
+|yht| 48| |

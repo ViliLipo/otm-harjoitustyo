@@ -148,6 +148,7 @@ public class Meal implements Comparable<Meal> {
     }
 
     /**
+     * Information string to be displayed in ui of some sort.
      *
      * @return String containing information of this meal
      */

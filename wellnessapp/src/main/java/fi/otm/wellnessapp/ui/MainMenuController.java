@@ -45,6 +45,8 @@ public class MainMenuController implements Initializable {
 
     @FXML
     private ListView<Meal> mealHistory;
+    @FXML
+    private Button removeButton;
 
     private DrawUtil du;
 
@@ -72,6 +74,31 @@ public class MainMenuController implements Initializable {
 
     @FXML
     void sliderDone(MouseEvent event) {
+        drawDiagram();
+    }
+    
+    
+    @FXML
+    void sliderClick(MouseEvent event) {
+        drawDiagram();
+        //System.out.println("slider clicked");
+    }
+
+    @FXML
+    void openMealMenu(ActionEvent event) {
+        this.launchOtherScene("/fxml/NewMealMenu.fxml");
+    }
+
+    @FXML
+    void removeMeal(ActionEvent event) {
+        Meal m = this.mealHistory.getSelectionModel().getSelectedItem();
+        if (m != null) {
+            this.ws.removeMeal(m);
+        }
+        drawDiagram();
+    }
+
+    private void drawDiagram() {
         //System.out.println(this.canvasSlider.getValue());
         int dif = (int) Math.floor((100 - this.canvasSlider.getValue()) / 3);
 
@@ -80,11 +107,8 @@ public class MainMenuController implements Initializable {
         cl.add(Calendar.DAY_OF_MONTH, -dif);
         //System.out.println(cl.getTime());
         du.drawDiagram(cl.getTime());
-    }
-
-    @FXML
-    void openMealMenu(ActionEvent event) {
-        this.launchOtherScene("/fxml/NewMealMenu.fxml");
+        this.userNameLabel.setText(ws.getUser().getUserName());
+        this.mealHistory.getItems().setAll(ws.getUser().getMealList());
     }
 
     private void launchOtherScene(String resourcePath) {
