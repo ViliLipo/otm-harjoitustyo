@@ -108,6 +108,7 @@ public class MealDaoSqlite3 implements MealDao {
             ResultSet rs = prep.executeQuery();
             rs.next();
             if (rs.isAfterLast()) {
+                scm.connect().close();
                 return null; // database did not contain id
             }
             Meal meal = new Meal(new Date(rs.getTimestamp("Time").getTime()), rs.getInt("UserID"));

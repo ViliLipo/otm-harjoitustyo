@@ -45,7 +45,6 @@ public class MealDaoSqlite3Test {
                 "csv/foodname_FI.csv", "csv/component_value.csv");
         NutritionalComponentStructure.getNutrititonalComponentStructure(dbName);
         fis = FoodItemStructure.getFoodItemStructure(dbName);
-        NutritionalComponentStructure.getNutrititonalComponentStructure(dbName);
         String sqlInsert = "INSERT OR IGNORE INTO Meal VALUES(?,?,?)";
         try {
             Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbName);

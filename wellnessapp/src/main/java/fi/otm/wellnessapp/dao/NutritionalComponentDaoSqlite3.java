@@ -67,6 +67,7 @@ public class NutritionalComponentDaoSqlite3 implements NutritionalComponentDao {
                 scm.connect().close();
                 return nc;
             } else {
+                scm.connect().close();
                 return null;
             }
         } catch (SQLException ex) {

@@ -6,7 +6,9 @@
 package fi.otm.wellnessapp.dao;
 
 import fi.otm.wellnessapp.structure.FoodItem;
+import fi.otm.wellnessapp.structure.FoodItemStructure;
 import fi.otm.wellnessapp.structure.NutritionalComponent;
+import fi.otm.wellnessapp.structure.NutritionalComponentStructure;
 import fi.otm.wellnessapp.tools.Sqlite3Utils;
 import java.io.File;
 import java.sql.Connection;
@@ -50,7 +52,7 @@ public class FoodItemDaoSqlite3Test {
         Sqlite3ConnectionManager.reset();
         Sqlite3Utils s3u = new Sqlite3Utils();
         s3u.setupSchema("sqlite/dataBaseSchema.sqlite3", (testDbName));
-        String insert = "INSERT INTO Component "
+        String insert = "INSERT OR IGNORE INTO Component "
                 + "VALUES(?,?,?,?)";
         String insert2 = "INSERT OR IGNORE INTO ComponentValue VALUES(?,?,?)";
         String insert3 = "INSERT OR IGNORE INTO FoodNameFi VALUES(?,?,?)";
@@ -95,6 +97,9 @@ public class FoodItemDaoSqlite3Test {
     public void tearDown() {
         File file = new File(testDbName);
         file.delete();
+        Sqlite3ConnectionManager.reset();
+        FoodItemStructure.reset();
+        NutritionalComponentStructure.reset();
     }
 
     /**
