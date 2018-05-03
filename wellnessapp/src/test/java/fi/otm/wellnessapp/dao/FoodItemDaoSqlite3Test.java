@@ -33,6 +33,8 @@ import org.junit.Ignore;
 public class FoodItemDaoSqlite3Test {
 
     private final String testDbName = "db/testDb.sqlite3";
+    
+    private final String dbPath = "db/";
 
     private NutritionalComponent energy;
 
@@ -43,13 +45,15 @@ public class FoodItemDaoSqlite3Test {
     public void setUp() {
         File file = new File(testDbName);
         file.delete();
+        file = new File(dbPath);
+        file.mkdirs();
         Sqlite3ConnectionManager.reset();
         Sqlite3Utils s3u = new Sqlite3Utils();
         s3u.setupSchema("sqlite/dataBaseSchema.sqlite3", (testDbName));
         String insert = "INSERT INTO Component "
                 + "VALUES(?,?,?,?)";
-        String insert2 = "INSERT INTO ComponentValue VALUES(?,?,?)";
-        String insert3 = "INSERT INTO FoodNameFi VALUES(?,?,?)";
+        String insert2 = "INSERT OR IGNORE INTO ComponentValue VALUES(?,?,?)";
+        String insert3 = "INSERT OR IGNORE INTO FoodNameFi VALUES(?,?,?)";
 
         try {
             Connection conn = DriverManager.getConnection("jdbc:sqlite:" + testDbName);
@@ -82,7 +86,7 @@ public class FoodItemDaoSqlite3Test {
 
         } catch (SQLException ex) {
             Logger.getLogger(FoodItemDaoSqlite3Test.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("BRICK");
+            System.out.println("Broken setup");
         }
         energy = new NutritionalComponent("ENERC", "kj", "ENER", "ENER");
     }
@@ -98,7 +102,7 @@ public class FoodItemDaoSqlite3Test {
      */
     @Test
     public void testGetAll() {
-        System.out.println("getAll");
+        //System.out.println("getAll");
         FoodItemDaoSqlite3 instance = new FoodItemDaoSqlite3(testDbName);
         FoodItem sweetroll = new FoodItem(2, "pulla", "fi");
         NutritionalComponent nc = new NutritionalComponent("ENERC", "kj", "ENER", "ENER");
@@ -116,7 +120,7 @@ public class FoodItemDaoSqlite3Test {
      */
     @Test
     public void testGetOne() {
-        System.out.println("getOne");
+        //System.out.println("getOne");
         FoodItemDaoSqlite3 instance = new FoodItemDaoSqlite3(testDbName);
         FoodItem result = instance.getOne(1);
         assertEquals("lihapulla", result.getName());
@@ -129,7 +133,7 @@ public class FoodItemDaoSqlite3Test {
      */
     @Test
     public void testAddOne() {
-        System.out.println("addOne");
+        //System.out.println("addOne");
         FoodItem fi = new FoodItem(3, "Rinkeli", "fi");
         fi.addContents(300.0d, energy);
         FoodItemDaoSqlite3 instance = new FoodItemDaoSqlite3(testDbName);
@@ -161,7 +165,7 @@ public class FoodItemDaoSqlite3Test {
      */
     @Test
     public void testAddAll() {
-        System.out.println("addAll");
+        //System.out.println("addAll");
         FoodItem fi = new FoodItem(3, "Rinkeli", "fi");
         fi.addContents(300.0d, energy);
         FoodItemDaoSqlite3 instance = new FoodItemDaoSqlite3(testDbName);
@@ -193,7 +197,7 @@ public class FoodItemDaoSqlite3Test {
      */
     @Test
     public void testRemove() {
-        System.out.println("remove");
+        //System.out.println("remove");
         FoodItem meatBall = new FoodItem(1, "lihapulla", "fi");
         FoodItemDaoSqlite3 instance = new FoodItemDaoSqlite3(testDbName);
         instance.remove(meatBall);

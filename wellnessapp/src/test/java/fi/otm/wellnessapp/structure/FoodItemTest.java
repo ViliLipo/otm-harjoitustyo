@@ -39,7 +39,7 @@ public class FoodItemTest {
      */
     @Test
     public void testGetName() {
-        System.out.println("getName");
+        //System.out.println("getName");
         FoodItem instance = fi;
         String expResult = "lihapulla";
         String result = instance.getName();
@@ -51,7 +51,7 @@ public class FoodItemTest {
      */
     @Test
     public void testGetId() {
-        System.out.println("getId");
+        //System.out.println("getId");
         FoodItem instance = fi;
         int expResult = 1;
         int result = instance.getId();
@@ -63,7 +63,7 @@ public class FoodItemTest {
      */
     @Test
     public void testGetLanguage() {
-        System.out.println("getLanguage");
+        //System.out.println("getLanguage");
         FoodItem instance = fi;
         String expResult = "fi";
         String result = instance.getLanguage();
@@ -75,7 +75,7 @@ public class FoodItemTest {
      */
     @Test
     public void testAddContents() {
-        System.out.println("addContents");
+        //System.out.println("addContents");
         double amount = 75.0;
         NutritionalComponent nc = new NutritionalComponent("Test","Test","Test","Test");
         FoodItem instance = fi;
@@ -89,7 +89,7 @@ public class FoodItemTest {
      */
     @Test
     public void testHashCode() {
-        System.out.println("hashCode");
+        //System.out.println("hashCode");
         FoodItem instance = fi;
         int expResult = 1;
         int result = instance.hashCode();
@@ -101,7 +101,7 @@ public class FoodItemTest {
      */
     @Test
     public void testEquals() {
-        System.out.println("equals");
+        //System.out.println("equals");
         Object o = fi;
         FoodItem instance = fi;
         boolean expResult = true;
@@ -120,7 +120,7 @@ public class FoodItemTest {
      */
     @Test
     public void testCompareTo() {
-        System.out.println("compareTo");
+        //System.out.println("compareTo");
         FoodItem o = new FoodItem(2, "Makarooni", "fi");
         FoodItem instance = fi;
         int expResult = -1;
@@ -137,8 +137,8 @@ public class FoodItemTest {
                 + "Rasvaa : 20.00g/100g\n"
                 + "Proteiinia : 10.00g/100g\n"
                 + "Sokeria : 5.00g/100g\n";
-        System.out.println(expResult);
-        System.out.println(fi.info());
+        //System.out.println(expResult);
+        //System.out.println(fi.info());
         assertEquals(expResult, fi.info());
     }
 }

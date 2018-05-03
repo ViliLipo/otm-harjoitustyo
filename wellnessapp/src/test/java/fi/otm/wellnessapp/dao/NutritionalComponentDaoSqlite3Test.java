@@ -29,6 +29,7 @@ import static org.junit.Assert.*;
 public class NutritionalComponentDaoSqlite3Test {
 
     private final String testDbName = "db/testDb.sqlite3";
+    private final String dbPath = "db/";
 
     public NutritionalComponentDaoSqlite3Test() {
 
@@ -38,6 +39,8 @@ public class NutritionalComponentDaoSqlite3Test {
     public void setUp() {
         File file = new File(testDbName);
         file.delete();
+        file = new File(dbPath);
+        file.mkdirs();
         Sqlite3ConnectionManager.reset();
         Sqlite3Utils s3u = new Sqlite3Utils();
         s3u.setupSchema("sqlite/dataBaseSchema.sqlite3", (testDbName));
@@ -75,7 +78,7 @@ public class NutritionalComponentDaoSqlite3Test {
     @Test
     public void testGetAll() {
 
-        System.out.println("getAll");
+        //System.out.println("getAll");
         NutritionalComponentDaoSqlite3 instance = new NutritionalComponentDaoSqlite3(testDbName);
         ArrayList<NutritionalComponent> result = instance.getAll();
         //System.out.println(result);
@@ -89,7 +92,7 @@ public class NutritionalComponentDaoSqlite3Test {
      */
     @Test
     public void testGetOne() {
-        System.out.println("getOne");
+        //System.out.println("getOne");
         NutritionalComponentDaoSqlite3 instance = new NutritionalComponentDaoSqlite3(testDbName);
         NutritionalComponent result = instance.getOne("TEST2");
         assertEquals("TEST2", result.getName());
@@ -103,7 +106,7 @@ public class NutritionalComponentDaoSqlite3Test {
      */
     @Test
     public void testAdd() {
-        System.out.println("add");
+        //System.out.println("add");
         NutritionalComponent nc = new NutritionalComponent("ADD", "kg", "img", "not real");
         NutritionalComponentDaoSqlite3 instance = new NutritionalComponentDaoSqlite3(testDbName);
         instance.add(nc);
@@ -129,7 +132,7 @@ public class NutritionalComponentDaoSqlite3Test {
      */
     @Test
     public void testRemove() {
-        System.out.println("remove");
+        //System.out.println("remove");
         String eufdName = "TEST2";
         NutritionalComponentDaoSqlite3 instance = new NutritionalComponentDaoSqlite3(testDbName);
         instance.remove(eufdName);

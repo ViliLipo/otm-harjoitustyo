@@ -63,7 +63,7 @@ public class MealTest {
      */
     @Test
     public void testSetGetMealId() {
-        System.out.println("setMealId");
+        //System.out.println("setMealId");
         int id = 0;
         meal.setMealId(id);
         assertEquals(id, meal.getMealId());
@@ -74,7 +74,7 @@ public class MealTest {
      */
     @Test
     public void testGetUserId() {
-        System.out.println("getUserId");
+        //System.out.println("getUserId");
         Meal instance = meal;
         int expResult = 5;
         int result = instance.getUserId();
@@ -86,7 +86,7 @@ public class MealTest {
      */
     @Test
     public void testAddFoodItem() {
-        System.out.println("addFoodItem");
+        //System.out.println("addFoodItem");
         FoodItem fi = new FoodItem(1, "lihapulla", "fi");
         double amount = 100.0;
         Meal instance = meal;
@@ -99,7 +99,7 @@ public class MealTest {
      */
     @Test
     public void testRemoveFoodItem() {
-        System.out.println("removeFoodItem");
+        //System.out.println("removeFoodItem");
         FoodItem fi = new FoodItem(1, "lihapulla", "fi");
         double amount = 100.0;
         Meal instance = meal;
@@ -113,7 +113,7 @@ public class MealTest {
      */
     @Test
     public void testGetTotalNutritionalValues() {
-        System.out.println("getTotalNutritionalValues");
+        //System.out.println("getTotalNutritionalValues");
         FoodItemDao foodDao = new FoodItemDaoSqlite3(dbName);
         FoodItem f1 = foodDao.getOne(4);
         FoodItem f2 = foodDao.getOne(6);
@@ -134,7 +134,7 @@ public class MealTest {
      */
     @Test
     public void testGetFoodItems() {
-        System.out.println("getFoodItems");
+        //System.out.println("getFoodItems");
         Meal instance = meal;
         FoodItemDao foodDao = new FoodItemDaoSqlite3(dbName);
         FoodItem f1 = foodDao.getOne(4);
@@ -153,7 +153,7 @@ public class MealTest {
      */
     @Test
     public void testGetTime() {
-        System.out.println("getTime");
+        //System.out.println("getTime");
         Meal instance = meal;
         Date expResult = refer;
         Date result = instance.getTime();
@@ -165,7 +165,7 @@ public class MealTest {
      */
     @Test
     public void testCompareTo() {
-        System.out.println("compareTo");
+        //System.out.println("compareTo");
         Meal o = meal;
         Meal instance = meal;
         int expResult = 0;

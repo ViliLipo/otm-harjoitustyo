@@ -69,7 +69,7 @@ public class UserTest {
      */
     @Test
     public void testSetUserID() {
-        System.out.println("setUserID");
+        //System.out.println("setUserID");
         int id = 65;
         User instance = user;
         instance.setUserID(id);
@@ -81,7 +81,7 @@ public class UserTest {
      */
     @Test
     public void testGetUserName() {
-        System.out.println("getUserName");
+        //System.out.println("getUserName");
         User instance = user;
         String expResult = "Matti";
         String result = instance.getUserName();
@@ -93,7 +93,7 @@ public class UserTest {
      */
     @Test
     public void testSetPassword() {
-        System.out.println("setPassword");
+        //System.out.println("setPassword");
         String expResult = User.md5Hash("password");
         user.setPassword("password");
         assertTrue(expResult.contentEquals(user.getPasswordHash()));
@@ -104,7 +104,7 @@ public class UserTest {
      */
     @Test
     public void testGetPasswordHash() {
-        System.out.println("getPasswordHash");
+        //System.out.println("getPasswordHash");
         User instance = user;
         String password = "crypted";
         try {
@@ -115,8 +115,8 @@ public class UserTest {
                 BigInteger bigInt = new BigInteger(1, digest);
                 String expResult = bigInt.toString(16);
                 String result = instance.getPasswordHash();
-                System.out.println(result);
-                System.out.println(expResult);
+                //System.out.println(result);
+                //System.out.println(expResult);
                 assertTrue(expResult.contentEquals(result));
             } catch (UnsupportedEncodingException ex) {
                 Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
@@ -132,7 +132,7 @@ public class UserTest {
      */
     @Test
     public void testSetCalorieGoal() {
-        System.out.println("setCalorieGoal");
+        //System.out.println("setCalorieGoal");
         int goal = 3500;
         User instance = user;
         instance.setCalorieGoal(goal);
@@ -145,7 +145,7 @@ public class UserTest {
      */
     @Test
     public void testSetDailyKiloJouleGoal() {
-        System.out.println("setDailyKiloJouleGoal");
+        //System.out.println("setDailyKiloJouleGoal");
         double value = 3500.0;
         User instance = user;
         instance.setDailyKiloJouleGoal(value);
@@ -159,7 +159,7 @@ public class UserTest {
      */
     @Test
     public void testGetDailyProteinGoal() {
-        System.out.println("getDailyProteinGoal");
+        //System.out.println("getDailyProteinGoal");
         User instance = user;
         user.setDailyProteinGoal(20.00);
         double expResult = 20.00;
@@ -172,7 +172,7 @@ public class UserTest {
      */
     @Test
     public void testSetMealList() {
-        System.out.println("setMealList");
+        //System.out.println("setMealList");
         ArrayList<Meal> list = new ArrayList<>();
         list.add(new Meal(new Date(), 1));
         User instance = user;
@@ -186,7 +186,7 @@ public class UserTest {
      */
     @Test
     public void testAddMeal() {
-        System.out.println("addMeal");
+        //System.out.println("addMeal");
         Meal meal = new Meal(new Date(), 0);
         User instance = user;
         instance.addMeal(meal);
@@ -198,7 +198,7 @@ public class UserTest {
      */
     @Test
     public void testWeekBeforeDate() {
-        System.out.println("weekBeforeDate");
+        //System.out.println("weekBeforeDate");
         Date time = new Date();
         Date time2 = new Date();
         Calendar cl = Calendar.getInstance();
@@ -231,7 +231,7 @@ public class UserTest {
     @Ignore("WIP")
     @Test
     public void testGetWeeksCalories() {
-        System.out.println("getWeeksCalories");
+        //System.out.println("getWeeksCalories");
         Date time = null;
         User instance = null;
         ArrayList<Double> expResult = null;
@@ -246,7 +246,7 @@ public class UserTest {
      */
     @Test
     public void testDailyScore() {
-        System.out.println("dailyScore");
+        //System.out.println("dailyScore");
         Date time = new Date();
         Date time2 = new Date();
         Calendar cl = Calendar.getInstance();

@@ -101,7 +101,7 @@ public class MealDaoSqlite3Test {
      */
     @Test
     public void testGetAll() {
-        System.out.println("getAll");
+        //System.out.println("getAll");
         MealDaoSqlite3 instance = new MealDaoSqlite3(dbName);
         ArrayList<Meal> result = instance.getAll();
         assertEquals(1, result.get(0).getMealId());
@@ -113,7 +113,7 @@ public class MealDaoSqlite3Test {
      */
     @Test
     public void testGetByUserId() {
-        System.out.println("getByUserId");
+        //System.out.println("getByUserId");
         int userid = 1;
         MealDaoSqlite3 instance = new MealDaoSqlite3(dbName);
         ArrayList<Meal> result = instance.getByUserId(userid);
@@ -125,7 +125,7 @@ public class MealDaoSqlite3Test {
      */
     @Test
     public void testGetOne() {
-        System.out.println("getOne");
+        //System.out.println("getOne");
         int mealId = 1;
         MealDaoSqlite3 instance = new MealDaoSqlite3(dbName);
         Meal expResult = new Meal(refer, 1);
@@ -139,7 +139,7 @@ public class MealDaoSqlite3Test {
      */
     @Test
     public void testAddOne() {
-        System.out.println("addOne");
+        //System.out.println("addOne");
         Meal meal = new Meal(new Date(refer.getTime() + 6000), 1);
         meal.addFoodItem(fis.getFoodItemById(10), 100);
         meal.addFoodItem(fis.getFoodItemById(11), 50);
@@ -155,7 +155,7 @@ public class MealDaoSqlite3Test {
      */
     @Test
     public void testRemove() {
-        System.out.println("remove");
+        //System.out.println("remove");
         Meal meal = new Meal(new Date(refer.getTime() + 6000), 1);
         meal.setMealId(4);
         MealDaoSqlite3 instance = new MealDaoSqlite3(dbName);

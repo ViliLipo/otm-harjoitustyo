@@ -36,7 +36,7 @@ public class NutritionalComponentTest {
      */
     @Test
     public void testGetName() {
-        System.out.println("getName");
+        //System.out.println("getName");
         NutritionalComponent instance = nc;
         String result = instance.getName();
         assertEquals("Test", result);
@@ -47,7 +47,7 @@ public class NutritionalComponentTest {
      */
     @Test
     public void testGetUnit() {
-        System.out.println("getUnit");
+        //System.out.println("getUnit");
         NutritionalComponent instance = nc;
         String expResult = "Unit";
         String result = instance.getUnit();
@@ -59,7 +59,7 @@ public class NutritionalComponentTest {
      */
     @Test
     public void testGetCmpClass() {
-        System.out.println("getCmpClass");
+        //System.out.println("getCmpClass");
         NutritionalComponent instance = nc;
         String expResult = "Class";
         String result = instance.getCmpClass();
@@ -71,7 +71,7 @@ public class NutritionalComponentTest {
      */
     @Test
     public void testGetCmpClassp() {
-        System.out.println("getCmpClassp");
+        //System.out.println("getCmpClassp");
         NutritionalComponent instance = nc;
         String expResult = "Classp";
         String result = instance.getCmpClassp();
@@ -83,7 +83,7 @@ public class NutritionalComponentTest {
      */
     @Test
     public void testHashCode() {
-        System.out.println("hashCode");
+        //System.out.println("hashCode");
         NutritionalComponent instance = nc;
         int expResult = ((String) "Test").hashCode();
         int result = instance.hashCode();
@@ -95,7 +95,7 @@ public class NutritionalComponentTest {
      */
     @Test
     public void testEquals() {
-        System.out.println("equals");
+        //System.out.println("equals");
         Object o = nc;
         NutritionalComponent instance = nc;
         boolean expResult = true;
