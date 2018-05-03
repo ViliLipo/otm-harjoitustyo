@@ -5,7 +5,9 @@
  */
 package fi.otm.wellnessapp.dao;
 
+import fi.otm.wellnessapp.structure.FoodItemStructure;
 import fi.otm.wellnessapp.structure.NutritionalComponent;
+import fi.otm.wellnessapp.structure.NutritionalComponentStructure;
 import fi.otm.wellnessapp.tools.Sqlite3Utils;
 import java.io.File;
 import java.sql.Connection;
@@ -70,6 +72,9 @@ public class NutritionalComponentDaoSqlite3Test {
     public void tearDown() {
         File file = new File(testDbName);
         file.delete();
+        NutritionalComponentStructure.reset();
+        FoodItemStructure.reset();
+        Sqlite3ConnectionManager.reset();
     }
 
     /**

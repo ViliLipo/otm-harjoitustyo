@@ -56,6 +56,9 @@ public class MealTest {
     public static void resetDb() {
         File file  = new File("db/fullTestDb.sqlite3");
         file.delete();
+        NutritionalComponentStructure.reset();
+        FoodItemStructure.reset();
+        Sqlite3ConnectionManager.reset();
     }
 
     /**
