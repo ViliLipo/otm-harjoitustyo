@@ -15,7 +15,8 @@ Käyttöliittymää ei ole huomioitu yksikkötestauksessa tai kattavuudessa.
 ### DAO-luokat
 Luokille MealDaoSqlite3, FoodItemDaoSqlite3 ja NutritionalComponentDaoSqlite3
 on omat testiluokat, joissa käytetetään tiedostona tilapäisiä tietokantoja,
-jotka eivät ole yhteydessä sovelluksen oikeaan tietokantaan.
+jotka eivät ole yhteydessä sovelluksen oikeaan tietokantaan. UserDaoSqlite3
+testataan vain integraatiotason testeissä.
 
 ## Integraatiotestaus
 Sovelluksen integraatiotestaus tapahtuu, pääosin luokissa UserTest sekä,
@@ -55,6 +56,6 @@ Sovellusta testattiin tilasta, jossa tietokanta ei ollut suorituksen alussa
 olemassa. Sovelluksen alustustoimenpiteet toimivat moitteitta.
 
 # Sovellukseen jääneet laatuongelmat
-Sovellus ei toimi kovinkaan järkevästi, jos jokin muu toimia sabotoi tietokantatiedostoa
+Sovellus ei toimi kovinkaan järkevästi, jos jokin muu toimija sabotoi tietokantatiedostoa
 mm. muuttamalla sen oikeuksia, poistamalla tai lukitsemalla sen. Sovellus ei kaadu
 mutta suoltaa virheilmoituksia.
