@@ -25,7 +25,6 @@ public class FoodItemStructure {
     private HashMap<Integer, FoodItem> mapById;
     private ArrayList<Integer> idList;
     private ArrayList<String> nameList;
-    private ArrayList<FoodItem> itemList;
     private static FoodItemStructure singleton = null;
 
     private FoodItemStructure(String filename) {
@@ -35,7 +34,6 @@ public class FoodItemStructure {
         this.nameList = new ArrayList<>();
         this.mapByName = new HashMap<>();
         this.mapById = new HashMap<>();
-        this.itemList = fiList;
         fiList.stream().forEach(fi -> {
             this.mapByName.put(fi.getName(), fi);
             this.mapById.put(fi.getId(), fi);
@@ -98,8 +96,5 @@ public class FoodItemStructure {
         return fNameList;
     }
 
-    public ArrayList<FoodItem> getFiList() {
-        return this.itemList;
-    }
 
 }

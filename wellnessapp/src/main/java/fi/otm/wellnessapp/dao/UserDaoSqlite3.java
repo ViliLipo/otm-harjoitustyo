@@ -65,7 +65,6 @@ public class UserDaoSqlite3 implements UserDao {
             Statement stmnt = scm.connect().createStatement();
             ResultSet rs = stmnt.executeQuery(query);
             user.setUserID(rs.getInt(1));
-            //System.out.println("Userid = " + user.getUserId());
             scm.connect().commit();
             scm.connect().close();
         } catch (SQLException ex) {

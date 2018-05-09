@@ -1,7 +1,9 @@
- # The WellnessApp
- # Vaatimusmäärittely
-
- ## Featurelist
+# The WellnessApp
+# Vaatimusmäärittely
+The WellnessApp on sovellus, jonka avulla voi seurata ruuasta saatavia
+ravintoarvoja. Sovelluksen ensimmäinen versio kattaa ainoastaan energian seurannan,
+mutta sen tietorakenne mahdollistaa muiden seurannan lisäämisen helposti.
+## Featurelist
 
 
  - Käyttäjä
@@ -18,3 +20,8 @@
   - Rajoitteet
     - Ohjelmisto toimii Linux-ympäristössä ja OSX-käyttöjärjestelmillä.
     - Käyttäjien tiedot tallennetaan paikalliseen SQLITE tietokantaan(toistaiseksi)
+
+# Jatkokehitysideoita
+- Muiden ravintoaineiden esim. proteiinin saannin seuranta.
+- Liikuntasuorituksien ja niiden kulutuksen seuranta.
+- Tietokanta palvelimelle.

@@ -57,15 +57,13 @@ public class MainMenuController implements Initializable {
     void infoPressed(ActionEvent event) {
         try {
             Meal m = this.mealHistory.getSelectionModel().getSelectedItem();
-            System.out.println(m);
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Ateria");
             alert.setHeaderText("Tietoja ateriasta");
             alert.setContentText(m.info());
-            //System.out.println(m.info());
             alert.showAndWait();
         } catch (NullPointerException ex) {
-            // System.out.println("DEBUG @MainmenuController.InfoPressedNothing selected");
+        
         }
     }
 
@@ -87,7 +85,6 @@ public class MainMenuController implements Initializable {
     @FXML
     void sliderClick(MouseEvent event) {
         drawDiagram();
-        //System.out.println("slider clicked");
     }
 
     @FXML
@@ -105,13 +102,11 @@ public class MainMenuController implements Initializable {
     }
 
     private void drawDiagram() {
-        //System.out.println(this.canvasSlider.getValue());
         int dif = (int) Math.floor((100 - this.canvasSlider.getValue()) / 3);
 
         Calendar cl = Calendar.getInstance();
         cl.setTime(new Date());
         cl.add(Calendar.DAY_OF_MONTH, -dif);
-        //System.out.println(cl.getTime());
         du.drawDiagram(cl.getTime());
         this.userNameLabel.setText(ws.getUser().getUserName());
         this.mealHistory.getItems().setAll(ws.getUser().getMealList());

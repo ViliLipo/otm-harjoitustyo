@@ -46,7 +46,6 @@ public class DrawUtil {
     private void drawBars(Date start) {
         int i = 0;
         ArrayList<Double> weeksCalories = this.user.getWeeksCalories(start);
-        //System.out.println(weeksCalories);
         Calendar cl = Calendar.getInstance();
         cl.setTime(start);
         cl.add(Calendar.DAY_OF_MONTH, -6);
@@ -77,10 +76,8 @@ public class DrawUtil {
             pickColor(gc, calories);
             int width = this.calcSegmentSizeX() / 3;
             Double height = calories / this.scaleCaloriePerPixel();
-            //System.out.println("DEBUG: drawOneBar height -> " + height);
             int x = start + width;
             double y = this.getBaseLine() - height;
-            //System.out.println("DEBUG: drawOneBar y -> " + y);
             gc.fillRect(x, y, width, height);
         }
         int x2 = start + this.calcSegmentSizeX() / 3;

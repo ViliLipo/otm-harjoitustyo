@@ -14,6 +14,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.StringJoiner;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -201,6 +202,20 @@ public class MealTest {
         energy = energy / 4.1868;
         String s = dateString + " : " + String.format("%.2f", energy) + "kcal";
         assertEquals(s, meal.toString());
+    }
+
+    @Test
+    public void testInfo() {
+        FoodItemStructure fis = FoodItemStructure.getFoodItemStructure(dbName);
+        meal.addFoodItem(fis.getFoodItemById(6), 30);
+        meal.addFoodItem(fis.getFoodItemById(6), 20);
+        StringJoiner sj = new StringJoiner("\n");
+        meal.getFoodItems().forEach((k, v) -> {
+            String pair = k.getName().split(",")[0] + " määrä: " + String.format("%.2f", v) + "g";
+            sj.add(pair);
+        });
+        String result = sj.toString();
+        assertEquals(result, meal.info());
     }
 
 }

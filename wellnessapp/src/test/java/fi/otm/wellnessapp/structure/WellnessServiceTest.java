@@ -61,6 +61,7 @@ public class WellnessServiceTest {
 
     @AfterClass
     public static void tearDownClass() {
+        
         File f = new File(DB);
         f.delete();
         Sqlite3ConnectionManager.reset();
@@ -90,6 +91,7 @@ public class WellnessServiceTest {
         UserDao ud = new UserDaoSqlite3(DB);
         User u = ud.getUser(username, User.md5Hash(password));
         assertEquals(u.getUserName(), username);
+        ud.removeUser(u);
     }
 
     /**

@@ -95,7 +95,6 @@ public class NewMealMenuController implements Initializable {
     private void displayFoodItems() {
         this.foodView.getItems().clear();
         this.ws.getNewMeal().getFoodItems().entrySet().stream().forEach((Entry<FoodItem, Double> e) -> {
-            //System.out.println("Debug @NewMealMenu.displayFoodItems: e = " + e);
             String name = e.getKey().getName();
             Double amount = e.getValue();
             this.foodView.getItems().add(String.format("%s : %.2fg", name, amount));
@@ -140,7 +139,6 @@ public class NewMealMenuController implements Initializable {
 
     @FXML
     void filterFood(KeyEvent event) {
-        //System.out.println("filter food");
         try {
             String filter = this.filterField.getText();
             if (filter.contentEquals("")) {

@@ -67,17 +67,13 @@ public class LoginController implements Initializable {
                 && !this.passwordField.getText().contentEquals("")) {
             String userName = this.userNameField.getText();
             String password = this.passwordField.getText();
-            System.out.println("first");
             if (ws.login(userName, password)) {
-                System.out.println("login succesful");
                 this.launchMainUi();
             } else {
                 userNameField.clear();
                 userNameField.setPromptText("Invalid credentials");
             }
         }
-        System.out.println("submit");
-
     }
 
     private void launchMainUi() {

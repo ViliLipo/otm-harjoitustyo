@@ -164,6 +164,22 @@ public class MealDaoSqlite3Test {
         instance.remove(meal);
         ArrayList<Meal> list = instance.getAll();
         assertFalse(list.contains(meal));
+        instance.addOne(meal);
+    }
+    
+    @Test
+    public void testAddAll() {
+        ArrayList<Meal> mealList = new ArrayList<>();
+        Meal meal1 = new Meal(new Date(), 1);
+        Meal meal2 = new Meal(new Date(), 1);
+        mealList.add(meal1);
+        mealList.add(meal2);
+        MealDaoSqlite3 instance = new MealDaoSqlite3(dbName);
+        instance.addAll(mealList);
+        assertEquals(5, instance.getAll().size());
+        instance.remove(meal1);
+        instance.remove(meal2);
+       
     }
 
 }
