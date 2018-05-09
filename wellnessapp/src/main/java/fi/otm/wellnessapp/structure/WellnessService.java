@@ -20,8 +20,8 @@ public class WellnessService {
 
     private static WellnessService singleton;
     private User user;
-    private final String dataBaseName = System.getProperty("user.home") + "/.WellnessApp/db/appDb.sqlite3";
-    private final String folderPath = System.getProperty("user.home") + "/.WellnessApp/db/";
+    private static String dataBaseName = System.getProperty("user.home") + "/.WellnessApp/db/appDb.sqlite3";
+    private static String folderPath = System.getProperty("user.home") + "/.WellnessApp/db/";
     private FoodItemStructure fis;
     private NutritionalComponentStructure ncs;
     private Meal newMeal;
@@ -42,6 +42,16 @@ public class WellnessService {
             singleton = new WellnessService();
         }
         return singleton;
+    }
+    /**
+     * This method is for forcing other database folder.
+     * Is used for testing etc.
+     * @param folderName Name of the folder where database resides
+     * @param dbName name of the database file
+     */
+    public static void forceOtherFolder(String folderName, String dbName) {
+        dataBaseName = dbName;
+        folderPath = folderName;
     }
 
     /**

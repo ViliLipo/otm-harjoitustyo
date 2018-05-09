@@ -24,6 +24,7 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.BeforeClass;
 import org.junit.Ignore;
 
 /**
@@ -32,17 +33,12 @@ import org.junit.Ignore;
  */
 public class MealDaoSqlite3Test {
 
-    private String dbName = "db/mealtestDb.sqlite3";
-    private String dbPath = "db/";
-    private Date refer;
+    private static String dbName = "db/mealtestDb.sqlite3";
+    private static String dbPath = "db/";
+    private static Date refer = new Date();
     private FoodItemStructure fis;
 
     public MealDaoSqlite3Test() {
-        refer = new Date();
-        Sqlite3Utils s3u = new Sqlite3Utils();
-        s3u.initDb("sqlite/dataBaseSchema.sqlite3",
-                dbName, dbPath, "csv/component.csv",
-                "csv/foodname_FI.csv", "csv/component_value.csv");
         NutritionalComponentStructure.getNutrititonalComponentStructure(dbName);
         fis = FoodItemStructure.getFoodItemStructure(dbName);
         String sqlInsert = "INSERT OR IGNORE INTO Meal VALUES(?,?,?)";
@@ -77,6 +73,17 @@ public class MealDaoSqlite3Test {
         }
     }
 
+    @BeforeClass
+    public static void oneTimeSetup() {
+        Sqlite3ConnectionManager.reset();
+        FoodItemStructure.reset();
+        NutritionalComponentStructure.reset();
+        Sqlite3Utils s3u = new Sqlite3Utils();
+        s3u.initDb("sqlite/dataBaseSchema.sqlite3",
+                dbName, dbPath, "csv/component.csv",
+                "csv/foodname_FI.csv", "csv/component_value.csv");
+    }
+
     @Before
     public void setUp() {
 
@@ -84,15 +91,16 @@ public class MealDaoSqlite3Test {
 
     @After
     public void tearDown() {
-        Sqlite3ConnectionManager.reset();
-        FoodItemStructure.reset();
-        NutritionalComponentStructure.reset();
+
     }
 
     @AfterClass
     public static void rmDb() {
         File file = new File("db/mealtestDb.sqlite3");
         file.delete();
+        Sqlite3ConnectionManager.reset();
+        FoodItemStructure.reset();
+        NutritionalComponentStructure.reset();
     }
 
     /**
@@ -100,7 +108,6 @@ public class MealDaoSqlite3Test {
      */
     @Test
     public void testGetAll() {
-        //System.out.println("getAll");
         MealDaoSqlite3 instance = new MealDaoSqlite3(dbName);
         ArrayList<Meal> result = instance.getAll();
         assertEquals(1, result.get(0).getMealId());
@@ -112,7 +119,6 @@ public class MealDaoSqlite3Test {
      */
     @Test
     public void testGetByUserId() {
-        //System.out.println("getByUserId");
         int userid = 1;
         MealDaoSqlite3 instance = new MealDaoSqlite3(dbName);
         ArrayList<Meal> result = instance.getByUserId(userid);
@@ -124,7 +130,6 @@ public class MealDaoSqlite3Test {
      */
     @Test
     public void testGetOne() {
-        //System.out.println("getOne");
         int mealId = 1;
         MealDaoSqlite3 instance = new MealDaoSqlite3(dbName);
         Meal expResult = new Meal(refer, 1);
@@ -138,7 +143,6 @@ public class MealDaoSqlite3Test {
      */
     @Test
     public void testAddOne() {
-        //System.out.println("addOne");
         Meal meal = new Meal(new Date(refer.getTime() + 6000), 1);
         meal.addFoodItem(fis.getFoodItemById(10), 100);
         meal.addFoodItem(fis.getFoodItemById(11), 50);
@@ -154,7 +158,6 @@ public class MealDaoSqlite3Test {
      */
     @Test
     public void testRemove() {
-        //System.out.println("remove");
         Meal meal = new Meal(new Date(refer.getTime() + 6000), 1);
         meal.setMealId(4);
         MealDaoSqlite3 instance = new MealDaoSqlite3(dbName);
@@ -162,6 +165,5 @@ public class MealDaoSqlite3Test {
         ArrayList<Meal> list = instance.getAll();
         assertFalse(list.contains(meal));
     }
-
 
 }

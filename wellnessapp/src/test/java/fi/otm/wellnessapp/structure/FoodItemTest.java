@@ -75,7 +75,6 @@ public class FoodItemTest {
      */
     @Test
     public void testAddContents() {
-        //System.out.println("addContents");
         double amount = 75.0;
         NutritionalComponent nc = new NutritionalComponent("Test","Test","Test","Test");
         FoodItem instance = fi;
@@ -120,7 +119,6 @@ public class FoodItemTest {
      */
     @Test
     public void testCompareTo() {
-        //System.out.println("compareTo");
         FoodItem o = new FoodItem(2, "Makarooni", "fi");
         FoodItem instance = fi;
         int expResult = -1;
@@ -137,8 +135,6 @@ public class FoodItemTest {
                 + "Rasvaa : 20.00g/100g\n"
                 + "Proteiinia : 10.00g/100g\n"
                 + "Sokeria : 5.00g/100g\n";
-        //System.out.println(expResult);
-        //System.out.println(fi.info());
         assertEquals(expResult, fi.info());
     }
 }

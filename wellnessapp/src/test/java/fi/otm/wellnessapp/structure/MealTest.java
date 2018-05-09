@@ -19,6 +19,7 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.BeforeClass;
 
 /**
  *
@@ -40,21 +41,23 @@ public class MealTest {
         FoodItemStructure.getFoodItemStructure(dbName);
     }
 
-    @Before
-    public void setUp() {
-        refer = new Date();
-        meal = new Meal(refer, 5);
+    @BeforeClass
+    public static void onetimeSetup() {
         NutritionalComponentStructure.reset();
         FoodItemStructure.reset();
         Sqlite3ConnectionManager.reset();
     }
 
-    @After
-    public void tearDown() {
+    @Before
+    public void setUp() {
+        refer = new Date();
+        meal = new Meal(refer, 5);
+
     }
+
     @AfterClass
     public static void resetDb() {
-        File file  = new File("db/fullTestDb.sqlite3");
+        File file = new File("db/fullTestDb.sqlite3");
         file.delete();
         NutritionalComponentStructure.reset();
         FoodItemStructure.reset();
@@ -174,11 +177,11 @@ public class MealTest {
         int expResult = 0;
         int result = instance.compareTo(o);
         assertEquals(expResult, result);
-        Meal a = new Meal(new Date(refer.getTime()+100), 5);
+        Meal a = new Meal(new Date(refer.getTime() + 100), 5);
         result = instance.compareTo(a);
         expResult = -1;
         assertEquals(expResult, result);
-        a = new Meal(new Date(refer.getTime() -100), 5);
+        a = new Meal(new Date(refer.getTime() - 100), 5);
         result = instance.compareTo(a);
         expResult = 1;
         assertEquals(expResult, result);

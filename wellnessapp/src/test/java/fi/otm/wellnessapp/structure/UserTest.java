@@ -43,6 +43,10 @@ public class UserTest {
 
     @BeforeClass
     public static void oneTimeSetup() {
+        Sqlite3ConnectionManager.reset();
+        FoodItemStructure.reset();
+        NutritionalComponentStructure.reset();
+        Sqlite3ConnectionManager.reset();
         Sqlite3Utils s3u = new Sqlite3Utils();
         s3u.initDb("sqlite/dataBaseSchema.sqlite3",
                 "db/testDb.sqlite3", "db/", "csv/component.csv",
@@ -52,22 +56,17 @@ public class UserTest {
 
     @Before
     public void setUp() {
-        Sqlite3ConnectionManager.reset();
         user = new User("Matti", User.md5Hash("crypted"));
         fis = FoodItemStructure.getFoodItemStructure(dataBaseName);
         ncs = NutritionalComponentStructure.getNutrititonalComponentStructure(dataBaseName);
     }
 
-    @After
-    public void tearDown() {
-        Sqlite3ConnectionManager.reset();
-        fis.reset();
-        ncs.reset();
-    }
-    
     @AfterClass
     public static void oneTimeTearDown() {
         File file = new File("db/testDb.sqlite3");
+        FoodItemStructure.reset();
+        NutritionalComponentStructure.reset();
+        Sqlite3ConnectionManager.reset();
         file.delete();
     }
 
@@ -238,7 +237,6 @@ public class UserTest {
     @Ignore("WIP")
     @Test
     public void testGetWeeksCalories() {
-        //System.out.println("getWeeksCalories");
         Date time = null;
         User instance = null;
         ArrayList<Double> expResult = null;
@@ -253,7 +251,6 @@ public class UserTest {
      */
     @Test
     public void testDailyScore() {
-        //System.out.println("dailyScore");
         Date time = new Date();
         Date time2 = new Date();
         Calendar cl = Calendar.getInstance();
