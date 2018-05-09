@@ -11,17 +11,19 @@ WellnessApp on kursille Ohjelmistotekniikan menetelmät laadittu harjoitustyo.
 Sovelluksen tarkoituksena on auttaa käyttäjäänsä ruokavalion seuraamisessa.
 Sovelluksen ravintoaineiden tiedot ovat osa Finellin avointa dataa.
 
-### Status viikko 6
-
-Tällä hetkellä voi kirjautua, luoda tunnuksen ja tarkastella
-ruoka-aineiden ravintoarvoja. Aterioita voi lisätä käyttäjälle. Sovellus
-piirtää pylväsdiagrammin käyttäjän edellisen kuukauden päivittäisistä kaloreista.
-Sovellus täyttää siis vaatimusdokumentin perusvaatimukset.
-Sovelluksen vakautta voidaan kuitenkin yhä parantaa sekä käytettävyyttä nostaa.
-JavaDoc on kirjoitettu structure-paketille ja testikattavuus on noin 70%.
-Erikoistapausten testejä tulisi kuitenkin kirjoittaa lisää. Testeihin myös
-kuluu liian pitkä aika ja DAO-testejä tulisi optimoida. Tällä hetkellä
+### Kurssin Loppustatus
+Sovellus täyttää määrittelydokumentin vaatimukset. Sovelluksella on korkea
+testikattavuus, sekä sen luokkien julkiset rajapinnat on dokumentoitu
+JavaDoc kommenteilla.
+Testeihin kuluu liian pitkä aika ja DAO-testejä tulisi optimoida. Tällä hetkellä
 testipatterin suorittamiseen voi kulua jopa 30s.
+
+Ohjelmaan on extrana toteutettu asennusta varten Debian paketti, joka
+toimii Debian pohjaisilla Linux-järjestelmillä kuten Ubuntulla.
+
+Sovellusta pitkään vaivasi, että testit eivät jostain Sqliteen tai tiedostoihin
+liittyvästä syystä menneet läpi Windows alustalla. Nyt ainakin
+NetBeans saa ohjelman testit läpi myös Windowsilla.
 
 
 ### Komentoja
