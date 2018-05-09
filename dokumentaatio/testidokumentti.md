@@ -3,7 +3,7 @@
 Wellnessapp-sovelluksen yksikkötestaus on toteutettu käyttäen JUnit, yksikkötestejä.
 Näiden rivikattavuus on noin 85%.
 
-![coverage]((https://raw.githubusercontent.com/ViliLipo/otm-harjoitustyo/master/dokumentaatio/coverage.png)
+![coverage](https://raw.githubusercontent.com/ViliLipo/otm-harjoitustyo/master/dokumentaatio/coverage.png)
 
 Käyttöliittymää ei ole huomioitu yksikkötestauksessa tai kattavuudessa.
 
