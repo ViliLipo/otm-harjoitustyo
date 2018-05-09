@@ -49,7 +49,15 @@ public class Meal implements Comparable<Meal> {
     public int getUserId() {
         return this.userId;
     }
-
+    
+    /**
+     * Adds FoodItem to this meal. Also tells this Meal
+     * To build its total nutritional values again when 
+     * it is accessed next time.
+     * 
+     * @param fi FoodItem to be added to this meal
+     * @param amount Amount of said FoodItem
+     */
     public void addFoodItem(FoodItem fi, double amount) {
         Double a = amount;
         this.foodItems.put(fi, a);
@@ -58,6 +66,7 @@ public class Meal implements Comparable<Meal> {
 
     public void removeFoodItem(FoodItem fi) {
         this.foodItems.remove(fi);
+        this.totalNutritionalValues = null;
     }
 
     /**

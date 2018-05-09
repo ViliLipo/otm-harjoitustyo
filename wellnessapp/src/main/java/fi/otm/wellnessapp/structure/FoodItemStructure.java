@@ -31,14 +31,12 @@ public class FoodItemStructure {
     private FoodItemStructure(String filename) {
         FoodItemDaoSqlite3 fiDao = new FoodItemDaoSqlite3(filename);
         ArrayList<FoodItem> fiList = fiDao.getAll();
-        //System.out.println(fiList.get(1).getName());
         this.idList = new ArrayList<>();
         this.nameList = new ArrayList<>();
         this.mapByName = new HashMap<>();
         this.mapById = new HashMap<>();
         this.itemList = fiList;
         fiList.stream().forEach(fi -> {
-            //System.out.println("DEBUG " + fi.getId());
             this.mapByName.put(fi.getName(), fi);
             this.mapById.put(fi.getId(), fi);
             this.nameList.add(fi.getName());

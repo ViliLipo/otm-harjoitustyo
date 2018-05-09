@@ -76,7 +76,17 @@ public class UserDaoSqlite3 implements UserDao {
 
     @Override
     public void removeUser(User user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sqlDelete = "DELETE FROM User "
+                + "WHERE UserID = (?)";
+        try {
+            PreparedStatement prep = scm.connect().prepareStatement(sqlDelete);
+            prep.setInt(1, user.getUserId());
+            prep.executeUpdate();
+            scm.connect().commit();
+            scm.connect().close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MealDaoSqlite3.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
@@ -92,8 +102,10 @@ public class UserDaoSqlite3 implements UserDao {
             prep.executeUpdate();
             scm.connect().commit();
             scm.connect().close();
-        } catch  (SQLException ex) {
-            Logger.getLogger(UserDaoSqlite3.class.getName()).log(Level.SEVERE, null, ex);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDaoSqlite3.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }
 

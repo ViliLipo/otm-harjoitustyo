@@ -174,6 +174,14 @@ public class MealTest {
         int expResult = 0;
         int result = instance.compareTo(o);
         assertEquals(expResult, result);
+        Meal a = new Meal(new Date(refer.getTime()+100), 5);
+        result = instance.compareTo(a);
+        expResult = -1;
+        assertEquals(expResult, result);
+        a = new Meal(new Date(refer.getTime() -100), 5);
+        result = instance.compareTo(a);
+        expResult = 1;
+        assertEquals(expResult, result);
     }
 
     /**

@@ -30,6 +30,12 @@ public class Sqlite3Utils {
 
     private String schemaFile;
     private String dataBaseFile;
+    
+    /**
+     * Sets up schema for database
+     * @param filename file where the schema is.
+     * @param dbname file path to database file
+     */
 
     public void setupSchema(String filename, String dbname) {
         try {
@@ -62,6 +68,16 @@ public class Sqlite3Utils {
         }
         return "";
     }
+    
+    /**
+     * Initialises the database if needed.
+     * @param schemafile file where the schema is
+     * @param dbname file where the database is or will be
+     * @param dbFolderPath folder where the database resides
+     * @param compCsv .csv file for NutritionalComponents
+     * @param foodCsv .csv file for FoodItems
+     * @param compValCsv .csv file for ComponentValues.
+     */
 
     public void initDb(String schemafile, String dbname, String dbFolderPath, String compCsv, String foodCsv, String compValCsv) {
         String query = "SELECT * FROM Component";

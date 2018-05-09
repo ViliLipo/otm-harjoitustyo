@@ -26,7 +26,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * This class is a bit of a mess and should be refractored to FoodItemDaoCsv
+ * and NutritionalComponentDaoCsv. 
  * @author vili
  */
 public class CsvParser {
@@ -67,6 +68,12 @@ public class CsvParser {
         }
         return null;
     }
+    
+    /**
+     * Writes NutritionalComponents from .csv to sqlite database.
+     * @param filename .csv file for NutritionalComponents
+     * @param dbname file for database.
+     */
 
     public void convertComponentCSVtoSQLITE(String filename, String dbname) {
         ArrayList<NutritionalComponent> ncList = parseComponents(filename);
@@ -133,11 +140,14 @@ public class CsvParser {
 
     }
 
-    /*
-    * In order for this to work components must be
-    * written to the db first
+    /**
+     * In order for this to work components must be written to the db first.
+     * Writes FoodItems from .csv to sqliteDatabase.
+     * @param componentValueFile .csv file for componentValues
+     * @param foodItemFile .csv value for FoodItems
+     * @param dbName database file.
      */
-    public  void convertFoodItems(String componentValueFile, String foodItemFile, String dbName) {
+    public void convertFoodItems(String componentValueFile, String foodItemFile, String dbName) {
         ArrayList<FoodItem> fiList = parseItems(foodItemFile);
         resolveNutritionFoodRelations(componentValueFile, dbName, fiList);
         FoodItemDaoSqlite3 fid = new FoodItemDaoSqlite3(dbName);

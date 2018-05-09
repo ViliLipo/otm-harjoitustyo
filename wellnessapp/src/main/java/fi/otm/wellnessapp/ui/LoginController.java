@@ -94,7 +94,7 @@ public class LoginController implements Initializable {
 
     @FXML
     void swapField(ActionEvent event) {
-
+        
     }
 
     @Override

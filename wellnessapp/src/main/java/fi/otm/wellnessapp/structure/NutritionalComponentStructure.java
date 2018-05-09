@@ -37,21 +37,30 @@ public class NutritionalComponentStructure {
             this.nameList.add(nc.getName());
         }
     }
-
+    /**
+     * Get instance of this structure
+     * @param filename Filename of the database for DAO
+     * @return instance of this structure
+     */
     public static NutritionalComponentStructure getNutrititonalComponentStructure(String filename) {
         if (singleton == null) {
             singleton = new NutritionalComponentStructure(filename);
         }
         return singleton;
     }
-
+    
+    /** If this singleton has been already initialised this can be used
+     * to access it. Will return null, if it has not been initialised.
+     * 
+     * @return instance of this structure
+     */
     public static NutritionalComponentStructure getNutrititonalComponentStructure() {
-        if (singleton == null) {
-            return null;
-        }
         return singleton;
     }
-
+    
+    /**
+     * Forces reinitialisation next time this structure is accessed.
+     */
     public static void reset() {
         singleton = null;
     }

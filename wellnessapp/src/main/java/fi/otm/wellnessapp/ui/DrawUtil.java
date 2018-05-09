@@ -29,7 +29,11 @@ public class DrawUtil {
         this.user = user;
         this.xmargin = 40;
     }
-
+    
+    /**
+     * Draws diagram to canvas starting from start day and goes back 7 days. 
+     * @param start start date.
+     */
     public void drawDiagram(Date start) {
         this.canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
         this.drawBars(start);
@@ -95,20 +99,20 @@ public class DrawUtil {
         }
     }
 
-    public int calcSegmentSizeX() {
+    private int calcSegmentSizeX() {
         return (int) Math.floor((this.canvas.getWidth() - 2 * xmargin) / 7);
     }
 
-    public double calorieCeiling() {
+    private double calorieCeiling() {
         return this.user.getDailyCalorieGoal() * 1.8d;
     }
 
-    public int scaleCaloriePerPixel() {
+    private int scaleCaloriePerPixel() {
         int scale = (int) Math.ceil(this.calorieCeiling() / this.canvas.getHeight());
         return scale;
     }
 
-    public double getBaseLine() {
+    private double getBaseLine() {
         return this.canvas.getHeight() - this.canvas.getHeight() / 10;
     }
 

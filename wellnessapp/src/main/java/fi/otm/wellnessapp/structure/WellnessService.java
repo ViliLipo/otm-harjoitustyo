@@ -114,12 +114,12 @@ public class WellnessService {
      * fi.otm.wellnessapp.dao.MealDaoSqlite3#addOne(fi.otm.wellnessapp.structure.Meal)
      */
     public void addNewMealToUser() {
-        if (this.newMeal != null) {
+        if ((this.newMeal != null) && (this.newMeal.getFoodItems().size() > 0)) {
             this.user.addMeal(this.newMeal);
             MealDao md = new MealDaoSqlite3(this.getDataBaseName());
             md.addOne(newMeal);
-            this.newMeal = null;
         }
+        this.newMeal = null;
     }
 
     public FoodItemStructure getFis() {
@@ -158,7 +158,7 @@ public class WellnessService {
     /**
      * Removes meal from user and removes meal from database
      *
-     * @param meal  Meal to be removed
+     * @param meal Meal to be removed
      * @see
      * fi.otm.wellnessapp.dao.MealDaoSqlite3#remove(fi.otm.wellnessapp.structure.Meal)
      */

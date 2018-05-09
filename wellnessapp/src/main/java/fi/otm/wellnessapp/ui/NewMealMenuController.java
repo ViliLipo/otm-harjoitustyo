@@ -115,11 +115,7 @@ public class NewMealMenuController implements Initializable {
 
     @FXML
     void closeNewFoodWindow(ActionEvent event) {
-        if (this.ws.getNewMeal().getFoodItems().size() > 0) {
-            this.ws.addNewMealToUser();
-        } else {
-            this.ws.setNewMeal(null);
-        }
+        this.ws.addNewMealToUser();
         this.launchMainUi();
     }
 

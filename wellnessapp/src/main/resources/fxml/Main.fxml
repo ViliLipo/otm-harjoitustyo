@@ -24,6 +24,7 @@
       </Label>
       <Button fx:id="newMealButton" layoutX="676.0" layoutY="63.0" mnemonicParsing="false" onAction="#openMealMenu" prefHeight="26.0" prefWidth="275.0" text="Uusi Ruokailu" />
       <ListView fx:id="mealHistory" layoutX="679.0" layoutY="110.0" onMouseClicked="#historyClicked" prefHeight="321.0" prefWidth="275.0" />
-      <Button fx:id="removeButton" layoutX="679.0" layoutY="437.0" mnemonicParsing="false" onAction="#removeMeal" prefHeight="26.0" prefWidth="113.0" text="poista valittu" />
+      <Button fx:id="removeButton" layoutX="679.0" layoutY="437.0" mnemonicParsing="false" onAction="#removeMeal" prefHeight="26.0" prefWidth="128.0" text="Poista valittu" />
+      <Button fx:id="infoButton" layoutX="840.0" layoutY="437.0" mnemonicParsing="false" onAction="#infoPressed" prefHeight="26.0" prefWidth="113.0" text="Lisätietoja" />
    </children>
 </AnchorPane>

@@ -49,9 +49,12 @@ public class MainMenuController implements Initializable {
     private Button removeButton;
 
     private DrawUtil du;
+    
+    @FXML
+    private Button infoButton;
 
     @FXML
-    void historyClicked(MouseEvent event) {
+    void infoPressed(ActionEvent event) {
         try {
             Meal m = this.mealHistory.getSelectionModel().getSelectedItem();
             System.out.println(m);
@@ -62,9 +65,12 @@ public class MainMenuController implements Initializable {
             //System.out.println(m.info());
             alert.showAndWait();
         } catch (NullPointerException ex) {
-            System.out.println("Nothing selected");
+            // System.out.println("DEBUG @MainmenuController.InfoPressedNothing selected");
         }
+    }
 
+    @FXML
+    void historyClicked(MouseEvent event) {
     }
 
     @FXML
