@@ -6,7 +6,6 @@ Näiden rivikattavuus on noin 85%.
 ![coverage](https://raw.githubusercontent.com/ViliLipo/otm-harjoitustyo/master/dokumentaatio/coverage.png)
 
 Käyttöliittymää ei ole huomioitu yksikkötestauksessa tai kattavuudessa.
-
 ### Sovelluslogiikka
  NutritionalComponent-luokan toiminnallisuudet testataan luokassa, NutritionalComponentTest,
  FoodItem-luokan toiminnallisuudet testataan luokassa FoodItemTest ja Meal-luokan toiminnallisuudet
@@ -23,6 +22,10 @@ Sovelluksen integraatiotestaus tapahtuu, pääosin luokissa UserTest sekä,
 WellnessServiceTest. Luokassa WellnessServiceTest lähes koko ohjelman
 perustoiminnallisuudet kokeillaan. Luokassa UserTest testataan
 Loogisen rakenteen kannalta monimutkaisimmat osat.
+
+Luokat NutritionalComponentStructure ja FoodItemStructure testataan
+vain integraatiotasolla, koska ne ovat käytännössä vain kokoelmia Javan
+tarjoamista tietorakenteista, eikä niiden toiminnalisuudet ole monimutkaisia.
 ### Huomio JUnit-testeistä
 Koska integraatiotason testeissä sovelluksen tietorakenne kasataan alusta
 uudelleen jokaiselle testiluokalle, testit kestävät turhan kauan.
@@ -44,7 +47,7 @@ Järjestelmätestaus suoritettiin käsin seuraavalla testipatteristolla. 1 onnis
 | Kuvan skaala muuttuu kun käyttäjän tavoite muuttuu| 1| |
 | Kaikki määritellyt näkymät ovat avattavissa| 1 | Käyttäjänhallinta, uusi ateria|
 | Aikaa ei voi antaa uudelle aterialle väärässä formaatissa| 1 | |
-| "nolla" filtteri ei aiheuta virhettä|1 ||
+| "nolla" filtteri ei aiheuta virhettä|1 | Viimeisen löytyneen aterian tiedot jäävät esiin|
 | Tyhjää ateriaa ei voi lisätä|1 | Tyhjää ateriaa ei lisätä mutta käyttäjä ei saa siitä ilmoitusta.|
 |Aterian voi poistaa| 1| |
 | Poistettu ateria häviää myös tietokannasta|1 | Tarkistettiin uudelleen kirjautumisella|

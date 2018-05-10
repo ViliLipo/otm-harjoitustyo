@@ -100,6 +100,10 @@ ravintoarvo datan oikeellisuudesta. Esim yksittäisten ruoka-aine ravinto-arvo
 suhteiden puuttuminen voi pahimmassa tapauksessa estää ohjelman mielekkään
 käyttämisen. Ongelma on onneksi rajattu vain siihen ruoka-aineeseen.
 
+Testausta myös monimutkaistaa useat Singleton-patternia noudattavat luokat,
+jotka pitää väkisin alustaa testien jälkeen, jotta niiden tilan saa nollattua
+testien välissä.
+
 ### DAO-Luokat
 Useat Dao-luokkien julkisest metodit eivät ilmoita epäonnistumisestaan mitenkään.
 Dao-luokan void-metodit voisi refractoroida boolean-metodeiksi, joiden
