@@ -8,6 +8,7 @@ package fi.otm.wellnessapp.dao;
 import fi.otm.wellnessapp.structure.FoodItemStructure;
 import fi.otm.wellnessapp.structure.Meal;
 import fi.otm.wellnessapp.structure.NutritionalComponentStructure;
+import fi.otm.wellnessapp.structure.User;
 import fi.otm.wellnessapp.tools.Sqlite3Utils;
 import java.io.File;
 import java.sql.Connection;
@@ -16,7 +17,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.After;
@@ -25,7 +25,6 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 
 /**
  *
@@ -82,6 +81,11 @@ public class MealDaoSqlite3Test {
         s3u.initDb("sqlite/dataBaseSchema.sqlite3",
                 dbName, dbPath, "csv/component.csv",
                 "csv/foodname_FI.csv", "csv/component_value.csv");
+        User u = new User("Erkki Esimerkki", User.md5Hash("asdfjkl"));
+        UserDao ud = new UserDaoSqlite3(dbName);
+        ud.addUser(u);
+        User u2 = new User("Pekka Puolipilvinen", User.md5Hash("0l1k0S1tt3nk1nP0ut4"));
+        ud.addUser(u2);
     }
 
     @Before

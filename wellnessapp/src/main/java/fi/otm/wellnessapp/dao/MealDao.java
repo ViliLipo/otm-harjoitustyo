@@ -46,8 +46,8 @@ public interface MealDao {
     public void addOne(Meal meal);
 
     /**
-     * Write all meals to database in one commit. Preferable to looping add one
-     * since commits are extremely time consuming. Sets value for mealId to all
+     * Write all meals to database in one transaction. Preferable to looping add one
+     * since transactions are extremely time consuming. Sets value for mealId to all
      * meals to match database.
      *
      * @param mealList list of meals to write.

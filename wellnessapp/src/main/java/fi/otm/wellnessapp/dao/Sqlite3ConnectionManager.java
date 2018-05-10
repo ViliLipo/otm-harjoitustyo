@@ -8,6 +8,7 @@ package fi.otm.wellnessapp.dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import org.sqlite.SQLiteConfig;
 
 /**
  *
@@ -19,8 +20,12 @@ public class Sqlite3ConnectionManager {
     
     private Connection conn = null;
     private String dbName;
+    private SQLiteConfig config;
+    
     private Sqlite3ConnectionManager(String dbName) {
         this.dbName = dbName;
+        this.config = new SQLiteConfig();
+        this.config.enforceForeignKeys(true);
     }
     public static Sqlite3ConnectionManager getConnectionManager(String dbName) {
         if (singleton == null) {
@@ -45,7 +50,7 @@ public class Sqlite3ConnectionManager {
     
     public Connection connect() throws SQLException {
         if ((this.conn == null) || this.conn.isClosed()) {
-            this.conn = DriverManager.getConnection("jdbc:sqlite:" + dbName);
+            this.conn = DriverManager.getConnection("jdbc:sqlite:" + dbName, config.toProperties());
             conn.setAutoCommit(false);
         }
         return this.conn;

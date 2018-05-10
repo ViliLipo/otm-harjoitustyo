@@ -5,13 +5,11 @@
  */
 package fi.otm.wellnessapp.dao;
 
-import fi.otm.wellnessapp.structure.Meal;
 import fi.otm.wellnessapp.structure.User;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

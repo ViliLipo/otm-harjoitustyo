@@ -9,7 +9,6 @@ import fi.otm.wellnessapp.structure.NutritionalComponent;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -61,9 +60,7 @@ public class NutritionalComponentDaoSqlite3 implements NutritionalComponentDao {
             ResultSet rs = prep.executeQuery();
             if (rs.next()) {
                 NutritionalComponent nc = new NutritionalComponent(rs.getString("EUFDNAME"),
-                        rs.getString("COMPUNIT"), rs.getString("CMPCLASS"),
-                        rs.getString("CMPCLASSP")
-                );
+                        rs.getString("COMPUNIT"), rs.getString("CMPCLASS"), rs.getString("CMPCLASSP"));
                 scm.connect().close();
                 return nc;
             } else {

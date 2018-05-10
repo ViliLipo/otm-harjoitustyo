@@ -59,7 +59,6 @@ public class MealDaoSqlite3 implements MealDao {
     @Override
     public ArrayList<Meal> getAll() {
         String sqlQuery = "SELECT * FROM Meal;";
-
         ArrayList<Meal> mealList = new ArrayList<>();
         try {
             Statement mealStatement = scm.connect().createStatement();
@@ -102,24 +101,21 @@ public class MealDaoSqlite3 implements MealDao {
     @Override
     public Meal getOne(int mealId) {
         String sqlQuery = "SELECT * FROM MEAL WHERE MealID = (?);";
+        Meal meal = null;
         try {
             PreparedStatement prep = scm.connect().prepareStatement(sqlQuery);
             prep.setInt(1, mealId);
             ResultSet rs = prep.executeQuery();
-            rs.next();
-            if (rs.isAfterLast()) {
-                scm.connect().close();
-                return null; // database did not contain id
+            if (rs.next()) {
+                meal = new Meal(new Date(rs.getTimestamp("Time").getTime()), rs.getInt("UserID"));
+                meal.setMealId(rs.getInt("MealID"));
+                this.resolveFoodItems(meal);
             }
-            Meal meal = new Meal(new Date(rs.getTimestamp("Time").getTime()), rs.getInt("UserID"));
-            meal.setMealId(rs.getInt("MealID"));
-            this.resolveFoodItems(meal);
             scm.connect().close();
-            return meal;
         } catch (SQLException ex) {
             Logger.getLogger(MealDaoSqlite3.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null;
+        return meal;
     }
 
     private void addCore(Meal meal) throws SQLException {
@@ -150,11 +146,12 @@ public class MealDaoSqlite3 implements MealDao {
             }
         });
     }
+
     /**
      * Adds one meal to database in one transaction
-     * @param meal  Meal to be added
+     *
+     * @param meal Meal to be added
      */
-
     @Override
     public void addOne(Meal meal) {
         try {
