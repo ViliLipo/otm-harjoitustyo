@@ -50,7 +50,7 @@ Pakkauksen wellnessapp.dao luokat huolehtivat tietojen tallettamisesta
 sqlite-tietokantaan. Luokat noudattavat data-access-object suunnittelu mallia
 ja jokaisen tietotyypin tallettamista varten on määritelty oma rajapinta.
 
-[Tietokantaskeema.](https://github.com/ViliLipo/otm-harjoitustyo/blob/master/wellnessapp/src/main/resources/sqlite/dataBaseSchema.sqlite3)
+[Tietokantaskeema.](https://github.com/ViliLipo/otm-harjoitustyo/blob/master/wellnessapp/src/main/resources/sqlite/dataBaseSchema.sql)
 
 Tietokanta koostuu kuudesta taulusta, joista FoodNameFi, ComponentValue ja
 Component noudattelevat Finelin avoimen datan csv:skeemaa.
