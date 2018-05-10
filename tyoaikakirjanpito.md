@@ -21,4 +21,11 @@
 |30.4| 4| Testit- javadoc |
 |2.5| 3 | javadoc, arkkitehtuuri, ja ohjeet|
 |2.5|2| viilailu ja hinkkaus|
-|yht| 50| |
+|9.5|2| Järjestelmätestaus ja dokumentointi|
+|9.5|2| JavaDoc työmaa|
+|10.5| 6| Loppuviimeistely|
+|yht| 60| |
+
+Työaika voi vaikuttaa pieneltä, mutta olen laatinut jo yhden samankaltaisen
+ohjelman aikaisemmin(LUT-olio-ohjelmointi ja tietokannat kesä 2017)
+ja itselle uusia ongelmia ei ilmentynyt.
