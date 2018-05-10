@@ -48,6 +48,13 @@ public class Sqlite3ConnectionManager {
         this.dbName = filename;
     }
     
+    /**
+     * This is a Java.sql.Connection with Autocommit false and foreign keys
+     * set on. Returns the connection if it is open, else opens it.
+     * @return Connection
+     * @throws SQLException If connection cant be formed. 
+     */
+    
     public Connection connect() throws SQLException {
         if ((this.conn == null) || this.conn.isClosed()) {
             this.conn = DriverManager.getConnection("jdbc:sqlite:" + dbName, config.toProperties());

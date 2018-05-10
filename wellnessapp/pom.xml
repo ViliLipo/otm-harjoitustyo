@@ -4,7 +4,7 @@
 
     <groupId>fi.otm</groupId>
     <artifactId>Wellnessapp</artifactId>
-    <version>0.1.1-SNAPSHOT</version>
+    <version>0.1.2-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Wellnessapp</name>
@@ -133,7 +133,7 @@
                         <exclude>fi/otm/wellnessapp/ui/*</exclude>
                         <exclude>org/*</exclude>
                     </excludes>
-                </configuration> 
+                </configuration>
                 <executions>
                     <execution>
                         <id>default-prepare-agent</id>

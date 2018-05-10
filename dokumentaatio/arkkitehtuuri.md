@@ -58,7 +58,9 @@ Meal, InAMeal ja User käytetään sovelluksessa avoimen käyttäjän yhdistämi
 ravintoaineiden dataan.
 
 Tietokantayhteys muodostetaan ulkoisena kirjastona asennetun SQLite driverin
-avulla.
+avulla. Tietokannan eheydestä huolehtii tietokantamoottori itse, unique
+ja foreign-key määrittelyjen avulla. Tietokanta poistaa itse liitostaulut, jos
+liitoksen, kummasta vain päästä poistetaan rivi.
 
 
 ## Päätoiminnallisuudet
@@ -97,6 +99,13 @@ oikeellinen toiminta on erittäin riippuvainen siihen csv-tiedostoilla syötetyn
 ravintoarvo datan oikeellisuudesta. Esim yksittäisten ruoka-aine ravinto-arvo
 suhteiden puuttuminen voi pahimmassa tapauksessa estää ohjelman mielekkään
 käyttämisen. Ongelma on onneksi rajattu vain siihen ruoka-aineeseen.
+
+### DAO-Luokat
+Useat Dao-luokkien julkisest metodit eivät ilmoita epäonnistumisestaan mitenkään.
+Dao-luokan void-metodit voisi refractoroida boolean-metodeiksi, joiden
+arvo kuvaa onnistumista. Tai Dao-rajapinnoille voisi määritellä myös oman universaalin
+ei SQLite spesifin exceptionin, jota kaikki sen toteuttavat luokat käyttäisivät
+virhetilanteiden ilmoittamiseen.
 
 ### Testaus
 Dao-testien toteutus on hieman kankea koska tietokanta rakennetaan ja puretaan
