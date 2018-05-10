@@ -48,7 +48,7 @@ public class UserTest {
         NutritionalComponentStructure.reset();
         Sqlite3ConnectionManager.reset();
         Sqlite3Utils s3u = new Sqlite3Utils();
-        s3u.initDb("sqlite/dataBaseSchema.sqlite3",
+        s3u.initDb("sqlite/dataBaseSchema.sql",
                 "db/testDb.sqlite3", "db/", "csv/component.csv",
                 "csv/foodname_FI.csv", "csv/component_value.csv");
 

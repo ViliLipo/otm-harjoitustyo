@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="ap" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="278.0" prefWidth="393.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fi.otm.wellnessapp.ui.LoginController">
+<AnchorPane fx:id="ap" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="278.0" prefWidth="393.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fi.otm.wellnessapp.ui.LoginController">
     <children>
-        <TextField fx:id="userNameField" layoutX="143.0" layoutY="139.0" onAction="#swapField" />
+        <TextField fx:id="userNameField" layoutX="143.0" layoutY="139.0" />
         <PasswordField fx:id="passwordField" layoutX="143.0" layoutY="187.0" onAction="#submit" />
         <Label layoutX="19.0" layoutY="29.0" prefHeight="54.0" prefWidth="319.0" text="Kirjaudu">
             <font>

@@ -51,7 +51,7 @@ public class FoodItemDaoSqlite3Test {
         file.mkdirs();
         Sqlite3ConnectionManager.reset();
         Sqlite3Utils s3u = new Sqlite3Utils();
-        s3u.setupSchema("sqlite/dataBaseSchema.sqlite3", (testDbName));
+        s3u.setupSchema("sqlite/dataBaseSchema.sql", (testDbName));
         String insert = "INSERT OR IGNORE INTO Component "
                 + "VALUES(?,?,?,?)";
         String insert2 = "INSERT OR IGNORE INTO ComponentValue VALUES(?,?,?)";

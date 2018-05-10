@@ -48,14 +48,22 @@ Järjestelmätestaus suoritettiin käsin seuraavalla testipatteristolla. 1 onnis
 | Tyhjää ateriaa ei voi lisätä|1 | Tyhjää ateriaa ei lisätä mutta käyttäjä ei saa siitä ilmoitusta.|
 |Aterian voi poistaa| 1| |
 | Poistettu ateria häviää myös tietokannasta|1 | Tarkistettiin uudelleen kirjautumisella|
+|Poistetun aterian yhteydet poistuvat tietokannasta| 1 | Tarkastettiin SQLite sovelluksella|
 
 Nämä kaikki testit suoritettiin onnistuneesti.
 
 # Asennus
 Sovellusta testattiin tilasta, jossa tietokanta ei ollut suorituksen alussa
 olemassa. Sovelluksen alustustoimenpiteet toimivat moitteitta.
+Debian paketti toimi moitteetta kahdella laitteella.
 
 # Sovellukseen jääneet laatuongelmat
 Sovellus ei toimi kovinkaan järkevästi, jos jokin muu toimija sabotoi tietokantatiedostoa
 mm. muuttamalla sen oikeuksia, poistamalla tai lukitsemalla sen. Sovellus ei kaadu
-mutta suoltaa virheilmoituksia.
+mutta suoltaa virheilmoituksia. Virheilmoitukset on kuitenkin ohjattu käyttäjä
+ystävälliseen ikkunaan. Siihen käytetään luokkaa fi.otm.wellnessapp.ui.FxLogHandler.
+
+Sovellus tuottaa konsoliin kaksi epämieluisaa riviä, jos se käynnistetään
+Linux-järjestelmällä, jossa ei ole asennettuna "adwaita" teemaa. Varoitukset ovat
+lähtöisin tämän projektin ulkopuolisesta koodista. Ne voisi raa'asti poistaa
+ohjaamalla kaiken outputin null pipeen, mutta se lienee turhaa.

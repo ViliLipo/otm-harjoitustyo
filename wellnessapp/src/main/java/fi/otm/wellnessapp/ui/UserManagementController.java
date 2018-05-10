@@ -59,6 +59,8 @@ public class UserManagementController implements Initializable {
 
     @FXML
     private Button backButton;
+    
+    private WellnessService ws;
 
     @FXML
     void changePassword(ActionEvent event) {
@@ -80,7 +82,6 @@ public class UserManagementController implements Initializable {
             alert.showAndWait();
         }
     }
-    private WellnessService ws;
 
     @FXML
     void goBack(ActionEvent event) {

@@ -6,8 +6,7 @@
 Ohjelma noudattelee kolmeosaista pakkausrakennetta, ja paketit ilmenevät
 luokkakaaviosta.
 
-Pakkaus wellnessapp.ui, sisältää JavaFX:llä toteutetun käyttöliittymän
-muun sovelluksen tietorakenteen manipuloimiseen.
+Pakkaus wellnessapp.ui, sisältää JavaFX:llä toteutetun käyttöliittymän.
 
 ## Käyttöliittymä
 Käyttöliittymä sisältää neljä erillista ohjainta ja näkymää
@@ -54,9 +53,12 @@ ja jokaisen tietotyypin tallettamista varten on määritelty oma rajapinta.
 [Tietokantaskeema.](https://github.com/ViliLipo/otm-harjoitustyo/blob/master/wellnessapp/src/main/resources/sqlite/dataBaseSchema.sqlite3)
 
 Tietokanta koostuu kuudesta taulusta, joista FoodNameFi, ComponentValue ja
-Component noudattelee Finelin avoimen datan csv:skeemaa.
+Component noudattelevat Finelin avoimen datan csv:skeemaa.
 Meal, InAMeal ja User käytetään sovelluksessa avoimen käyttäjän yhdistämiseen
 ravintoaineiden dataan.
+
+Tietokantayhteys muodostetaan ulkoisena kirjastona asennetun SQLite driverin
+avulla.
 
 
 ## Päätoiminnallisuudet

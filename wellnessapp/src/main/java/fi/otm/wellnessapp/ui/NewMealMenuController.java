@@ -1,9 +1,6 @@
 package fi.otm.wellnessapp.ui;
 
 import fi.otm.wellnessapp.structure.WellnessService;
-import fi.otm.wellnessapp.structure.FoodItemStructure;
-import fi.otm.wellnessapp.dao.MealDao;
-import fi.otm.wellnessapp.dao.MealDaoSqlite3;
 import fi.otm.wellnessapp.structure.FoodItem;
 import fi.otm.wellnessapp.structure.Meal;
 import java.io.IOException;
@@ -174,11 +171,6 @@ public class NewMealMenuController implements Initializable {
             this.ws.removeFoodItemFromNewMeal(foodName);
             this.displayFoodItems();
         }
-    }
-
-    @FXML
-    void selectDate(ActionEvent event) {
-
     }
 
     @FXML

@@ -45,7 +45,7 @@ public class NutritionalComponentDaoSqlite3Test {
         file.mkdirs();
         Sqlite3ConnectionManager.reset();
         Sqlite3Utils s3u = new Sqlite3Utils();
-        s3u.setupSchema("sqlite/dataBaseSchema.sqlite3", (testDbName));
+        s3u.setupSchema("sqlite/dataBaseSchema.sql", (testDbName));
         String insert = "INSERT INTO Component "
                 + "VALUES(?,?,?,?)";
         try {

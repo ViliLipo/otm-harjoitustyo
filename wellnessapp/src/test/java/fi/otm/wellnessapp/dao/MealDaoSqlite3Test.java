@@ -78,7 +78,7 @@ public class MealDaoSqlite3Test {
         FoodItemStructure.reset();
         NutritionalComponentStructure.reset();
         Sqlite3Utils s3u = new Sqlite3Utils();
-        s3u.initDb("sqlite/dataBaseSchema.sqlite3",
+        s3u.initDb("sqlite/dataBaseSchema.sql",
                 dbName, dbPath, "csv/component.csv",
                 "csv/foodname_FI.csv", "csv/component_value.csv");
         User u = new User("Erkki Esimerkki", User.md5Hash("asdfjkl"));
