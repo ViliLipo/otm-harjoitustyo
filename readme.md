@@ -51,3 +51,5 @@ $ mvn javadoc:javadoc
 [wellnessapp0.1.0](https://github.com/ViliLipo/otm-harjoitustyo/releases/tag/0.1.0)
 
 [WellnessApp.0.1.1](https://github.com/ViliLipo/otm-harjoitustyo/releases/tag/0.1.1)
+
+[Wellnessapp.0.1.2](https://github.com/ViliLipo/otm-harjoitustyo/releases/tag/0.1.2)
