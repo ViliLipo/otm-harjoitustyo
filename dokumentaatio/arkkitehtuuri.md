@@ -127,3 +127,6 @@ virhetilanteiden ilmoittamiseen.
 Dao-testien toteutus on hieman kankea koska tietokanta rakennetaan ja puretaan
 useita kertoja niiden aikana. Tämä johtaa siihen, että testaamisessa
 kuluu erittäin pitkä aika n.30s.
+### Käyttöliittymä
+Käyttöliittymä ei tue kovinkaan hyvin skaalautumista eri kokoihin. Tämä on
+selkeä kehityskohde.
