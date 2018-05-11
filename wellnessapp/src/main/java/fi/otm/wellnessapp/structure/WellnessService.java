@@ -43,9 +43,11 @@ public class WellnessService {
         }
         return singleton;
     }
+
     /**
-     * This method is for forcing other database folder.
-     * Is used for testing etc.
+     * This method is for forcing other database folder. Is used for testing
+     * etc.
+     *
      * @param folderName Name of the folder where database resides
      * @param dbName name of the database file
      */
@@ -125,9 +127,9 @@ public class WellnessService {
      */
     public void addNewMealToUser() {
         if ((this.newMeal != null) && (this.newMeal.getFoodItems().size() > 0)) {
-            this.user.addMeal(this.newMeal);
             MealDao md = new MealDaoSqlite3(this.getDataBaseName());
             md.addOne(newMeal);
+            this.user.addMeal(this.newMeal);
         }
         this.newMeal = null;
     }
@@ -174,7 +176,7 @@ public class WellnessService {
      */
     public void removeMeal(Meal meal) {
         this.user.getMealList().remove(meal);
-        MealDao md = new MealDaoSqlite3(this.dataBaseName);
+        MealDao md = new MealDaoSqlite3(dataBaseName);
         md.remove(meal);
     }
 

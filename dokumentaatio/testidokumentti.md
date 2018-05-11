@@ -22,6 +22,8 @@ Sovelluksen integraatiotestaus tapahtuu, pääosin luokissa UserTest sekä,
 WellnessServiceTest. Luokassa WellnessServiceTest lähes koko ohjelman
 perustoiminnallisuudet kokeillaan. Luokassa UserTest testataan
 Loogisen rakenteen kannalta monimutkaisimmat osat.
+Myöskin paketin tools luokat testattaan vain integraatiotasolla, sillä
+ne ovat suuren refraktoroinnin tarpeessa.
 
 Luokat NutritionalComponentStructure ja FoodItemStructure testataan
 vain integraatiotasolla, koska ne ovat käytännössä vain kokoelmia Javan

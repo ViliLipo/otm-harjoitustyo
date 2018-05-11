@@ -112,13 +112,16 @@ public class Meal implements Comparable<Meal> {
 
     @Override
     public int hashCode() {
-        return this.time.hashCode() + this.userId;
+        return this.time.hashCode() + this.userId + this.mealId;
     }
 
     @Override
     public int compareTo(Meal o) {
         if (o.getClass() == this.getClass()) {
             Meal m = (Meal) o;
+            if(this.getTime().getTime() == m.getTime().getTime()) {
+                return Integer.compare(this.mealId, m.mealId);
+            }
             return this.time.compareTo(m.getTime());
         } else {
             return 0;

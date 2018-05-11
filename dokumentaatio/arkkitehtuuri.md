@@ -62,6 +62,13 @@ avulla. Tietokannan eheydestä huolehtii tietokantamoottori itse, unique
 ja foreign-key määrittelyjen avulla. Tietokanta poistaa itse liitostaulut, jos
 liitoksen, kummasta vain päästä poistetaan rivi.
 
+## Alustustoimenpiteet
+Ohjelman alustustoimenpiteistä vastaa paketin tools luokat. Sqlite3Utils vastaa
+alustamisen suuremmista osista kuten skeeman syöttämisestä ja CsvParser kopioi
+datan .csv tiedostoista sql-tietokantaan. Sqlite3Utils.initDb(params) metodia kutsutaan
+luokan WellnessService rakentajassa. initDb(params) rakentaa tietokannan, jos
+se puuttuu.
+
 
 ## Päätoiminnallisuudet
 
@@ -93,6 +100,11 @@ Tämän jälkeen stagelle ladataan UserManagement.fxml. Tässä näkymässä
 voidaan muuttaa käyttäjän salasana tai päivittäinen kaloritavoite.
 
 ## Ohjelman heikkoudet
+
+### Alustustoimenpiteet
+Luokka CsvParser tulisi refraktoroida luokiksi, FoodItemDaoCsv ja NutritionalComponentDaoCsv.
+Tämä järkevöittäisi ohjelman rakennetta huomattavasti tällä osa-alueella.
+
 ### Tietorakenne
 Ohjelman tietorakenne pyrkii tehokkuuteen ja nopeaan toimintaan mutta, sen
 oikeellinen toiminta on erittäin riippuvainen siihen csv-tiedostoilla syötetyn
